@@ -36,7 +36,7 @@ class Cell:
     def isState(self,state,value):
         return self.states[Cell.t_now][state]==value
 
-    
+
     def preDiffuse(self,state):
         self.states[Cell.t_next][state]=0
 
@@ -92,6 +92,12 @@ class World:
     def getCell(self,x,y):
         pos = y*self.size+x
         return self.cells[pos]
+
+    def sumAll(self,state):
+        count=0
+        for cell in self.cells:
+            count+=cell.getState(state)
+        return count
 
     def countAll(self,state,value):
         count=0

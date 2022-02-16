@@ -7,8 +7,8 @@ HEIGHT = 600
 
 # Create a new simulation of grid size 80 X 80 cells
 # Set the verable in each cell of as "live"
-world = ABM.World(80, ["resource"],[0])
-world.setCell(35, 35, "resource", 1000)
+world = ABM.World(30, ["resource"],[0])
+world.setCell(15, 15, "resource", 500)
 world.update()
 
 
@@ -21,7 +21,7 @@ def update():
     ABM.draw(screen, world, "resource", 1,discreet=False)
 
     # Uncomment the line below to output number of live cells
-    # print((world.countAll("live",1),0))
+    print((world.sumAll("resource"),0))
 
 #Start the simulation
 ABM.go()
