@@ -7,7 +7,7 @@ HEIGHT = 600
 
 # Create a new simulation of grid size 80 X 80 cells
 # Set the verable in each cell of as "live"
-world = ABM.World(80, ["live"])
+world = ABM.World(80, ["live"],[0])
 
 # Set the live variable of an individual cell at the grid cordinate of 35 34  to 1
 world.setCell(35, 34, "live", 1)
@@ -39,7 +39,7 @@ def update():
     #Update the world
     world.update()
     #Draw the world with squares that have their "live" veriable set to 1
-    ABM.draw(screen, world, "live", 1)
+    ABM.draw(screen, world, "live", 1,discreet=True)
 
     # Uncomment the line below to output number of live cells
     # print((world.countAll("live",1),0))
