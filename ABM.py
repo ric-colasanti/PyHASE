@@ -1,8 +1,23 @@
+from calendar import c
 from numpy import False_
 import pgzrun
 import pygame
 import time
 import random
+
+
+class Agent:
+    def __init__(self):
+        self.home = None
+    
+    def move(self,cell):
+        cell.occupants[cell.t_next]=self
+        self.home=cell
+
+    def getHome(self):
+        return self.home
+        
+
 class Cell:
     t_now = 0
     t_next = 1
@@ -26,6 +41,16 @@ class Cell:
             else:
                 self.states[0][states[s]]=values[s]
                 self.states[1][states[s]]=values[s]
+
+    def setAgent(self,agent):
+        agent.move(self)
+        self.occupants[Cell.t_next]=agent
+
+    def getAgent(self,agent):
+        return self.occupants[Cell.t_now]
+
+    def isOccupied(self):
+        return self.occupants[Cell.t_next]!=None
 
     def setState(self,state,value):
         self.states[Cell.t_next][state]=value
@@ -74,6 +99,7 @@ class World:
     def __init__(self,size,states,values):
         self.size = size
         self.cells=[]
+        self.agents=[]
         for i in range(self.size*self.size):
             self.cells.append(Cell((i%self.size),int(i/self.size),states,values))
         for cell in self.cells:
@@ -84,6 +110,12 @@ class World:
                     if (cell.x_pos!=x) or (cell.y_pos!=y):
                         pos = y*self.size+x
                         cell.addNeighbour(self.cells[pos])
+
+    def addAgent(self,x,y):
+        pos = y*self.size+x
+        agent = Agent()
+        self.agents.append(agent)
+        self.cells[pos].setAgent(agent)
 
     def setCell(self,x,y,state,value):
         pos = y*self.size+x
@@ -128,7 +160,6 @@ def draw(screen,world,state,value,discreet=False_):
     pygame.display.set_caption('ABM')
     time.sleep(World.frame)
     width = screen.surface.get_width()
-    height = screen.surface.get_height()
     ratio = width/world.size
     box_size = int(ratio-1)
 
@@ -148,3 +179,10 @@ def draw(screen,world,state,value,discreet=False_):
             if r<0:
                 r=0
             screen.draw.filled_rect(box,(r,0,0))
+    for agent in world.agents:
+        cell = agent.getHome()
+        x_pos = int(cell.x_pos*ratio+(ratio/2))
+        y_pos = int(cell.y_pos*ratio+(ratio/2))
+        screen.draw.filled_circle((x_pos,y_pos),int(box_size/2),(60,60,200))
+
+
