@@ -18,8 +18,9 @@ world.setCell(36, 36, "live", 1)
 #Update the world
 world.update()
 
-# This function "update" is run every iter ation by the ABM simulation
+# This function "update" is run every iter action by the ABM simulation
 def update():
+    ABM.frame = 0.05
     # For every cell in the simulation grid
     for cell in world.cells:
         # Count the number of imidiate neighbours that have their "live" veriable set to 1
