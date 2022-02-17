@@ -6,6 +6,7 @@ import time
 import random
 
 
+frame = 0.01
 class Agent:
     def __init__(self):
         self.home = None
@@ -16,6 +17,15 @@ class Agent:
 
     def getHome(self):
         return self.home
+
+    def moveRandom(self):
+        cell = self.home.getRandom()
+        self.move(cell)
+
+    def moveBest(self,state):
+        cell = self.home.search(state)
+        self.move(cell)
+
         
 
 class Cell:
@@ -42,9 +52,19 @@ class Cell:
                 self.states[0][states[s]]=values[s]
                 self.states[1][states[s]]=values[s]
 
+    def search(self,state):
+        found = self
+        for cell in self.neighbours:
+            if cell.states[Cell.t_now][state]>found.states[Cell.t_now][state]:
+                found = cell
+        return found
+
     def setAgent(self,agent):
         agent.move(self)
         self.occupants[Cell.t_next]=agent
+    
+    def getRandom(self):
+        return random.choice(self.neighbours)
 
     def getAgent(self,agent):
         return self.occupants[Cell.t_now]
@@ -156,9 +176,10 @@ class World:
 
 def go():
     pgzrun.go()
+    
 def draw(screen,world,state,value,discreet=False_):
     pygame.display.set_caption('ABM')
-    time.sleep(World.frame)
+    time.sleep(frame)
     width = screen.surface.get_width()
     ratio = width/world.size
     box_size = int(ratio-1)
