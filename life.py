@@ -6,7 +6,7 @@ WIDTH = 600
 HEIGHT = 600
 
 # Create a new simulation of grid size 80 X 80 cells
-# Set the verable in each cell of as "live"
+# Set the variable in each cell of as "live"
 world = ABM.World(80, ["live"],[0])
 
 # Set the live variable of an individual cell at the grid cordinate of 35 34  to 1
@@ -25,7 +25,7 @@ def update():
     
     # For every cell in the simulation grid
     for cell in world.cells:
-        # Count the number of imidiate neighbours that have their "live" veriable set to 1
+        # Count the number of immediate neighbours that have their "live" variable set to 1
         count = cell.count("live", 1)
 
         # The game of life rules
@@ -41,7 +41,7 @@ def update():
                 cell.setState("live", 0)
     #Update the world
     world.update()
-    #Draw the world with squares that have their "live" veriable set to 1
+    #Draw the world with squares that have their "live" variable set to 1
     ABM.draw(screen, world, "live", 1,discreet=True)
 
     # Uncomment the line below to output number of live cells
