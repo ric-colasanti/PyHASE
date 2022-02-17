@@ -7,6 +7,7 @@ HEIGHT = 600
 
 # Create a new simulation of grid size 80 X 80 cells
 # Set the variable in each cell of as "resource" and set value to 0
+#world = ABM.World(30, ["resource"],["rnd"])
 world = ABM.World(30, ["resource"],[0])
 #set center cell resource to 500
 world.setCell(15, 15, "resource", 500)
