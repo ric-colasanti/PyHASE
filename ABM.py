@@ -1,4 +1,5 @@
 
+from calendar import c
 import pgzrun
 import pygame
 import time
@@ -11,6 +12,8 @@ class Agent:
         self.home = None
     
     def move(self,cell):
+        if self.home!= None:
+            self.home.occupants[cell.t_next]=None
         cell.occupants[cell.t_next]=self
         self.home=cell
 
@@ -54,8 +57,9 @@ class Cell:
     def search(self,state):
         found = self
         for cell in self.neighbours:
-            if cell.states[Cell.t_now][state]>found.states[Cell.t_now][state]:
-                found = cell
+            if cell.occupants[Cell.t_next]== None:
+                if cell.states[Cell.t_now][state]>found.states[Cell.t_now][state]:
+                    found = cell
         return found
 
     def setAgent(self,agent):
