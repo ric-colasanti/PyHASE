@@ -1,5 +1,4 @@
-from calendar import c
-from numpy import False_
+
 import pgzrun
 import pygame
 import time
@@ -177,7 +176,7 @@ class World:
 def go():
     pgzrun.go()
     
-def draw(screen,world,state,value,discreet=False_):
+def draw(screen,world,state,value,discreet=False):
     pygame.display.set_caption('ABM')
     time.sleep(frame)
     width = screen.surface.get_width()

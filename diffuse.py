@@ -16,7 +16,9 @@ world.update()
 
 # This function "update" is run every iter action by the ABM simulation
 def update():
-    ABM.frame=0.1
+    #sleep
+    ABM.frame = 0.1
+    
     # diffuse resource by 0.5
     world.diffuse("resource",0.5)
     world.update()
