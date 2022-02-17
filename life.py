@@ -5,16 +5,16 @@ import ABM
 WIDTH = 600
 HEIGHT = 600
 
-# Create a new simulation of grid size 80 X 80 cells
+# Create a new simulation of grid size 60 X 60 cells
 # Set the variable in each cell of as "live"
-world = ABM.World(80, ["live"],[0])
+world = ABM.World(60, ["live"],[0])
 
 # Set the live variable of an individual cell at the grid cordinate of 35 34  to 1
-world.setCell(35, 34, "live", 1)
-world.setCell(35, 35, "live", 1)
-world.setCell(35, 36, "live", 1)
-world.setCell(34, 35, "live", 1)
-world.setCell(36, 36, "live", 1)
+world.setCell(25, 24, "live", 1)
+world.setCell(25, 25, "live", 1)
+world.setCell(25, 26, "live", 1)
+world.setCell(24, 25, "live", 1)
+world.setCell(26, 26, "live", 1)
 #Update the world
 world.update()
 
@@ -22,7 +22,7 @@ world.update()
 def update():
     #sleep
     ABM.frame = 0.01
-    
+
     # For every cell in the simulation grid
     for cell in world.cells:
         # Count the number of immediate neighbours that have their "live" variable set to 1

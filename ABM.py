@@ -1,5 +1,4 @@
 
-from calendar import c
 import pgzrun
 import pygame
 import time
@@ -10,7 +9,7 @@ frame = 0.01
 class Agent:
     def __init__(self):
         self.home = None
-    
+
     def move(self,cell):
         if self.home!= None:
             self.home.occupants[cell.t_next]=None
@@ -28,7 +27,7 @@ class Agent:
         cell = self.home.search(state)
         self.move(cell)
 
-        
+
 
 class Cell:
     t_now = 0
@@ -65,7 +64,7 @@ class Cell:
     def setAgent(self,agent):
         agent.move(self)
         self.occupants[Cell.t_next]=agent
-    
+
     def getRandom(self):
         return random.choice(self.neighbours)
 
@@ -179,7 +178,7 @@ class World:
 
 def go():
     pgzrun.go()
-    
+
 def draw(screen,world,state,value,discreet=False):
     pygame.display.set_caption('ABM')
     time.sleep(frame)
@@ -208,5 +207,4 @@ def draw(screen,world,state,value,discreet=False):
         x_pos = int(cell.x_pos*ratio+(ratio/2))
         y_pos = int(cell.y_pos*ratio+(ratio/2))
         screen.draw.filled_circle((x_pos,y_pos),int(box_size/2),(60,60,200))
-
 
