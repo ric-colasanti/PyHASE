@@ -45,6 +45,12 @@ class Agent:
         cell = self.home.search(state)
         self.move(cell)
 
+    def getState(self,state):
+        return self.home.getState(state)
+    
+    def setState(self,state,value):
+        return self.home.setNState(state,value)
+
 
 
 class Cell:
@@ -95,9 +101,10 @@ class Cell:
     def setState(self,state,value):
         self.states[Cell.t_next][state]=value
 
-    def state(self,state,value):
+    def setNState(self,state,value):
         self.states[Cell.t_now][state]=value
-        self.states[Cell.t_next][state]=value
+
+
 
     def getState(self,state):
         return self.states[Cell.t_now][state]
