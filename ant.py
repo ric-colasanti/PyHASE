@@ -10,7 +10,7 @@ HEIGHT = 600
 #world = ABM.World(30, ["resource"],["rnd"])
 world = ABM.World(120, ["state"],[0],n_type=4)
 
-world.addAgent(60,60)
+world.addAgent(60,60,color='red')
 
 
 

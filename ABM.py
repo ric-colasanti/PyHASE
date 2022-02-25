@@ -7,8 +7,9 @@ import random
 
 frame = 0.01
 class Agent:
-    def __init__(self):
+    def __init__(self,color):
         self.home = None
+        self.color  = color
         self.point=0
 
     def right(self):
@@ -182,9 +183,9 @@ class World:
                 cell.addNeighbour(self.cells[pos])
                 
 
-    def addAgent(self,x,y):
+    def addAgent(self,x,y,color='blue'):
         pos = y*self.size+x
-        agent = Agent()
+        agent = Agent(color)
         self.agents.append(agent)
         self.cells[pos].setAgent(agent)
         
@@ -260,5 +261,5 @@ def draw(screen,world,state,value,discreet=False):
         cell = agent.getHome()
         x_pos = int(cell.x_pos*ratio+(ratio/2))
         y_pos = int(cell.y_pos*ratio+(ratio/2))
-        screen.draw.filled_circle((x_pos,y_pos),int(box_size/2),(60,60,200))
+        screen.draw.filled_circle((x_pos,y_pos),int(box_size/2),agent.color)
 
