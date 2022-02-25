@@ -45,7 +45,7 @@ def update():
     ABM.draw(screen, world, "live", 1,discreet=True)
 
     # Uncomment the line below to output number of live cells
-    # print((world.countAll("live",1),0))
+    print((world.countAll("live",1),0))
 
 #Start the simulation
 ABM.go()
