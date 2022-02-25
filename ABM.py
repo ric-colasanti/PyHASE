@@ -9,6 +9,24 @@ frame = 0.01
 class Agent:
     def __init__(self):
         self.home = None
+        self.point=0
+
+    def right(self):
+        self.point+=1
+        if self.point>= self.home.number_neighbours:
+            self.point=0
+        self.move(self.home.neighbours[self.point])
+
+    def left(self):
+        self.point-=1
+        if self.point<0:
+            self.point=self.home.number_neighbours-1
+        self.move(self.home.neighbours[self.point])
+    
+    def random(self):
+        pos = random.randint(0,4)
+        self.move(self.home.neighbours[pos])
+
 
     def move(self,cell):
         if self.home!= None:
@@ -77,6 +95,10 @@ class Cell:
     def setState(self,state,value):
         self.states[Cell.t_next][state]=value
 
+    def state(self,state,value):
+        self.states[Cell.t_now][state]=value
+        self.states[Cell.t_next][state]=value
+
     def getState(self,state):
         return self.states[Cell.t_now][state]
 
@@ -118,30 +140,55 @@ class Cell:
 
 class World:
     frame = 0.01
-    def __init__(self,size,states,values):
+    def __init__(self,size,states,values,n_type=8):
         self.size = size
         self.cells=[]
         self.agents=[]
         for i in range(self.size*self.size):
             self.cells.append(Cell((i%self.size),int(i/self.size),states,values))
-        for cell in self.cells:
-            for  y in range(cell.y_pos-1,cell.y_pos+2):
-                for  x in range(cell.x_pos-1,cell.x_pos+2):
-                    x=self.bounds(x)
-                    y=self.bounds(y)
-                    if (cell.x_pos!=x) or (cell.y_pos!=y):
-                        pos = y*self.size+x
-                        cell.addNeighbour(self.cells[pos])
+        if type == 8:    
+            for cell in self.cells:
+                for  y in range(cell.y_pos-1,cell.y_pos+2):
+                    for  x in range(cell.x_pos-1,cell.x_pos+2):
+                        x=self.bounds(x)
+                        y=self.bounds(y)
+                        if (cell.x_pos!=x) or (cell.y_pos!=y):
+                            pos = y*self.size+x
+                            cell.addNeighbour(self.cells[pos])
+        else:
+            for cell in self.cells:                
+                x=self.bounds(cell.x_pos)
+                y=self.bounds(cell.y_pos-1)
+                pos = y*self.size+x
+                cell.addNeighbour(self.cells[pos])
+                x=self.bounds(cell.x_pos+1)
+                y=self.bounds(cell.y_pos)
+                pos = y*self.size+x
+                cell.addNeighbour(self.cells[pos])
+                x=self.bounds(cell.x_pos)
+                y=self.bounds(cell.y_pos+1)
+                pos = y*self.size+x
+                cell.addNeighbour(self.cells[pos])
+                x=self.bounds(cell.x_pos-1)
+                y=self.bounds(cell.y_pos)
+                pos = y*self.size+x
+                cell.addNeighbour(self.cells[pos])
+                
 
     def addAgent(self,x,y):
         pos = y*self.size+x
         agent = Agent()
         self.agents.append(agent)
         self.cells[pos].setAgent(agent)
+        
 
     def setCell(self,x,y,state,value):
         pos = y*self.size+x
         self.cells[pos].setState(state,value)
+
+    def setState(self,x,y,state,value):
+        pos = y*self.size+x
+        self.cells[pos].state(state,value)        
 
     def getCell(self,x,y):
         pos = y*self.size+x
