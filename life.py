@@ -21,7 +21,7 @@ world.update()
 # This function "update" is run every iter action by the ABM simulation
 def update():
     #sleep
-    ABM.frame = 0.01
+    ABM.frame = 0.05
 
     # For every cell in the simulation grid
     for cell in world.cells:
@@ -45,7 +45,7 @@ def update():
     ABM.draw(screen, world, "live", 1,discreet=True)
 
     # Uncomment the line below to output number of live cells
-    print((world.countAll("live",1),0))
+    #print((world.countAll("live",1),0))
 
 #Start the simulation
 ABM.go()

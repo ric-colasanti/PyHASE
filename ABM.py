@@ -154,7 +154,7 @@ class World:
         self.agents=[]
         for i in range(self.size*self.size):
             self.cells.append(Cell((i%self.size),int(i/self.size),states,values))
-        if type == 8:    
+        if n_type == 8:    
             for cell in self.cells:
                 for  y in range(cell.y_pos-1,cell.y_pos+2):
                     for  x in range(cell.x_pos-1,cell.x_pos+2):
