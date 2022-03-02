@@ -7,7 +7,7 @@ HEIGHT = 600
 
 # Create a new simulation of grid size 80 X 80 cells
 # Set the variable in each cell of as "signle" and set value to 0
-world = ABM.World(120, ["signle"],[0],n_type=4)
+world = ABM.World(120, ["signal"],[0],n_type=4)
 # add an agent
 world.addAgent(60,60,color='red')
 
@@ -19,17 +19,17 @@ def update():
     # loop through all agents
     for agent in world.agents:
         # what is the signle at the cell that agent occupies
-        state = agent.getState("signle")
+        state = agent.getState("signal")
         if state == 1:
-            agent.setState("signle",0)
+            agent.setState("signal",0)
             agent.right()
         else:
-            agent.setState("signle",1)
+            agent.setState("signal",1)
             agent.left()
         #agent.moveRandom()
 
     #Draw the world with squares that have their "signle" variable set to 1
-    ABM.draw(screen, world, "signle", 1,discreet=True)
+    ABM.draw(screen, world, "signal", 1,discreet=True)
 
 
 #Start the simulation
