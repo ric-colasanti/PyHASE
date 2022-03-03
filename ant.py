@@ -5,7 +5,7 @@ import ABM
 WIDTH = 600
 HEIGHT = 600
 
-# Create a new simulation of grid size 80 X 80 cells
+# Create a new simulation of grid size 120 X 120 cells
 # Set the variable in each cell of as "signal" and set value to 0
 world = ABM.World(120, ["signal"],[0],n_type=4)
 # add an agent
