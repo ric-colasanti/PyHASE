@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>PyHASE</title>
+  <title>PHASE ABM Material</title>
   <meta charset="utf-8">
   <link rel="shortcut icon" href="img/life.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,7 @@
 
   <nav class="navbar navbar-expand-md bgTextBox navbar-light alien">
     <!-- Brand -->
-    <a class="navbar-brand alien" href="index.html"><img src="img/life.png" alt="logo" style="width:40px;"> PyHASE
+    <a class="navbar-brand alien" href="index.html"><img src="img/life.png" alt="logo" style="width:40px;"> PHASE Material
     </a>
 
     <!-- Toggler/collapsibe Button -->
@@ -53,7 +53,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <!-- Dropdown -->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
             Code
           </a>
@@ -63,56 +63,80 @@
             <a class="dropdown-item" href="pages/agent.html">Agent</a>
             <a class="dropdown-item" href="pages/ant.html">Ant</a>
             <a class="dropdown-item" href="pages/abm.html">ABM</a>
-          </div>
+          </div> -->
       </ul>
     </div>
   </nav>
   <br>
   <div class="container">
-    <h2>PyHASE</h2>
-    <p><h4>Axioms</h4></p>
-    <p>1) For people to understand ABM they need to experience/use an ABM</p>
-    <p>2) PHASE is trying to get people to use sociological agents. Ie people agents in either networks or geographical environments.</p>
-    <p>3) The participants do not need to know how to use a generic ABM or fully program a sociological AMB themselves</p>
-    <p>4) NetLogo has a sharp learning curve just to get a working ABM especially if little or no programming experience</p>
-    
-    <p><h4>PyHASE</h4></p>
-    <p>PyPHASE is not a comprehensive ABM it is a wrapper around a Python AMB library. In this case it is a simple toy ABM written for this demo. PyHASE should work with a more comprehensive Sociological ABM python library. It is intended for "workshop" use only. It is not intended as a fully supported ABM IDE</p>
-    
-    <p>The starting point of PyHASE is the game library PyGame Zero (pgzero).  This handels all of the graphics and iterations. pgzero isolates the update function (see code examples). This makes the code much more readable.
-    </p>
-    <p>pgzero is very lightweight and runs very well on a Raspberry Pi Zero. Used with the Mu editor <a href="https://codewith.mu/">https://codewith.mu/</a> could be a very engaging experience for PHASE participants. I have tested this combination on a Raspberry Pi Zero and it works well. </p>
-    <p>The code is at the github repository <a href="https://github.com/ric-colasanti/PyHASE">https://github.com/ric-colasanti/PyHASE</a></p>
-    <p>The PyHASE versions of three examples can be seen in the code link in the navbar above
-    </p>
-    <p>The initial plan would be that participants would alter boilerplate code, not write full code them selves. For example in the Life demo they could would change the initial patten and see the effect. But they would be walked through the code of the demos. (not the ABM code) This would expose them to the idea of coding an ABM</p>
-    <p><b>Note</b> you will need to have pgzero installed</p>
-    <pre>
-      <code>
-        pip install pgzero
-      </code>
-    </pre>
-    <h5>PyGame Zero</h5>
+    <h2>PHASE Material</h2>
+    <h5>Complexity Explorer</h5>
     <div class="row">
 
       <div class="col-sm-4">
-        <img src="img/pgzero.svg" width="100%">
-
+        <img src="img/SantaFe.png" width="100%">
       </div>
 
 
       <div class="col-sm-8 bgTextBox">
-     <p>From the <a href="https://pygame-zero.readthedocs.io/en/stable/">Pygamezero website</a> </p>
-     <p>"Pygame Zero is for creating games without boilerplate.
-
-      It is intended for use in education, so that teachers can teach basic programming without needing to explain the Pygame API or write an event loop."</p>
-        <!-- <div class="ref">[1] Christakis, Nicholas A., and James H. Fowler. "The spread of obesity in a large
-                social network over 32 years." New England journal of medicine 357.4 (2007): 370-379. <a
-                    href="papers/Christakis and Fowler.pdf">Download</a></div> -->
-      </div>
+        <p>Santa Fe Institute online course <a href="https://www.complexityexplorer.org/courses/23-introduction-to-agent-based-modeling-summer-2016/segments/5164?summary">Introduction to Agent-Based Modeling</a>  This is an in depth 7 module course that is aimed at the programming novice and taking them to intermediate level.It is centred around  It includes the use of R. The modules are in a mooc style with 10 - 15 video sections. The videos are available to download and reuse. </p>
+    </div>
 
     </div>
     <br>
+
+    <h5>Computer simulations</h5>
+    <div class="row">
+
+      <div class="col-sm-4">
+        <img src="img/UCDavis.png" width="100%">
+      </div>
+
+
+      <div class="col-sm-8 bgTextBox">
+        <p>UCDavis has a MOOC on Cousere <a href="https://www.coursera.org/learn/computer-simulations/home/welcome">Computer Simulations</a>  This is an other course that is aimed at the programming novice and is centerd arond NetLogo. The videos are not available to download</p>
+    </div>
+
+    </div>
+    <br>
+    
+
+    <h5>Agent-Based Modeling for Archaeology</h5>
+    <div class="row">
+
+      <div class="col-sm-4">
+        <img src="img/ABMFA.png" width="100%">
+      </div>
+
+
+      <div class="col-sm-8 bgTextBox">
+        <p>The Santa Fe Institute press has produce a print and online boob <a href="https://www.sfipress.org/books/agent-based-modeling-archaeology">Agent-Based Modeling for Archaeology: Simulating the Complexity of Societies</a>  This a very comprensive worked set of examples of AMB for archaeology. It is centerde around NetLogo</p>
+    </div>
+
+    </div>
+    <br>
+
+     
+
+    <h5>Agent-Based Modeling for Archaeology</h5>
+    <div class="row">
+
+      <div class="col-sm-4">
+        <img src="img/ABMV1.jpg" width="100%">
+      </div>
+
+
+      <div class="col-sm-8 bgTextBox">
+        <p>The book <a href="https://www.elsevier.com/books/agent-based-spatial-simulation-with-netlogo-volume-1/banos/978-1-78548-055-3">https://www.elsevier.com/books/agent-based-spatial-simulation-with-netlogo-volume-1/banos/978-1-78548-055-3</a>  Contains a number of interesting chapter/pages <p>
+            <ul>
+           <li> 1---Introduction-to-the-Agent-App_2015_Agent-based-Spatial-Simulation-with-N <a href="papers/1---Introduction-to-the-Agent-App_2015_Agent-based-Spatial-Simulation-with-N.pdf">Download</a> </li>
+            <li> 2---Description-Formalisms-in-Agent_2015_Agent-based-Spatial-Simulation-with-NetLogo <a href="papers/2---Description-Formalisms-in-Agent_2015_Agent-based-Spatial-Simulation-with.pdf"> Download</a> </li>
+            <li> 3---Introduction-to-NetLogo_2015_Agent-based-Spatial-Simulation-with-Netlogo <a href="papers/3---Introduction-to-NetLogo_2015_Agent-based-Spatial-Simulation-with-Netlogo.pdf"> Download</a> </li>
+        </ul>
+    </div>
+
+    </div>
+    <br>   
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
