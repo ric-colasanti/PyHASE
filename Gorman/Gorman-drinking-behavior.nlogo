@@ -6,19 +6,18 @@ globals [ debug-turtle per-susceptible per-current per-former iterations ]
 to setup
   clear-all
   set-default-shape turtles "person"
-
-  create-turtles number-of-agents[       ;; create NUMBER-OF-TURTLES turtls
-    setxy random-xcor random-ycor       ;; assign random cell
-    set color green
-    set size 0.5                          ;; face N, E, S, or W
-    set drinking-class "susceptible"
-  ]
-
-  repeat initial-drinkers [
-    ask one-of turtles with [ drinking-class = "susceptible" ][
-      set drinking-class "current"
+  ask patches[
+    sprout 1 [       ;; create NUMBER-OF-TURTLES turtls
+      set color green
+      set size 0.5                          ;; face N, E, S, or W
+      set drinking-class "susceptible"
     ]
   ]
+
+  ask one-of turtles with [ drinking-class = "susceptible" ][
+    set drinking-class "current"
+  ]
+
 
   set debug-turtle one-of turtles with [ drinking-class = "susceptible" ]
   ask turtles [ set-color ]
@@ -90,10 +89,14 @@ to go
     set-color
   ]
 
-  set per-susceptible count turtles with [ drinking-class = "susceptible" ] / number-of-agents * 100
-  set per-current count turtles with [ drinking-class = "current" ] / number-of-agents * 100
-  set per-former count turtles with [ drinking-class = "former" ] / number-of-agents * 100
+  set per-susceptible count turtles with [ drinking-class = "susceptible" ] / 100 * 100
+  set per-current count turtles with [ drinking-class = "current" ] / 100 * 100
+  set per-former count turtles with [ drinking-class = "former" ] / 100 * 100
   debuging
+
+  ask patches[
+    set plabel count turtles-here
+  ]
   tick
   set iterations iterations + 1
   if iterations > 1000 [
@@ -135,10 +138,10 @@ ticks
 30.0
 
 BUTTON
-30
-430
-120
-463
+25
+275
+115
+308
 NIL
 setup
 NIL
@@ -152,10 +155,10 @@ NIL
 1
 
 BUTTON
-31
-472
-123
-505
+26
+317
+118
+350
 NIL
 go
 T
@@ -170,24 +173,9 @@ NIL
 
 SLIDER
 25
-125
+130
 197
-158
-number-of-agents
-number-of-agents
-1
-100
-100.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-25
-210
-197
-243
+163
 move-probability
 move-probability
 0
@@ -198,29 +186,14 @@ move-probability
 NIL
 HORIZONTAL
 
-SLIDER
-25
-165
-197
-198
-initial-drinkers
-initial-drinkers
-1
-number-of-agents
-1.0
-1
-1
-NIL
-HORIZONTAL
-
 SWITCH
-30
-520
-133
-553
+790
+645
+893
+678
 debug
 debug
-0
+1
 1
 -1000
 
@@ -250,13 +223,13 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot per-susceptible"
+"default" 1.0 0 -10899396 true "" "plot per-susceptible"
 
 SLIDER
 25
-255
+175
 197
-288
+208
 current-to-former
 current-to-former
 0
@@ -269,9 +242,9 @@ HORIZONTAL
 
 SLIDER
 25
-300
+220
 202
-333
+253
 former-to-current
 former-to-current
 0
@@ -298,7 +271,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot per-current"
+"default" 1.0 0 -2674135 true "" "plot per-current"
 
 PLOT
 695
@@ -316,7 +289,57 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot per-former"
+"default" 1.0 0 -13345367 true "" "plot per-former"
+
+TEXTBOX
+255
+565
+405
+583
+Drinking state:
+12
+0.0
+1
+
+TEXTBOX
+255
+585
+405
+603
+Susceptible to drinking
+12
+55.0
+1
+
+TEXTBOX
+255
+605
+405
+623
+Current drinker
+12
+15.0
+1
+
+TEXTBOX
+255
+625
+405
+643
+Former drinker
+12
+105.0
+1
+
+TEXTBOX
+500
+570
+650
+620
+value shows number of people in a patch
+12
+0.0
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
