@@ -2,7 +2,7 @@ turtles-own[
   drinking-class ;; 3 types susceptible current former
 ]
 
-globals [ debug-turtle per-susceptible per-current per-former iterations ]
+globals [ debug-turtle per-susceptible per-current per-former iterations move-rate prob-stop prob-restart]
 to setup
   clear-all
   set-default-shape turtles "person"
@@ -24,6 +24,25 @@ to setup
   ask patches [ set pcolor random-float 2 ]
   debuging
   set iterations 0
+
+  ifelse move-more[
+    set move-rate 0.2
+  ][
+    set move-rate 0.02
+  ]
+
+  ifelse high-probablity-of-quiting[
+    set prob-stop 0.3
+  ][
+    set prob-stop 0.1
+  ]
+
+  ifelse hi-probability-of-restarting [
+    set prob-restart 0.3
+  ][
+    set prob-restart 0.1
+  ]
+
   reset-ticks
 end
 
@@ -42,7 +61,7 @@ to set-color  ;; turtle procedure
 end
 
 to move
-  if random-float 1 < move-probability [
+  if random-float 1 < move-rate [
       face one-of neighbors4              ;; face N, E, S, or W
       forward 1                           ;; advance one step
     ]
@@ -61,13 +80,12 @@ to set-state
       ]
     ]
     t-class = "current" [
-      if random-float 1 < r / t + current-to-former[
+      if random-float 1 < r / t + prob-stop[
         set drinking-class "former"
       ]
-
   ]
     t-class = "former" [
-      if random-float 1 < d / t + former-to-current[
+      if random-float 1 < d / t + prob-restart[
         set drinking-class "current"
       ]
   ])
@@ -99,7 +117,7 @@ to go
   ]
   tick
   set iterations iterations + 1
-  if iterations > 1000 [
+  if iterations >= 1000 [
     stop
   ]
 end
@@ -111,9 +129,9 @@ end
 ; copyright and related or neighboring rights to this model.
 @#$#@#$#@
 GRAPHICS-WINDOW
-250
+265
 125
-673
+688
 549
 -1
 -1
@@ -138,10 +156,10 @@ ticks
 30.0
 
 BUTTON
-25
-275
-115
-308
+10
+280
+100
+313
 NIL
 setup
 NIL
@@ -155,10 +173,10 @@ NIL
 1
 
 BUTTON
-26
-317
-118
-350
+160
+280
+252
+313
 NIL
 go
 T
@@ -171,25 +189,10 @@ NIL
 NIL
 0
 
-SLIDER
-25
-130
-197
-163
-move-probability
-move-probability
-0
-1
-0.05
-0.01
-1
-NIL
-HORIZONTAL
-
 SWITCH
-790
+805
 645
-893
+908
 678
 debug
 debug
@@ -208,9 +211,9 @@ Agent-Based Modeling of Drinking Behavior: A Preliminary Model and Potential App
 1
 
 PLOT
-690
+705
 130
-890
+905
 280
 Susceptible
 Iterations days
@@ -225,40 +228,10 @@ false
 PENS
 "default" 1.0 0 -10899396 true "" "plot per-susceptible"
 
-SLIDER
-25
-175
-197
-208
-current-to-former
-current-to-former
-0
-1
-0.1
-0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-25
-220
-202
-253
-former-to-current
-former-to-current
-0
-1
-0.1
-0.01
-1
-NIL
-HORIZONTAL
-
 PLOT
-690
+705
 295
-890
+905
 445
 Current drinkers
 iterations days
@@ -274,9 +247,9 @@ PENS
 "default" 1.0 0 -2674135 true "" "plot per-current"
 
 PLOT
-695
+710
 470
-895
+910
 620
 Former drinkers
 iterations days
@@ -292,9 +265,9 @@ PENS
 "default" 1.0 0 -13345367 true "" "plot per-former"
 
 TEXTBOX
-255
+270
 565
-405
+420
 583
 Drinking state:
 12
@@ -302,9 +275,9 @@ Drinking state:
 1
 
 TEXTBOX
-255
+270
 585
-405
+420
 603
 Susceptible to drinking
 12
@@ -312,9 +285,9 @@ Susceptible to drinking
 1
 
 TEXTBOX
-255
+270
 605
-405
+420
 623
 Current drinker
 12
@@ -322,9 +295,9 @@ Current drinker
 1
 
 TEXTBOX
-255
+270
 625
-405
+420
 643
 Former drinker
 12
@@ -332,14 +305,47 @@ Former drinker
 1
 
 TEXTBOX
-500
+515
 570
-650
+665
 620
 value shows number of people in a patch
 12
 0.0
 1
+
+SWITCH
+10
+125
+250
+158
+move-more
+move-more
+1
+1
+-1000
+
+SWITCH
+10
+175
+250
+208
+high-probablity-of-quiting
+high-probablity-of-quiting
+0
+1
+-1000
+
+SWITCH
+10
+225
+252
+258
+hi-probability-of-restarting
+hi-probability-of-restarting
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
