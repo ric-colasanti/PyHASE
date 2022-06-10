@@ -2,53 +2,84 @@ turtles-own[
   drinking-class ;; 3 types susceptible current former
 ]
 
-globals [ debug-turtle per-susceptible per-current per-former iterations move-rate prob-stop prob-restart]
+globals [
+  debug-turtle
+
+  per-susceptible ;; % population susceptible to drinking
+  per-current     ;; % population currently drinking
+  per-former      ;; % population former drinkers
+
+  iterations
+
+  move-rate       ;; probability of moving
+  prob-stop       ;; probability of stopping drinking
+  prob-restart    ;; probability of re-starting drinking
+
+  time-when-no-susceptible
+  flag
+]
+
+
+
 to setup
-  clear-all
+  clear-patches
+  clear-ticks
+  clear-turtles
+  clear-all-plots
+  ;; clear all data and agents
+
+
   set-default-shape turtles "person"
+
   ask patches[
-    if pycor = 1[
-    sprout 1 [       ;; create NUMBER-OF-TURTLES turtls
-      set color green
-      set size 1.5                        ;; face N, E, S, or W
-      set drinking-class "susceptible"
-    ]
+    if pycor = 1[  ;; only have center row of the matrix  populated with agents ( 1D mode;)
+      sprout 1 [
+        set size 1.5  ;; so agent looks visable on 1D ladscape
+        set drinking-class "susceptible"  ;; set all agents as susceptible to drinking
+      ]
     ]
   ]
 
   ask one-of turtles with [ drinking-class = "susceptible" ][
-    set drinking-class "current"
+    set drinking-class "current"  ;; pick one of the susceptible agents as an inital drinker
   ]
 
-
-  set debug-turtle one-of turtles with [ drinking-class = "susceptible" ]
-  ask turtles [ set-color ]
-  ask patches [ set pcolor black ]
+  ;;; debugging
   debuging
+
+  ask turtles [ set-color ] ;; set agent color to drinking state
+  ask patches [ set pcolor black ] ;; bacground to black
+
   set iterations 0
 
-  ifelse move-more[
-    set move-rate 0.2
+
+  ;; using switch to set one of tow options for move, re-starting drinking and stopping drinking
+  ifelse move-more[  ;; values taken from paper
+      set move-rate 0.5
   ][
-    set move-rate 0.02
+      set move-rate 0.2
   ]
 
-  ifelse high-probablity-of-quiting[
+  ifelse high-probablity-of-quiting[  ;; values taken from paper
+    set prob-stop 0.5
+  ][
     set prob-stop 0.3
-  ][
-    set prob-stop 0.1
   ]
 
-  ifelse hi-probability-of-restarting [
-    set prob-restart 0.3
+  ifelse high-probability-of-restarting [  ;; values taken from paper
+    set prob-restart 0.5
   ][
-    set prob-restart 0.1
+    set prob-restart 0.3
+  ]
+  if  flag = 0 [
+    output-print "move quiting restart current former time"
+    set flag true
   ]
 
   reset-ticks
 end
 
-to set-color  ;; turtle procedure
+to set-color  ;; turtle procedure for setting color to drinking state
   (ifelse
   drinking-class = "susceptible" [
     set color green
@@ -63,15 +94,15 @@ to set-color  ;; turtle procedure
 end
 
 to move
-  if random-float 1 < move-rate [
+  if random-float 1 < move-rate [ ;; test to see if move
+    ;; randomly pick left or right
     ifelse random-float 1 < 0.5 [
-      face patch-at -1 0
-  ][
-    face patch-at 1 0
-                  ;; face N, E, S, or W
-    ]     forward 1
-      ;; advance one step
-    ]
+      face patch-at -1 0  ;; x - 1   left
+    ][
+      face patch-at 1 0   ;; x + 1   right
+     ]
+    forward 1;; advance one step
+  ]
 end
 
 to set-state
@@ -100,6 +131,7 @@ end
 
 to debuging
   if debug [
+    set debug-turtle one-of turtles with [ drinking-class = "susceptible" ]
     ask debug-turtle [
       set color white
     ]
@@ -107,7 +139,6 @@ to debuging
 end
 
 to go
-
   ask turtles [
     move
     set-state
@@ -126,7 +157,22 @@ to go
   ]
   tick
   set iterations iterations + 1
+  if count turtles with [ drinking-class = "susceptible" ] > 0 [
+    set time-when-no-susceptible  iterations
+  ]
   if iterations >= 1000 [
+
+    output-type move-rate
+    output-type "  "
+    output-type prob-stop
+    output-type "     "
+    output-type prob-restart
+    output-type "     "
+    output-type per-current
+    output-type "      "
+    output-type per-former
+    output-type "     "
+    output-print time-when-no-susceptible
     stop
   ]
 end
@@ -199,10 +245,10 @@ NIL
 0
 
 SWITCH
-20
-400
-123
-433
+1400
+735
+1503
+768
 debug
 debug
 1
@@ -220,9 +266,9 @@ Agent-Based Modeling of Drinking Behavior: A Preliminary Model and Potential App
 1
 
 PLOT
-330
+355
 130
-710
+735
 375
 Susceptible
 Iterations days
@@ -238,9 +284,9 @@ PENS
 "default" 1.0 0 -10899396 true "" "plot per-susceptible"
 
 PLOT
-730
+755
 130
-1105
+1130
 375
 Current drinkers
 iterations days
@@ -256,9 +302,9 @@ PENS
 "default" 1.0 0 -2674135 true "" "plot per-current"
 
 PLOT
-1115
+1140
 130
-1490
+1515
 375
 Former drinkers
 iterations days
@@ -274,9 +320,9 @@ PENS
 "default" 1.0 0 -13345367 true "" "plot per-former"
 
 TEXTBOX
-330
+355
 380
-480
+505
 398
 Susceptible to drinking
 12
@@ -284,9 +330,9 @@ Susceptible to drinking
 1
 
 TEXTBOX
-735
+760
 380
-885
+910
 398
 Current drinker
 12
@@ -294,9 +340,9 @@ Current drinker
 1
 
 TEXTBOX
-1125
+1150
 380
-1275
+1300
 398
 Former drinker
 12
@@ -320,7 +366,7 @@ SWITCH
 188
 move-more
 move-more
-0
+1
 1
 -1000
 
@@ -340,16 +386,16 @@ SWITCH
 255
 262
 288
-hi-probability-of-restarting
-hi-probability-of-restarting
+high-probability-of-restarting
+high-probability-of-restarting
 1
 1
 -1000
 
 MONITOR
-730
+755
 395
-905
+930
 440
 % Current drinkers
 per-current
@@ -358,9 +404,9 @@ per-current
 11
 
 MONITOR
-1115
+1140
 395
-1290
+1315
 440
 % Former drinkers
 per-former
@@ -369,15 +415,50 @@ per-former
 11
 
 MONITOR
-325
+350
 395
-502
+527
 440
 % Susceptible non drinkers
 per-susceptible
 17
 1
 11
+
+MONITOR
+540
+395
+707
+440
+time when no susceptible
+time-when-no-susceptible
+17
+1
+11
+
+OUTPUT
+350
+455
+705
+725
+13
+
+BUTTON
+755
+455
+862
+488
+clear output
+clear-output\nset flag 0
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
