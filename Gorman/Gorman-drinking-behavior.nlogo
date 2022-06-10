@@ -107,9 +107,9 @@ to go
     set-color
   ]
 
-  set per-susceptible count turtles with [ drinking-class = "susceptible" ] / 100 * 100
-  set per-current count turtles with [ drinking-class = "current" ] / 100 * 100
-  set per-former count turtles with [ drinking-class = "former" ] / 100 * 100
+  set per-susceptible count turtles with [ drinking-class = "susceptible" ]
+  set per-current count turtles with [ drinking-class = "current" ]
+  set per-former count turtles with [ drinking-class = "former" ]
   debuging
 
   ask patches[
@@ -131,8 +131,8 @@ end
 GRAPHICS-WINDOW
 265
 125
-688
-549
+650
+511
 -1
 -1
 37.73
@@ -145,10 +145,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--5
-5
--5
-5
+0
+9
+0
+9
 1
 1
 1
@@ -265,51 +265,51 @@ PENS
 "default" 1.0 0 -13345367 true "" "plot per-former"
 
 TEXTBOX
-270
-565
-420
-583
+20
+330
+170
+348
 Drinking state:
 12
 0.0
 1
 
 TEXTBOX
-270
-585
-420
-603
+20
+350
+170
+368
 Susceptible to drinking
 12
 55.0
 1
 
 TEXTBOX
-270
-605
+20
 420
-623
+170
+438
 Current drinker
 12
 15.0
 1
 
 TEXTBOX
-270
-625
-420
-643
+25
+485
+175
+503
 Former drinker
 12
 105.0
 1
 
 TEXTBOX
-515
+280
+520
+585
 570
-665
-620
-value shows number of people in a patch
+Value shows number of people in a patch
 12
 0.0
 1
@@ -321,7 +321,7 @@ SWITCH
 158
 move-more
 move-more
-1
+0
 1
 -1000
 
@@ -346,6 +346,39 @@ hi-probability-of-restarting
 1
 1
 -1000
+
+MONITOR
+15
+435
+190
+480
+% Current drinkers
+per-current
+17
+1
+11
+
+MONITOR
+15
+505
+190
+550
+% Former drinkers
+per-former
+17
+1
+11
+
+MONITOR
+15
+365
+192
+410
+% Susceptible non drinkers
+per-susceptible
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
