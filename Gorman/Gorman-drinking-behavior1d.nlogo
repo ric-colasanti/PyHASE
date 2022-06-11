@@ -40,6 +40,7 @@ to setup
     ]
   ]
 
+
   ask one-of turtles with [ drinking-class = "susceptible" ][
     set drinking-class "current"  ;; pick one of the susceptible agents as an inital drinker
   ]
@@ -49,6 +50,19 @@ to setup
 
   ask turtles [ set-color ] ;; set agent color to drinking state
   ask patches [ set pcolor black ] ;; bacground to black
+
+  if add-bar[
+    ask patch 50 0 [
+      set pcolor orange
+    ]
+    ask patch 50 1 [
+      set pcolor orange
+    ]
+    ask patch 50 2 [
+      set pcolor orange
+    ]
+  ]
+
 
   set iterations 0
 
@@ -105,6 +119,26 @@ to move
   ]
 end
 
+
+to move-pub
+  if random-float 1 < move-rate [ ;; test to see if move
+    ;; randomly pick left or right
+    let bias 0.5
+    if xcor > 50[
+      set bias 0.75
+    ]
+    if xcor < 50[
+      set bias 0.25
+    ]
+    ifelse random-float 1 < bias [
+      face patch-at -1 0  ;; x - 1   left
+    ][
+      face patch-at 1 0   ;; x + 1   right
+     ]
+    forward 1;; advance one step
+  ]
+end
+
 to set-state
   let s count turtles-here with [ drinking-class = "susceptible" ]
   let d count turtles-here with [ drinking-class = "current" ]
@@ -140,7 +174,15 @@ end
 
 to go
   ask turtles [
+    ifelse add-bar[
+      ifelse drinking-class = "current"[
+        move-pub
+      ][
+        move
+      ]
+    ][
     move
+    ]
     set-state
     set-color
   ]
@@ -212,9 +254,9 @@ ticks
 
 BUTTON
 20
-310
+375
 110
-343
+408
 NIL
 setup
 NIL
@@ -229,9 +271,9 @@ NIL
 
 BUTTON
 170
-310
+375
 262
-343
+408
 NIL
 go
 T
@@ -439,7 +481,7 @@ time-when-no-susceptible
 OUTPUT
 350
 455
-705
+720
 725
 13
 
@@ -460,21 +502,47 @@ NIL
 NIL
 1
 
+SWITCH
+20
+305
+132
+338
+add-bar
+add-bar
+1
+1
+-1000
+
 @#$#@#$#@
 ## WHAT IS IT?
 
-A two dimentional version of Gorman's Agent-based model of drinking behavior
+A version of Gorman's mode from the paper "Agent-based modeling of drinking behavior: a preliminary model and potential applications to theory and practice"
 
 ## HOW IT WORKS
 
-10 by 10 patches
+The ABM is an abstract spatially discrete model of drinking behavour. The environment is represented as a simple one-dimensional grid of spaces. People are represented as simple agents that can be in one of three drinking states: never-drank (green) , current-drinker (red), and former-drinker (blue). Each agent occupies an individual grid space and can move between adjacent spaces. Each space can contain any number of agents ( indicated by the number in the space). An agent’s state is influenced by its current state and the states of the other agents that occupy the same space.  
+
+There are two versions of the model. In one, the agents move randomly between adjacent spaces. In the other, the agents also move randomly, but the agents who are current drinkers move preferentially towards a “pub” placed within the environment.  
+
+The key components of the model are the rules that govern an agent’s change in drinking state. The never-drank state is given the symbol S. The current-drinker state is given the symbol D. The former-drinker state is  given the symbol R.  
+
+The transition rules are: The S state can change to a D state. A D state can change to an R state and a R state can change to a D state.  
+
+This means that a person who has never drunk (S) can become a drinker (D), but a drinker can never become a person who has never drunk. A drinker (D) can stop drinking and become a former drinker (R), but that person can start drinking again to become a drinker (D). 
+
+The actual transition from one state to another is dependent on the state of the other agents in the same grid space and an intrinsic transition rate. For each space in the grid (the index i is used to identify the space) the total number of agents for each state is calculated (S(i), D(i), R(i))  
+
+The probability of transitioning from never drinking (S) to drinking (D) is proportional to the fraction of drinkers among the other agents in the same grid space. The probability of transitioning from drinking (D) to being a former drinker (R) is proportional to the fraction of nondrinkers among the other agents in the same grid space plus an intrinsic rate (γ) The probability of transitioning from being a former drinker (R) to being a drinker (D) is proportional to the fraction of drinkers among the other agents in the same grid space plus an intrinsic rate (ρ). 
+
+The experimenter can change the rate at which the agents move between grid spaces and the intrinsic rates of stopping drinking and resuming drinking. The experimenter can also introduce a space that preferentially attracts drinkers, a “pub”. 
 
 
 ## THINGS TO NOTICE
- Note that the patch color is ranom 
+All agents will inevitably be either a drinker or a non-drinker and that the proportion of each is dependent on the intrinsic transition rates and that these are reflective of total societal processes such as health policies. The rate at which people change state is very dependent on the spatial nature of the environment. The rate of movement was a strong influence but that this was not linear with there being an “optimal” rate for transition. The inclusion of space that preferentially attracted drinkers also greatly influenced the transition rate again in a very nonlinear way. The model emphasized the complexity of drinking behavior but showed that elements could be deconstructed and used to better understand fundamental behavior.  
 
 
-## RELATED MODELS
+## THINGS TO TRY
+There is an output area in the model this will capture the results from different runs.
 
 
 <!-- 2022 -->
