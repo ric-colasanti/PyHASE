@@ -17,9 +17,9 @@ to setup
   set-default-shape turtles "circle"
   set variability 0.0
 
-;  if add-variability[
-;    set variability 0.1
-;  ]
+  if add-variability[
+    set variability 0.01
+  ]
 
   set set-group []
 
@@ -162,26 +162,9 @@ NIL
 
 BUTTON
 20
-520
-82
-553
-step
-go
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-BUTTON
-95
-520
-158
-553
+590
+83
+623
 Run
 go
 T
@@ -196,9 +179,9 @@ NIL
 
 PLOT
 20
-300
+385
 320
-490
+575
 plot 1
 NIL
 NIL
@@ -217,9 +200,9 @@ PENS
 
 SWITCH
 20
-170
+200
 222
-203
+233
 set-50-fixed-weight
 set-50-fixed-weight
 1
@@ -228,9 +211,9 @@ set-50-fixed-weight
 
 TEXTBOX
 20
-215
+300
 280
-250
+335
 Select just 50 healthy-weight individuals and keep their weight healthy
 12
 0.0
@@ -238,9 +221,9 @@ Select just 50 healthy-weight individuals and keep their weight healthy
 
 MONITOR
 20
-250
+335
 92
-295
+380
 % Obese
 count turtles with [ color = red ] / count turtles * 100
 0
@@ -249,9 +232,9 @@ count turtles with [ color = red ] / count turtles * 100
 
 MONITOR
 100
-250
+335
 157
-295
+380
 % Over
 count turtles with [ color = blue ]/ count turtles * 100
 0
@@ -260,9 +243,9 @@ count turtles with [ color = blue ]/ count turtles * 100
 
 MONITOR
 165
-250
+335
 242
-295
+380
 % Healthy
 count turtles with [ color = green ] / count turtles * 100
 0
@@ -271,9 +254,9 @@ count turtles with [ color = green ] / count turtles * 100
 
 MONITOR
 250
-250
+335
 317
-295
+380
 % Under
 count turtles with [ color = yellow ] / count turtles * 100
 0
@@ -289,6 +272,17 @@ Exploiting Social Networks to Mitigate the Obesity Epidemic
 32
 0.0
 1
+
+SWITCH
+20
+250
+172
+283
+add-variability
+add-variability
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
