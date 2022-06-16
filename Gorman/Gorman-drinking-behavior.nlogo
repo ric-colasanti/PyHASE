@@ -2,51 +2,98 @@ turtles-own[
   drinking-class ;; 3 types susceptible current former
 ]
 
-globals [ debug-turtle per-susceptible per-current per-former iterations move-rate prob-stop prob-restart]
+globals [
+  debug-turtle
+
+  per-susceptible ;; % population susceptible to drinking
+  per-current     ;; % population currently drinking
+  per-former      ;; % population former drinkers
+
+  iterations
+
+  move-rate       ;; probability of moving
+  prob-stop       ;; probability of stopping drinking
+  prob-restart    ;; probability of re-starting drinking
+
+  time-when-no-susceptible
+  flag
+]
+
+
+
 to setup
-  clear-all
+  clear-patches
+  clear-ticks
+  clear-turtles
+  clear-all-plots
+  ;; clear all data and agents
+
+
   set-default-shape turtles "person"
+
   ask patches[
-    sprout 1 [       ;; create NUMBER-OF-TURTLES turtls
-      set color green
-      set size 0.5                          ;; face N, E, S, or W
-      set drinking-class "susceptible"
+    if pycor = 1[  ;; only have center row of the matrix  populated with agents ( 1D mode;)
+      sprout 1 [
+        set size 1.5  ;; so agent looks visable on 1D ladscape
+        set drinking-class "susceptible"  ;; set all agents as susceptible to drinking
+      ]
     ]
   ]
 
+
   ask one-of turtles with [ drinking-class = "susceptible" ][
-    set drinking-class "current"
+    set drinking-class "current"  ;; pick one of the susceptible agents as an inital drinker
+  ]
+
+  ;;; debugging
+
+
+  ask turtles [ set-color ] ;; set agent color to drinking state
+  ask patches [ set pcolor black ] ;; bacground to black
+
+  if add-bar[
+    ask patch 50 0 [
+      set pcolor orange
+    ]
+    ask patch 50 1 [
+      set pcolor orange
+    ]
+    ask patch 50 2 [
+      set pcolor orange
+    ]
   ]
 
 
-  set debug-turtle one-of turtles with [ drinking-class = "susceptible" ]
-  ask turtles [ set-color ]
-  ask patches [ set pcolor random-float 2 ]
-  debuging
   set iterations 0
 
-  ifelse move-more[
-    set move-rate 0.2
+
+  ;; using switch to set one of tow options for move, re-starting drinking and stopping drinking
+  ifelse move-more[  ;; values taken from paper
+      set move-rate 0.5
   ][
-    set move-rate 0.02
+      set move-rate 0.2
   ]
 
-  ifelse high-probablity-of-quiting[
+  ifelse high-probablity-of-quiting[  ;; values taken from paper
+    set prob-stop 0.5
+  ][
     set prob-stop 0.3
-  ][
-    set prob-stop 0.1
   ]
 
-  ifelse hi-probability-of-restarting [
-    set prob-restart 0.3
+  ifelse high-probability-of-restarting [  ;; values taken from paper
+    set prob-restart 0.5
   ][
-    set prob-restart 0.1
+    set prob-restart 0.3
+  ]
+  if  flag = 0 [
+    output-print "move quiting restart current former time"
+    set flag true
   ]
 
   reset-ticks
 end
 
-to set-color  ;; turtle procedure
+to set-color  ;; turtle procedure for setting color to drinking state
   (ifelse
   drinking-class = "susceptible" [
     set color green
@@ -61,10 +108,35 @@ to set-color  ;; turtle procedure
 end
 
 to move
-  if random-float 1 < move-rate [
-      face one-of neighbors4              ;; face N, E, S, or W
-      forward 1                           ;; advance one step
+  if random-float 1 < move-rate [ ;; test to see if move
+    ;; randomly pick left or right
+    ifelse random-float 1 < 0.5 [
+      face patch-at -1 0  ;; x - 1   left
+    ][
+      face patch-at 1 0   ;; x + 1   right
+     ]
+    forward 1;; advance one step
+  ]
+end
+
+
+to move-pub
+  if random-float 1 < move-rate [ ;; test to see if move
+    ;; randomly pick left or right
+    let bias 0.5
+    if xcor > 50[
+      set bias 0.75
     ]
+    if xcor < 50[
+      set bias 0.25
+    ]
+    ifelse random-float 1 < bias [
+      face patch-at -1 0  ;; x - 1   left
+    ][
+      face patch-at 1 0   ;; x + 1   right
+     ]
+    forward 1;; advance one step
+  ]
 end
 
 to set-state
@@ -91,18 +163,19 @@ to set-state
   ])
 end
 
-to debuging
-  if debug [
-    ask debug-turtle [
-      set color white
-    ]
-  ]
-end
+
 
 to go
-
   ask turtles [
+    ifelse add-bar[
+      ifelse drinking-class = "current"[
+        move-pub
+      ][
+        move
+      ]
+    ][
     move
+    ]
     set-state
     set-color
   ]
@@ -110,13 +183,18 @@ to go
   set per-susceptible count turtles with [ drinking-class = "susceptible" ]
   set per-current count turtles with [ drinking-class = "current" ]
   set per-former count turtles with [ drinking-class = "former" ]
-  debuging
+
 
   ask patches[
+    if pycor = 1 [
     set plabel count turtles-here
+    ]
   ]
   tick
   set iterations iterations + 1
+  if count turtles with [ drinking-class = "susceptible" ] > 0 [
+    set time-when-no-susceptible  iterations
+  ]
   if iterations >= 1000 [
     stop
   ]
@@ -129,26 +207,26 @@ end
 ; copyright and related or neighboring rights to this model.
 @#$#@#$#@
 GRAPHICS-WINDOW
-265
-125
-650
-511
--1
--1
-37.73
-1
 10
+65
+1518
+119
+-1
+-1
+15.0
+1
+8
 1
 1
 1
 0
 1
-1
+0
 1
 0
-9
+99
 0
-9
+2
 1
 1
 1
@@ -156,10 +234,10 @@ ticks
 30.0
 
 BUTTON
-10
-280
-100
-313
+20
+375
+110
+408
 NIL
 setup
 NIL
@@ -173,10 +251,10 @@ NIL
 1
 
 BUTTON
-160
-280
-252
-313
+170
+375
+262
+408
 NIL
 go
 T
@@ -189,32 +267,21 @@ NIL
 NIL
 0
 
-SWITCH
-805
-645
-908
-678
-debug
-debug
-1
-1
--1000
-
 TEXTBOX
 55
 20
-690
-55
+1525
+76
 Agent-Based Modeling of Drinking Behavior: A Preliminary Model and Potential Applications to Theory and Practice
-15
+25
 0.0
 1
 
 PLOT
-705
+355
 130
-905
-280
+735
+375
 Susceptible
 Iterations days
 % susceptible
@@ -229,10 +296,10 @@ PENS
 "default" 1.0 0 -10899396 true "" "plot per-susceptible"
 
 PLOT
-705
-295
-905
-445
+755
+130
+1130
+375
 Current drinkers
 iterations days
 % current drinkers
@@ -247,10 +314,10 @@ PENS
 "default" 1.0 0 -2674135 true "" "plot per-current"
 
 PLOT
-710
-470
-910
-620
+1140
+130
+1515
+375
 Former drinkers
 iterations days
 % former drinkers
@@ -265,71 +332,61 @@ PENS
 "default" 1.0 0 -13345367 true "" "plot per-former"
 
 TEXTBOX
-20
-330
-170
-348
-Drinking state:
-12
-0.0
-1
-
-TEXTBOX
-20
-350
-170
-368
+355
+380
+505
+398
 Susceptible to drinking
 12
 55.0
 1
 
 TEXTBOX
-20
-420
-170
-438
+760
+380
+910
+398
 Current drinker
 12
 15.0
 1
 
 TEXTBOX
-25
-485
-175
-503
+1150
+380
+1300
+398
 Former drinker
 12
 105.0
 1
 
 TEXTBOX
-280
-520
-585
-570
+15
+125
+335
+145
 Value shows number of people in a patch
 12
 0.0
 1
 
 SWITCH
-10
-125
-250
-158
+20
+155
+260
+188
 move-more
 move-more
-0
+1
 1
 -1000
 
 SWITCH
-10
-175
-250
-208
+20
+205
+260
+238
 high-probablity-of-quiting
 high-probablity-of-quiting
 0
@@ -337,21 +394,21 @@ high-probablity-of-quiting
 -1000
 
 SWITCH
-10
-225
-252
-258
-hi-probability-of-restarting
-hi-probability-of-restarting
+20
+255
+262
+288
+high-probability-of-restarting
+high-probability-of-restarting
 1
 1
 -1000
 
 MONITOR
-15
-435
-190
-480
+755
+395
+930
+440
 % Current drinkers
 per-current
 17
@@ -359,10 +416,10 @@ per-current
 11
 
 MONITOR
-15
-505
-190
-550
+1140
+395
+1315
+440
 % Former drinkers
 per-former
 17
@@ -370,31 +427,68 @@ per-former
 11
 
 MONITOR
-15
-365
-192
-410
+350
+395
+527
+440
 % Susceptible non drinkers
 per-susceptible
 17
 1
 11
 
+MONITOR
+540
+395
+707
+440
+time when no susceptible
+time-when-no-susceptible
+17
+1
+11
+
+SWITCH
+20
+305
+132
+338
+add-bar
+add-bar
+1
+1
+-1000
+
 @#$#@#$#@
 ## WHAT IS IT?
 
-A two dimentional version of Gorman's Agent-based model of drinking behavior
+A version of Gorman's mode from the paper "Agent-based modeling of drinking behavior: a preliminary model and potential applications to theory and practice"
 
 ## HOW IT WORKS
 
-10 by 10 patches
+The ABM is an abstract spatially discrete model of drinking behavour. The environment is represented as a simple one-dimensional grid of spaces. People are represented as simple agents that can be in one of three drinking states: never-drank (green) , current-drinker (red), and former-drinker (blue). Each agent occupies an individual grid space and can move between adjacent spaces. Each space can contain any number of agents ( indicated by the number in the space). An agent’s state is influenced by its current state and the states of the other agents that occupy the same space.  
+
+There are two versions of the model. In one, the agents move randomly between adjacent spaces. In the other, the agents also move randomly, but the agents who are current drinkers move preferentially towards a “pub” placed within the environment.  
+
+The key components of the model are the rules that govern an agent’s change in drinking state. The never-drank state is given the symbol S. The current-drinker state is given the symbol D. The former-drinker state is  given the symbol R.  
+
+The transition rules are: The S state can change to a D state. A D state can change to an R state and a R state can change to a D state.  
+
+This means that a person who has never drunk (S) can become a drinker (D), but a drinker can never become a person who has never drunk. A drinker (D) can stop drinking and become a former drinker (R), but that person can start drinking again to become a drinker (D). 
+
+The actual transition from one state to another is dependent on the state of the other agents in the same grid space and an intrinsic transition rate. For each space in the grid (the index i is used to identify the space) the total number of agents for each state is calculated (S(i), D(i), R(i))  
+
+The probability of transitioning from never drinking (S) to drinking (D) is proportional to the fraction of drinkers among the other agents in the same grid space. The probability of transitioning from drinking (D) to being a former drinker (R) is proportional to the fraction of nondrinkers among the other agents in the same grid space plus an intrinsic rate (γ) The probability of transitioning from being a former drinker (R) to being a drinker (D) is proportional to the fraction of drinkers among the other agents in the same grid space plus an intrinsic rate (ρ). 
+
+The experimenter can change the rate at which the agents move between grid spaces and the intrinsic rates of stopping drinking and resuming drinking. The experimenter can also introduce a space that preferentially attracts drinkers, a “pub”. 
 
 
 ## THINGS TO NOTICE
- Note that the patch color is ranom 
+All agents will inevitably be either a drinker or a non-drinker and that the proportion of each is dependent on the intrinsic transition rates and that these are reflective of total societal processes such as health policies. The rate at which people change state is very dependent on the spatial nature of the environment. The rate of movement was a strong influence but that this was not linear with there being an “optimal” rate for transition. The inclusion of space that preferentially attracted drinkers also greatly influenced the transition rate again in a very nonlinear way. The model emphasized the complexity of drinking behavior but showed that elements could be deconstructed and used to better understand fundamental behavior.  
 
 
-## RELATED MODELS
+## THINGS TO TRY
+There is an output area in the model this will capture the results from different runs.
 
 
 <!-- 2022 -->
