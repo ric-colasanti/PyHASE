@@ -1,4 +1,3 @@
-
 undirected-link-breed [social-links social-link]
 globals [ set-group variability flag ]
 
@@ -17,9 +16,7 @@ to setup
   set-default-shape turtles "circle"
   set variability 0.0
 
-;  if add-variability[
-;    set variability 0.1
-;  ]
+
 
   set set-group []
 
@@ -42,11 +39,11 @@ to setup
   ]
 
   ask turtles [
-    let choice random 101
+    let choice random( obese + over + under + healthy + 1
       set color (ifelse-value
-        choice <= 33 [ red ]
-        choice <= 68 [ blue ]
-        choice <= 99 [ green ]
+        choice <=  ( obese ) [ red ]
+        choice <=  ( obese + over ) [ blue ]
+        choice <=  ( obese + over + healthy ) [ green ]
         [ yellow ])
   ]
 
@@ -114,13 +111,12 @@ to go
   ;;wait 0.5
   tick
 end
-
 @#$#@#$#@
 GRAPHICS-WINDOW
-335
-75
-835
-576
+350
+80
+850
+581
 -1
 -1
 12.0
@@ -144,10 +140,10 @@ ticks
 30.0
 
 BUTTON
-21
-128
-94
-161
+30
+70
+103
+103
 NIL
 setup
 NIL
@@ -199,10 +195,10 @@ PENS
 "Under weight" 1.0 0 -1184463 true "" "plot count turtles with [ color = yellow ] / count turtles * 100"
 
 SWITCH
-20
-200
-222
-233
+25
+260
+227
+293
 set-50-fixed-weight
 set-50-fixed-weight
 1
@@ -267,22 +263,82 @@ TEXTBOX
 35
 25
 1005
-110
+60
 Exploiting Social Networks to Mitigate the Obesity Epidemic
 32
 0.0
 1
 
-SWITCH
-20
-250
-172
-283
-add-variability
-add-variability
+SLIDER
+25
+115
+197
+148
+obese
+obese
+0
+100
+33.0
 1
 1
--1000
+NIL
+HORIZONTAL
+
+SLIDER
+25
+150
+197
+183
+over
+over
+0
+100
+35.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+25
+185
+197
+218
+healthy
+healthy
+0
+100
+31.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+25
+220
+197
+253
+under
+under
+0
+100
+1.0
+1
+1
+NIL
+HORIZONTAL
+
+MONITOR
+200
+115
+337
+160
+total should be 100
+obese + over + healthy + under
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
