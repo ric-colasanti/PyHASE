@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Bhar</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Bhar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#model">Model</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container pt-5" style="margin-top:80px">
+    <div class="model-area" id="model">
+      <h2>Model</h2>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="col-sm-4 bgDemo">
+            <canvas id="canvas" width="340" height="340"></canvas>
+          </div>
+        </div>
+
+        <div class="col-sm-8 bgTextBox bg-light text-dark">
+          <h4>Description</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/ABM.js"></script>
+
+  <script>
+    var size = 50
+    var count = 0
+    var caCanvas = new CACanvas(size)
+    var patch
+    class Person extends Agent {
+      constructor(state) {
+        super();
+        this.state = state;
+      }
+
+      update(){
+        this.state = this.links[rndInt(this.links.length)].state;
+      }
+    }
+
+    population = new Agents()
+
+    place = new Patches(size)
+    for (i = 0; i < size * size; i++) {
+      var patch = new Patch();
+      var agent = new Person(rndInt(3))
+      patch.addAgent(agent);
+      population.addAgent(agent);
+      place.addPatch(patch);
+    }
+    place.setNeighbors()
+    place.list.forEach(function (patch, index) {
+      var aperson = patch.occupant
+
+      if (aperson != null) {
+
+        aperson.home.neighbors.forEach(function (npatch, i) {
+          // console.log(npatch.xPos, npatch.yPos);
+          if (npatch.occupant != null) {
+            // console.log("*", npatch.occupant.home.xPos, npatch.occupant.home.yPos);
+            // console.log(npatch.occupant)
+            aperson.addLink(npatch.occupant)
+          }
+        })
+        // console.log(aperson);
+      }
+    });
+
+    draw = function () {
+      count++;
+      //place.shuffle()
+      place.list.forEach(function (patch, index) {
+        var person = patch.occupant
+        var col = "#000000";
+        // if (person != null) {
+        if (person.links.length > 0) {
+          switch (person.state) {
+            case 0:
+              col = "#ff0000";
+              break;
+            case 1:
+              col = "#00ff00";
+              break;
+            case 2:
+              col = "#0000ff";
+              break;
+
+            default:
+              col = "#000000";
+          }
+          caCanvas.draw(patch.xPos, patch.yPos, col,false, col);
+        }
+      })
+      population.shuffle();
+      population.list.forEach(function (person, index) {  
+        person.update()
+      });  
+      caCanvas.update("canvas");
+      if (count < 1000) {
+        window.requestAnimationFrame(draw);
+      }
+    }
+    draw();
+  </script>
+
+</body>
+
+</html>
