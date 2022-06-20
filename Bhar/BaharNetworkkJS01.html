@@ -35,6 +35,10 @@
         <div class="col-sm-4">
           <div class="col-sm-4 bgDemo">
             <canvas id="canvas" width="340" height="340"></canvas>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+              <label class="form-check-label">Lock 50 healthy</label>
+            </div> 
           </div>
         </div>
 
@@ -95,6 +99,8 @@
       population.addAgent(agent);
       place.addPatch(patch);
     }
+    const checked = document.querySelector('#check1:checked') !== null
+   if (checked == true){
     var l = population.list.length;
     var lock = 50
     while (lock > 0) {
@@ -104,7 +110,7 @@
         lock--;
       }
     }
-
+  }
     place.setNeighbors()
     place.list.forEach(function (patch, index) {
       var aperson = patch.occupant
