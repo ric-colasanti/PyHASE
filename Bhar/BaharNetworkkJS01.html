@@ -46,6 +46,11 @@
           <div class="col-sm-4 bgDemo">
             <canvas id="canvas" width="340" height="340"></canvas>
             <div class="form-check">
+              <div class="slidecontainer">
+                Healthy weight <input type="range" min="1" max="100" value="30" class="slider" id="healthy">
+                Over weight <input type="range" min="1" max="100" value="36" class="slider" id="over">
+                Obese  <input type="range" min="1" max="100" value="34" class="slider" id="obese">
+              </div>
               <input class="form-check-input" type="checkbox" id="check1" name="option1" unchecked>
               <label class="form-check-label" style="width: 200px;">Lock 50 healthy</label>
               <button id="run" class="btn btn-primary mt-3">Run</button>
@@ -107,6 +112,9 @@
     var flag = false;
     var nextTime = 0;
     var delay = 1000;
+    var healthy = document.getElementById("healthy");
+    var over = document.getElementById("over");
+    var obese = document.getElementById("obese");
 
 
     class Person extends Agent {
@@ -149,11 +157,26 @@
 
     setup = function () {
       population = new Agents()
-
+      var h = Number(healthy.value)
+      var o = Number(over.value)
+      var b = Number(obese.value)
+      var atype = 2
+      var t = h+o+b;
       place = new Patches(size)
       for (i = 0; i < size * size; i++) {
         var patch = new Patch();
-        var agent = new Person(rndInt(3))
+        var choice = rndInt(t)
+        console.log(choice);
+        if(choice <=h){
+          atype = 0;
+        }
+        if((choice >h) && (choice <=(h+o))){
+          atype = 1;
+        }   
+        if(choice >(h+o)){
+          atype = 2;
+        }
+        var agent = new Person(atype)
         patch.addAgent(agent);
         population.addAgent(agent);
         place.addPatch(patch);
@@ -164,7 +187,7 @@
         var lock = 50
         while (lock > 0) {
           var person = population.list[rndInt(population.list.length - 1)]
-          if (person.state == 2 && person.locked == false) {
+          if (person.state == 0 && person.locked == false) {
             person.locked = true;
             lock--;
           }
@@ -193,13 +216,13 @@
         if (person.links.length > 0) {
           switch (person.state) {
             case 0:
-              col = "#ff0000";
+              col = "#00ff00";
               break;
             case 1:
               col = "#0000ff";
               break;
             case 2:
-              col = "#00ff00";
+              col = "#ff0000";
               break;
 
             default:
