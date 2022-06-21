@@ -14,7 +14,7 @@
 
   <style>
     .scroller {
-      height: 500px;
+      height: 600px;
       overflow: scroll;
       overflow-x: hidden;
     }
@@ -44,23 +44,40 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="col-sm-4 bgDemo">
-            <canvas id="canvas" width="340" height="340"></canvas>
+
+
+            <button  class="btn btn-primary tablinks" onclick="openCity(event, 'Grid')">Grid</button>
+            <button  class="btn btn-primary tablinks" onclick="openCity(event, 'Graph')">Graph</button>
+
+            <br>
+            <div id="Grid" class="tabcontent active" style="display: block;">
+              <br>
+              <canvas id="canvas" width="340" height="340"></canvas>
+            </div>
+
+            <div id="Graph" class="tabcontent" style="display: none;">
+              <div id="myPlot" style="width:340px"></div>
+            </div>
+
+
             <div class="form-check">
               <div class="slidecontainer">
                 Healthy weight <input type="range" min="1" max="100" value="30" class="slider" id="healthy">
                 Over weight <input type="range" min="1" max="100" value="36" class="slider" id="over">
-                Obese  <input type="range" min="1" max="100" value="34" class="slider" id="obese">
+                Obese <input type="range" min="1" max="100" value="34" class="slider" id="obese">
               </div>
               <input class="form-check-input" type="checkbox" id="check1" name="option1" unchecked>
               <label class="form-check-label" style="width: 200px;">Lock 50 healthy</label>
               <button id="run" class="btn btn-primary mt-3">Run</button>
             </div>
+
           </div>
         </div>
 
         <div class="col-sm-8 bgTextBox bg-light text-dark scroller">
           <h5>Why is this a good example</h5>
-          <p>This is a very good model to understand network theory. One of the most important features of ABM is the
+          <p>This is a very good model to understand network theory.</p>
+          <p> One of the most important features of ABM is the
             way in which the agents interact with each other. In this model a population's social network is created by
             forming links between agents. The agent to agent links represent connections between a person and their
             friends. In this model this friendship network is used to simulate the effect that a person's friends have
@@ -68,6 +85,7 @@
             determining the behaviour of the model.</p>
 
           <h5>What is the NCD prevention challenge being addressed?</h5>
+          <p>This model is concerned with obesity.</p>
           <p>Between 1971 and 2003 the population of the city of Framingham was part of a cardiac health study where
             12,067 people's health data were repeatedly collected. A long term analysis of the weight data and the
             friendship network of the population by Christakis and Fowler showed that a person’s chances of becoming
@@ -102,6 +120,8 @@
   </div>
 
   <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/ABM.js"></script>
 
@@ -161,19 +181,18 @@
       var o = Number(over.value)
       var b = Number(obese.value)
       var atype = 2
-      var t = h+o+b;
+      var t = h + o + b;
       place = new Patches(size)
       for (i = 0; i < size * size; i++) {
         var patch = new Patch();
         var choice = rndInt(t)
-        console.log(choice);
-        if(choice <=h){
+        if (choice <= h) {
           atype = 0;
         }
-        if((choice >h) && (choice <=(h+o))){
+        if ((choice > h) && (choice <= (h + o))) {
           atype = 1;
-        }   
-        if(choice >(h+o)){
+        }
+        if (choice > (h + o)) {
           atype = 2;
         }
         var agent = new Person(atype)
@@ -229,7 +248,7 @@
               col = "#000000";
           }
           var bCol = "#000000";
-          if (person.locked){
+          if (person.locked) {
             bCol = "#ffffff";
           }
           caCanvas.draw(patch.xPos, patch.yPos, bCol, true, col);
@@ -244,13 +263,38 @@
       var changes = 0
       draw()
       population.shuffle();
+      var h = 0;
+      var o = 0;
+      var b = 0;
       population.list.forEach(function (person, index) {
         if (person.locked == false) {
           if (person.update()) {
             changes++
           }
+          if (person.state == 0) {
+            h++;
+          }
+          if (person.state == 1) {
+            o++;
+          }
+          if (person.state == 2) {
+            b++;
+          }
         }
       });
+      var xArray = ["Healthy", "Overweight", "Obese"];
+      var yArray = [h, o, b];
+
+      var data = [{
+        x: xArray,
+        y: yArray,
+        color: ['green','blue','red'],
+        type: "bar"
+      }];
+
+      var layout = { title: "Weight types" };
+
+      Plotly.newPlot("myPlot", data, layout);
       if (changes > 0) {
         setTimeout(function () {
           window.requestAnimationFrame(update);
@@ -276,6 +320,21 @@
     draw();
     var btn = document.getElementById("run");
     btn.addEventListener("click", go);
+
+
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
   </script>
 
 </body>
