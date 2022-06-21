@@ -65,6 +65,7 @@
                 Healthy weight <input type="range" min="1" max="100" value="30" class="slider" id="healthy">
                 Over weight <input type="range" min="1" max="100" value="36" class="slider" id="over">
                 Obese <input type="range" min="1" max="100" value="34" class="slider" id="obese">
+                Speed <input type="range" min="1" max="100" value="2" class="slider" id="speed">
               </div>
               <input class="form-check-input" type="checkbox" id="check1" name="option1" unchecked>
               <label class="form-check-label" style="width: 200px;">Lock 50 healthy</label>
@@ -135,6 +136,8 @@
     var healthy = document.getElementById("healthy");
     var over = document.getElementById("over");
     var obese = document.getElementById("obese");
+    var speed = document.getElementById("speed");
+
 
 
     class Person extends Agent {
@@ -298,7 +301,7 @@
       if (changes > 0) {
         setTimeout(function () {
           window.requestAnimationFrame(update);
-        }, 1000 / 2);
+        }, 1000 / Number(speed.value));
 
       } else {
         console.log("DONE");
