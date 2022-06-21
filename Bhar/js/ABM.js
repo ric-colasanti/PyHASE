@@ -38,6 +38,13 @@ class CACanvas {
         this.ctx.stroke();
     }
 
+    clear(colour){
+        this.ctx.beginPath();
+        this.ctx.rect(0,0, this.buffer.width, this.buffer.height)
+        this.ctx.fillStyle = colour;
+        this.ctx.fill();
+    }
+
     update(canvasID) {
         let visible_canvas = document.getElementById(canvasID);
         let vctx = visible_canvas.getContext("2d");
