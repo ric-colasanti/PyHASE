@@ -42,7 +42,9 @@
       </div>
     </div>
   </nav>
+ 
   <div class="container pt-5" style="margin-top:80px">
+    <!-- <a href="#test">test</a>  -->
     <div class="model-area" id="model">
       <h2>Exploiting Social Networks to Mitigate the Obesity Epidemic</h2>
       <div class="ref">Bahr, David B., et al. "Exploiting social networks to mitigate the obesity epidemic." Obesity 17.4 (2009): 723-728.</div>
@@ -81,7 +83,7 @@
 
           </div>
         </div>
-
+        
         <div class="col-sm-8 bgTextBox bg-light text-dark scroller">
           <h5>Why is this a good example</h5>
           <p>This is a very good model to understand network theory.</p>
@@ -118,7 +120,7 @@
 
           <h5>What are the implications of these findings for policy or practice?</h5>
 
-          <p>
+          <p id="test">
             Links [need to make sure all outputs/links are open access]
             Primary paper
             Model code
@@ -246,11 +248,9 @@
 
 
     draw = function () {
-      var flag = false;
       place.list.forEach(function (patch, index) {
         var person = patch.occupant
-        var col = "#000000";
-        // if (person != null) {
+        var col
         if (person.links.length > 0) {
           switch (person.state) {
             case 0:
@@ -307,7 +307,7 @@
       var data = [{
         x: xArray,
         y: yArray,
-        color: ['green','blue','red'],
+        colors: ['green','blue','red'],
         type: "bar"
       }];
 
