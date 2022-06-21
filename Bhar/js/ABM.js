@@ -110,7 +110,7 @@ class Patches {
     }
 
     setNeighbors() {
-        for (i = 0; i < this.list.length; i++) {
+        for (var i = 0; i < this.list.length; i++) {
             let neighbors = new Array();
             let patch = this.list[i];
             let coord = this.coordinates(i);

@@ -14,7 +14,7 @@
 
   <style>
     .scroller {
-      height: 600px;
+      height: 700px;
       overflow: scroll;
       overflow-x: hidden;
     }
@@ -71,6 +71,7 @@
                 Healthy weight <input type="range" min="1" max="100" value="30" class="slider" id="healthy">
                 Over weight <input type="range" min="1" max="100" value="36" class="slider" id="over">
                 Obese <input type="range" min="1" max="100" value="34" class="slider" id="obese">
+                Random links <input type="range" min="0" max="3000" value="0" class="slider" id="rlinks">
                 Speed <input type="range" min="1" max="100" value="2" class="slider" id="speed">
               </div>
               <input class="form-check-input" type="checkbox" id="check1" name="option1" unchecked>
@@ -106,6 +107,7 @@
             social networks and to test the effectiveness of population level weight management interventions.</p>
 
           <h5>How is ABM suited to address this challenge?</h5>
+          <p>What the Bhar paper shows is that differing connections at the individual will produce different outcomes at the population level. An agent based model allows you to model a range of personal interactions and observe how these affect the behaviour of the population as a whole. Some small changes in individual behaviour result in  totally different outcomes. In the simulation see what happens when you lock in just 50 individuals to a healthy weight.  Mathematical or statistical models of wole populations can not capture this emergent “phase change”.</p>
 
           <h5>What are the key components of the model?</h5>
 
@@ -143,6 +145,7 @@
     var over = document.getElementById("over");
     var obese = document.getElementById("obese");
     var speed = document.getElementById("speed");
+    var rlinks = document.getElementById("rlinks");
 
 
 
@@ -232,6 +235,12 @@
           })
         }
       });
+      for( var i=0; i<rlinks.value;i++){
+        var t = population.list[rndInt(40*40)]
+        var f = population.list[rndInt(40*40)]
+        t.addLink(f);
+        f.addLink(t);
+      }
     }
 
 
