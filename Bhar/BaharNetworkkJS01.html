@@ -20,9 +20,10 @@
     }
 
     .ref {
-        font-size: x-small;
-        font-style: italic;
+      font-size: x-small;
+      font-style: italic;
     }
+
     /* .card-link {
       color:black;
     } */
@@ -45,60 +46,75 @@
       </div>
     </div>
   </nav>
- 
+
   <div class="container" style="margin-top:80px">
     <!-- <a href="#test">test</a>  -->
     <div class="model-area" id="model">
       <h2>Exploiting Social Networks to Mitigate the Obesity Epidemic</h2>
-      <div class="ref">Bahr, David B., et al. "Exploiting social networks to mitigate the obesity epidemic." Obesity 17.4 (2009): 723-728.</div>
+      <div class="ref">Bahr, David B., et al. "Exploiting social networks to mitigate the obesity epidemic." Obesity
+        17.4 (2009): 723-728.</div>
       <br>
       <div class="row">
         <div class="col-sm-4">
-         
 
 
-            <button  class="btn btn-primary tablinks" onclick="openCity(event, 'Grid')">Grid</button>
-            <button  class="btn btn-primary tablinks" onclick="openCity(event, 'Graph')">Graph</button>
 
+          <button class="btn btn-primary tablinks" onclick="openCity(event, 'Grid')">Grid</button>
+          <button class="btn btn-primary tablinks" onclick="openCity(event, 'Graph')">Graph</button>
+
+          <br>
+          <div id="Grid" class="tabcontent active" style="display: block;">
             <br>
-            <div id="Grid" class="tabcontent active" style="display: block;">
-              <br>
-              <p align="center">
-                <canvas id="canvas" width="250" height="250"></canvas>
-              </p>
-              
-            </div>
+            <p align="center">
+              <canvas id="canvas" width="250" height="250"></canvas>
+            </p>
 
-            <div id="Graph" class="tabcontent" style="display: none;">
-              <p align="center">
-                <div id="myPlot" style="width:350px"></div>
-              </p>
-            </div>
+          </div>
+
+          <div id="Graph" class="tabcontent" style="display: none;">
+            <p align="center">
+            <div id="myPlot" style="width:350px"></div>
+            </p>
+          </div>
 
 
-            <div class="form-check">
-              <div class="slidecontainer">
-                 <span style="color:rgb(0, 255, 0); background-color: black;">   &#9679;</span> Healthy weight <input type="range" min="1" max="100" value="30" class="slider" id="healthy">
-                <br>
-               <span style="color:DodgerBlue; background-color: black;">   &#9679;</span> Over weight <input type="range" min="1" max="100" value="36" class="slider" id="over">
-                <br>
-                 <span style="color:red; background-color: black;">   &#9679;</span> Obese <input type="range" min="1" max="100" value="34" class="slider" id="obese">
-                <br>
-                Random links <input type="range" min="0" max="3000" value="0" class="slider" id="rlinks">
-                <br>
-                Speed <input type="range" min="1" max="100" value="2" class="slider" id="speed">
+          <div class="form-check">
+            <div class="slidecontainer">
+              <div class="row">
+                <div class="col"><span style="color:rgb(0, 255, 0); background-color: black;"> &#9679;</span> Healthy
+                </div>
+                <div class="col"><input type="range" min="1" max="100" value="30" class="slider" id="healthy"></div>
               </div>
-              <br>
-              <input class="form-check-input" type="checkbox" id="check1" name="option1" unchecked>
-              <br>
-              <label class="form-check-label" >Lock 50 <span style="color:rgb(0, 255, 0); background-color: orange;">   &#9679;</span> healthy</label>
-              <br>
-              <button id="run" class="btn btn-primary mt-3">Run</button>
+              <div class="row">
+                <div class="col"><span style="color:DodgerBlue; background-color: black;"> &#9679;</span> Over </div>
+                <div class="col"><input type="range" min="1" max="100" value="30" class="slider" id="over"></div>
+              </div>
+              <div class="row">
+                <div class="col"> <span style="color:red; background-color: black;"> &#9679;</span> Obese </div>
+                <div class="col"><input type="range" min="1" max="100" value="30" class="slider" id="obese"></div>
+              </div>
+              <div class="row">
+                <div class="col">Random links</div>
+                <div class="col"><input type="range" min="0" max="3000" value="0" class="slider" id="rlinks"></div>
+              </div>
+              <div class="row">
+                <div class="col">Speed</div>
+                <div class="col"> <input type="range" min="1" max="100" value="2" class="slider" id="speed"></div>
+              </div>
             </div>
+            <br>
+            <input class="form-check-input" type="checkbox" id="check1" name="option1" unchecked>
+            <label class="form-check-label">Lock 50 <span style="color:rgb(0, 255, 0); background-color: orange;">
+                &#9679;</span> healthy</label>
+          </div>
 
-          
+
+          <br>
+          <button id="run" class="btn btn-primary mt-3">Run</button>
         </div>
-        
+
+
+
         <div class="col-sm-8  ">
           <div id="accordion">
             <div class="card">
@@ -110,12 +126,16 @@
               <div id="collapseOne" class="collapse show" data-parent="#accordion">
                 <div class="card-body ">
                   <p>This is a very good model to understand network theory.</p>
-          <p> One of the most important features of ABM is the
-            way in which the agents interact with each other. In this model a population's social network is created by
-            forming links between agents. The agent to agent links represent connections between a person and their
-            friends. In this model this friendship network is used to simulate the effect that a person's friends have
-            on their body weight. This abstract model shows that the structure of that network is very important in
-            determining the behaviour of the model.</p>
+                  <p> One of the most important features of ABM is the
+                    way in which the agents interact with each other. In this model a population's social network is
+                    created by
+                    forming links between agents. The agent to agent links represent connections between a person and
+                    their
+                    friends. In this model this friendship network is used to simulate the effect that a person's
+                    friends have
+                    on their body weight. This abstract model shows that the structure of that network is very important
+                    in
+                    determining the behaviour of the model.</p>
                 </div>
               </div>
             </div>
@@ -123,22 +143,32 @@
               <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
                   What is the NCD prevention challenge being addressed?
-              </a>
+                </a>
               </div>
               <div id="collapseTwo" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>This model is concerned with obesity.</p>
-                  <p>Between 1971 and 2003 the population of the city of Framingham was part of a cardiac health study where
-                    12,067 people's health data were repeatedly collected. A long term analysis of the weight data and the
-                    friendship network of the population by Christakis and Fowler showed that a person’s chances of becoming
-                    obese increased by almost 70% if he or she had a friend who became obese. In the social network of the
-                    Framingham heart study described by Christakis and Fowler the nodes are the people in the study and the
-                    edges are the relationships between the people. These relationships are friends, family and coworkers.
-                    Networks are found throughout nature and society. Despite their apparent random appearance network theory
+                  <p>Between 1971 and 2003 the population of the city of Framingham was part of a cardiac health study
+                    where
+                    12,067 people's health data were repeatedly collected. A long term analysis of the weight data and
+                    the
+                    friendship network of the population by Christakis and Fowler showed that a person’s chances of
+                    becoming
+                    obese increased by almost 70% if he or she had a friend who became obese. In the social network of
+                    the
+                    Framingham heart study described by Christakis and Fowler the nodes are the people in the study and
+                    the
+                    edges are the relationships between the people. These relationships are friends, family and
+                    coworkers.
+                    Networks are found throughout nature and society. Despite their apparent random appearance network
+                    theory
                     can be applied to these networks to identify common patterns and behaviours. Using network theory,
-                    artificial networks of social interactions can be constructed that have the same important characteristics
-                    of real social networks. These artificial networks can then be used to simulate how obesity spreads along
-                    social networks and to test the effectiveness of population level weight management interventions.</p>
+                    artificial networks of social interactions can be constructed that have the same important
+                    characteristics
+                    of real social networks. These artificial networks can then be used to simulate how obesity spreads
+                    along
+                    social networks and to test the effectiveness of population level weight management interventions.
+                  </p>
                 </div>
               </div>
             </div>
@@ -150,7 +180,13 @@
               </div>
               <div id="collapseThree" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  <p>What the Bhar paper shows is that differing connections at the individual will produce different outcomes at the population level. An agent based model allows you to model a range of personal interactions and observe how these affect the behaviour of the population as a whole. Some small changes in individual behaviour result in  totally different outcomes. In the simulation see what happens when you lock in just 50 individuals to a healthy weight.  Mathematical or statistical models of whole populations can not capture this emergent “phase change”. In the context of the management of obesity it means we can test different individual interventions. 
+                  <p>What the Bhar paper shows is that differing connections at the individual will produce different
+                    outcomes at the population level. An agent based model allows you to model a range of personal
+                    interactions and observe how these affect the behaviour of the population as a whole. Some small
+                    changes in individual behaviour result in  totally different outcomes. In the simulation see what
+                    happens when you lock in just 50 individuals to a healthy weight.  Mathematical or statistical
+                    models of whole populations can not capture this emergent “phase change”. In the context of the
+                    management of obesity it means we can test different individual interventions.
                   </p>
                 </div>
               </div>
@@ -163,8 +199,19 @@
               </div>
               <div id="collapseFour" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  <p>The simulation models a population of individual agents (people) that are represented as different colored  dots on the grid. Each agent can be in one of three weight states: healthy weight (green) over weight (blue) and obese (red). In this version of the Bhar model each agent occupies an individual space on a 40 by 40 grid. Each agent has a social network consisting of the agents eight immediate neighbors on the grid. With in any iteration step of the simulation an agent will change its weight state to be that of the majority state of its social networked neighbors.</p>
-                  <p>Because the agents are linked together in a grid like network it means that all of the agents have two friends in common with that agent, although note that these will be two different friends for each agent.  This results in a network that has a high clustering coefficient. The effect of this can be seen in the relatively stable clustering of weight type when the simulation is run. The number of common friends, and thus the clustering coefficient can be reduced by adding random links. This is done with the random link slider. Keeping every thing else the same see how the behavior of the simulation change.</p> 
+                  <p>The simulation models a population of individual agents (people) that are represented as different
+                    colored dots on the grid. Each agent can be in one of three weight states: healthy weight (green)
+                    over weight (blue) and obese (red). In this version of the Bhar model each agent occupies an
+                    individual space on a 40 by 40 grid. Each agent has a social network consisting of the agents eight
+                    immediate neighbors on the grid. With in any iteration step of the simulation an agent will change
+                    its weight state to be that of the majority state of its social networked neighbors.</p>
+                  <p>Because the agents are linked together in a grid like network it means that all of the agents have
+                    two friends in common with that agent, although note that these will be two different friends for
+                    each agent. This results in a network that has a high clustering coefficient. The effect of this can
+                    be seen in the relatively stable clustering of weight type when the simulation is run. The number of
+                    common friends, and thus the clustering coefficient can be reduced by adding random links. This is
+                    done with the random link slider. Keeping every thing else the same see how the behavior of the
+                    simulation change.</p>
                 </div>
               </div>
             </div>
@@ -177,11 +224,13 @@
               </div>
               <div id="collapseFive" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat.
                 </div>
               </div>
             </div>
-          
+
             <div class="card">
               <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
@@ -190,11 +239,13 @@
               </div>
               <div id="collapseSeven" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat.
                 </div>
               </div>
             </div>
-          
+
             <div class="card">
               <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseEight">
@@ -209,7 +260,7 @@
                 </div>
               </div>
             </div>
-          
+
           </div>
 
         </div>
@@ -325,9 +376,9 @@
           })
         }
       });
-      for( var i=0; i<rlinks.value;i++){
-        var t = population.list[rndInt(40*40)]
-        var f = population.list[rndInt(40*40)]
+      for (var i = 0; i < rlinks.value; i++) {
+        var t = population.list[rndInt(40 * 40)]
+        var f = population.list[rndInt(40 * 40)]
         t.addLink(f);
         f.addLink(t);
       }
@@ -394,7 +445,7 @@
       var data = [{
         x: xArray,
         y: yArray,
-        colors: ['green','blue','red'],
+        colors: ['green', 'blue', 'red'],
         type: "bar"
       }];
 
