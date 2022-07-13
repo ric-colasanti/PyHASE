@@ -57,7 +57,7 @@
       <div class="row">
         <div class="col-sm-5">
 
-  
+
           <div class="row">
             <div class="col" align="center">
               <button class="btn btn-primary tablinks" onclick="openCity(event, 'Grid')">Grid</button>
@@ -77,7 +77,7 @@
 
           <div id="Graph" class="tabcontent" style="display: none;">
             <p align="left">
-            <div id="myPlot" style="width:350px"></div>
+              <div id="myPlot" style="width:350px"></div>
             </p>
           </div>
 
@@ -134,7 +134,13 @@
               </div>
               <div id="collapseOne" class="collapse show" data-parent="#accordion">
                 <div class="card-body ">
-                  <p>This is a good model to explore and understand network theory. One of the most important features of an ABM is the way in which the agents interact with each other. In this model a population's social network is created by forming links between agents. The agent to agent links represent connections between a person and their friends. In this model this friendship network is used to simulate the effect that a person's friends have on their body weight. This abstract model shows that the structure of that network is very important in determining the behaviour of the model.
+                  <p>This is a good model to explore and understand network theory. One of the most important features
+                    of an ABM is the way in which the agents interact with each other. In this model social networks
+                    within a population are created by forming links between agents. The agent-to-agent links represent
+                    connections between a person and their friends. In this model this friendship network is used to
+                    simulate the effect that a person's friends have on their body weight. This abstract model shows
+                    that the structure of this friendship network is very important in determining population level
+                    patterns of behaviour.
                   </p>
                 </div>
               </div>
@@ -148,7 +154,19 @@
               <div id="collapseTwo" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>This model is concerned with obesity.</p>
-                  <p> Between 1971 and 2003, the population of the city of Framingham was part of a cardiac health study where 12,067 people's health data were repeatedly collected. A long term analysis of the weight data and the the social network of the population by Christakis and Fowler showed that a person’s chances of becoming obese increased by almost 70% if he or she had a friend who became obese. In the social network described by Christakis and Fowler, the network describes the relationships between the people. These relationships are the social links between friends, family and coworkers.The people can be thought of as nodes and the relationships as links between the nodes. Networks of nodes and links are found throughout nature and society. A branch of mathematics called network theory can be applied to these networks to identify common patterns and behaviours. Using network theory, artificial networks of social interactions can be constructed that have the same important characteristics of real social networks. These artificial networks can then be used to simulate how obesity spreads along social networks and to test the effectiveness of population level weight management interventions. 
+                  <p> Between 1971 and 2003, the population of the city of Framingham was part of a cardiac health study
+                    where 12,067 people's health data were repeatedly collected. A long-term analysis of weight data and
+                    the social network the population by Christakis and Fowler showed that a person’s chances of
+                    becoming obese increased by almost 70% if they had a friend who became obese. In this study by
+                    Christakis and Fowler, the social network describes the relationships between peopleincluding
+                    friends, family and co-workers. Each person can be thought of as node within the network and the
+                    relationships as links between the nodes. Networks of nodes and links are found throughout nature
+                    and society. A branch of mathematics called network theory can be applied to these networks to
+                    identify common patterns and behaviours. Using network theory, artificial networks of social
+                    interactions can be constructed that have the same important characteristics of real social
+                    networks. These artificial networks can then be used to simulate how obesity spreads among social
+                    networks and to test the effectiveness of different weight management interventions on reducing
+                    obesity at the population level.
                   </p>
                 </div>
               </div>
@@ -161,7 +179,13 @@
               </div>
               <div id="collapseThree" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  <p>What the Bhar paper shows is that the behaviour presented at the population level is dependent on the nature of the interactions at the individual level. An agent based model allows you to model a range of personal interactions and observe how these affect the behaviour of the population as a whole. A small change in individual behaviour can result in a totally different outcome at the population level. Mathematical or statistical models of whole populations cannot capture this emergent “phase change”. In the context of the management of obesity this means we can test different individual interventions and see how the effects propagate across the population. 
+                  <p> The Bhar paper shows that the behaviour presented at the population level is dependent on the
+                    nature of the interactions at the individual level. An agent-based model allows you to model a range
+                    of personal interactions and observe how these affect the behaviour of the population as a whole. A
+                    small change in individual behaviour can result in a totally different outcome at the population
+                    level. Mathematical or statistical models of whole populations cannot capture this emergent “phase
+                    change”. In the context of the management of obesity this means we can test different
+                    individual-level interventions and see how the effects propagate across the population.
                   </p>
                 </div>
               </div>
@@ -174,9 +198,11 @@
               </div>
               <div id="collapseFour" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  <p>The simulation recreated here models a population of individual agents (people) that are represented as different coloured dots on the grid. Each agent can be in one of three weight states: states: healthy weight (<span
-                    style="color:green;"" >green</span>)over weight (<span style=" color:blue;"">blue</span>) and obese (<span style="color:red;"" >red</span>). In this version of the Bhar model each agent occupies an individual space on a 40 by 40 grid. Each agent has a social network consisting of the agent's eight immediate neighbours on the grid. Within any iteration step of the simulation, an agent will change its weight state to be that of the majority state of its social networked neighbours.</p>
-                  <p>Because the agents are linked together in a grid-like network, it means that all of the agents have two friends in common with that agent, although note that these will be two different friends for each agent. This results in a network that has a high clustering coefficient. The effect of this can be seen in the relatively stable clustering of weight type when the simulation is run. The number of common friends, and thus the clustering coefficient can be reduced by adding random links. This is done with the random link slider. </p>
+                  <p>The simulation recreated here models a population of individual agents (people) that are
+                    represented as different coloured dots on the grid. Each agent can be in one of three weight states:
+                    healthy weight (<span style="color:green;"" >green</span>)over weight (<span style="
+                      color:blue;"">blue</span>) and obese (<span style="color:red;"" >red</span>). In this version of the Bhar model each agent occupies an individual space on a 40 by 40 grid. Each agent has a social network consisting of the agent’s eight immediate neighbours on the grid. As the model runs, at each iteration step an agent will change its weight state to match that of the majority of its social network neighbours (i.e. the surrounding agents on the grid).</p>
+                  <p>Because the agents are linked together in a grid-like network, it means that each agent has two friends in common with every other agent in their social network, although note that these will be two different friends for each agent within the social network. This results in a network that has a high clustering coefficient with agents likely to take on the weight-state of their neighbours . The effect of this can be seen in the relatively stable clustering of weight type when the simulation is run. The number of common friends, and thus the clustering coefficient can be reduced by adding random links within the model so that each agent is also connected to other agents who are not next to them in the grid. </p>
                 </div>
               </div>
             </div>
@@ -189,28 +215,63 @@
                       </div>
                       <div id="collapseFive" class="collapse" data-parent="#accordion">
                         <div class="card-body">
-                          <p>At the setup of a simulation, each agent is assigned to an individual space on the 40 by 40 grid. Each agent then makes a friendship link with its eight closest neighbours. Additional friendship links can be made to random members of the population. The number of such links is controlled by the random links slider. The top three sliders in the model (Healthy, Over, and Obese) determine the proportion of the population assigned to one of the three weight states: healthy weight(<span style="color:green;"" >green</span>) over weight (<span style=" color:blue;"">blue</span>)
-                          and obese (<span style="color:red;"" >red</span>).</p>
-                          <p>To run the model, click on the Run button. The model will run until there is no change in the population or until you click the stop button. The Graph button shows you a bar graph of the proportion of the population in each of the three weight categories. You can change the initial conditions by changing the values of the sliders and then clicking the setup followed by the Run button</p>
-                          <p>Note that the initial distribution of agents and types has a random element in it. This means that the outcomes will not always be the same.</p>
-                          <p>he aim of the model is to demonstrate the effect that social network structure has on population behaviour. With no random links, there are many common friends and you can see strong clustering in weight behaviours. Friends influence friends and where there are common friends, a group behaviour is reinforced. This group reinforcement can be seen when you choose 50 healthy people and lock their weight type to being constant for all of the simulation. These act as group centres and help maintain healthy group behaviour. Note that as group cohesion and clustering coefficient is reduced by adding random links the effect of locking in 50 individuals is greatly reduced.</p>
-                          <p>Finally, the speed of simulations can be altered with the speed slider.</p>
+                          <p>Click the Setup button, which will assign each agent to an individual space on the 40 by 40
+                            grid. Each agent then makes a friendship link with its eight closest neighbours. Additional
+                            friendship links can be made to random members of the population. The number of such links
+                            is controlled by the random links slider. The top three sliders in the model (Healthy, Over,
+                            and Obese) determine the proportion of the population assigned to one of the three weight
+                            states at the model setup: healthy weight(<span
+                              style="color:green;"" >green</span>) over weight (<span style=" color:blue;"">blue</span>)
+                            and obese (<span style="color:red;"" >red</span>).</p>
+                          <p>To run the model, click on the Run button. The model will run until there is no change in the population or until you click the stop button. The speed the simulation runs at can be altered with the Speed slider.The Graph button shows you a bar graph of the proportion of the population in each of the three weight categories. You can change the initial conditions by changing the values of the sliders and then clicking the Setup followed by the Run button</p>
+                          <p>If you run the model a few times you will note that the outcomes will not always be the same. This is because the initial distribution of agents and types has a random element in it. </p>
+                          <p>The aim of the model is to demonstrate the effect that social network structure has on population behaviour. Try running the model a few times after making each of the following adjustments:</p>
+
+                          <h6>&#9679 No random links between agents</h6>
+                        <p>With no random links, there are many common friends and you can see strong clustering in weight behaviours. Friends influence friends and where there are common friends, a group behaviour is reinforced.</p>
+                        
+                         <h6>&#9679 Select Lock 50 healthy</h6>
+                         <p>When you choose 50 healthy people and lock their weight type to being constant for all of the simulation the group reinforcement can be seen more clearly. These healthy individuals act as group centres and help maintain healthy group behaviour.</p>
+                        
+                        <h6>&#9679 Increase the number of random links between agents</h6>
+                        <p>You see that group cohesion and clustering coefficient is reduced by adding random links and the effect of locking in 50 individuals is greatly reduced.</p>
                 </div>
               </div>
-            </div></div>
+            </div>
 
             <div class=" card">
-                            <div class="card-header">
-                              <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
-                                What are the implications of these findings for policy or practice?
-                              </a>
-                            </div>
-                            <div id="collapseSeven" class="collapse" data-parent="#accordion">
-                              <div class="card-body">
-                                <p>Obviously this is an abstract model. People don't vote with their friends as to what weight they should be. Neither are social networks as uniform in real life as they are in this version of the Bhar model. Also, fixing a set number of people at a healthy weight won't solve the obesity epidemic. What this model does show is the qualitative effect that social networks have on group behaviour and this is just the type of behaviour documented by Christakis and Fowler. The model presented here is just one version of the models outlined in the full Bhar et al paper where the authors explore a wider range of social network structure and differing influence methods that the majority state of its social networked neighbours.  </p>
-                                <p>What this model and the Bhar et al paper show is that weight regulation is not solely an individual act and that intervention to help people regulate their weight needs to take social connections into account. One of the interventions looked at in the Bhar et al paper is dieting with friends. More realistic models have been created from both the Bhar et al and the Christakis and Fowler papers, for example Giabbanelli et al. Giabbanelli et al applied network theory to generate artificial social networks. They include a simple model of human metabolism and simulated how individuals influence each other with respect to food consumption and physical activity. They applied their  model to both synthetic and real-world populations and demonstrated the importance of the structural properties of the collective social network of the individual on the  macro-level distribution of body mass and obesity found in the population. Shi et al created a networked ABM with an age and height structured metabolic model to investigate weight loss interventions in a real Chinese population.  </p>
+                              <div class="card-header">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
+                                  What are the implications of these findings for policy or practice?
+                                </a>
                               </div>
-                            </div>
+                              <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                  <p>This is an abstract model: people don't vote with their friends as to what weight
+                                    they should be, and social networks are not as uniform in real life as they are in
+                                    this version of the Bhar model. Also, fixing a set number of people at a healthy
+                                    weight will not solve the obesity epidemic. What this model does show is the
+                                    qualitative effect that social networks have on group behaviour and this is just the
+                                    type of behaviour documented by Christakis and Fowler. The model presented here is
+                                    just one version of the models outlined in the full Bhar et al paper where the
+                                    authors explore a wider range of social network structures and differing methods
+                                    that influence the majority state of each agent’s social network neighbours.</p>
+                                  <p>What this model and the Bhar et al paper show is that weight regulation is not
+                                    solely an individual act and that any intervention to help people regulate their
+                                    weight needs to take social connections into account. One of the interventions
+                                    looked at in the Bhar et al paper is dieting with friends. More realistic models
+                                    have been created from both the Bhar et al and the Christakis and Fowler papers.,
+                                    For example Giabbanelli et al. applied network theory to generate artificial social
+                                    networks. They include a simple model of human metabolism and simulated how
+                                    individuals influence each other with respect to food consumption and physical
+                                    activity. They applied their model to both synthetic and real-world populations and
+                                    demonstrated the importance of the structural properties of each individual’s social
+                                    network on the distribution of body mass and obesity at the population level. In
+                                    another example by Shi et al a networked ABM was created with an age and height
+                                    structured metabolic model to investigate weight loss interventions in a real
+                                    Chinese population.</p>
+                                </div>
+                              </div>
                         </div>
 
                         <div class="card">
@@ -251,7 +312,6 @@
           <script src="js/ABM.js"></script>
 
           <script>
-
             var size = 40
             var caCanvas = new CACanvas(size)
             var flag = false;
@@ -426,7 +486,9 @@
                 type: "bar"
               }];
 
-              var layout = { title: "Weight types" };
+              var layout = {
+                title: "Weight types"
+              };
 
               Plotly.newPlot("myPlot", data, layout);
               if ((changes > 0) && (flag == true)) {
@@ -453,7 +515,9 @@
 
             setup();
             draw();
-            test = function () { console.log("test"); }
+            test = function () {
+              console.log("test");
+            }
             var runBtn = document.getElementById("run");
             runBtn.addEventListener("click", go);
             var setupBtn = document.getElementById("setup");
