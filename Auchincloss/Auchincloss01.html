@@ -157,7 +157,9 @@
 
 
         class Person extends Agent {
-            constructor(state) {
+            constructor(income) {
+                this.income = income
+                this.previousVisits = [null,null,null,null,null]
                 super();
             }
 
@@ -171,33 +173,29 @@
                 super();
                 this.occupant = []
             }
+
+            addAgent(agent) {
+                this.occupant.push(agent);
+                agent.home = this;
+            }
+            
+            distance(place){
+                var xDif = Math.abs(this.xPos - place.xPos)
+                var yDif = Math.abs(this.yPos - place.yPos)
+                return Math.sqrt(Math.pow(xDif,2)+Math.pow(yDif,2))
+            }
         }
-
-
-
-
-
-
-
+                
+    
 
         setup = function () {
             population = new Agents()
             place = new Patches(size)
             for (i = 0; i < size * size; i++) {
-                var patch = new Patch();
-                var choice = rndInt(t)
-                if (choice <= h) {
-                    atype = 0;
-                }
-                if ((choice > h) && (choice <= (h + o))) {
-                    atype = 1;
-                }
-                if (choice > (h + o)) {
-                    atype = 2;
-                }
-                var agent = new Person(atype)
-                patch.addAgent(agent);
-                population.addAgent(agent);
+                var place = new Place();
+                var person = new Person(atype)
+                plasce.addAgent(person);
+                population.addAgent(person);
                 place.addPatch(patch);
             }
             const checked = document.querySelector('#check1:checked') !== null
