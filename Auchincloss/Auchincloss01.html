@@ -55,7 +55,7 @@
             <div class="ref">Auchincloss, Amy H., et al. "An agent-based model of income inequalities in diet in the context of residential segregation." American journal of preventive medicine 40.3 (2011): 303-311.</div>
             <br>
             <div class="row">
-                <div class="col-sm-5">
+                <div class="col-sm-7">
 
 
                     <div class="row">
@@ -70,7 +70,7 @@
                     <div id="Grid" class="tabcontent active" style="display: block;">
                         <br>
                         <p align="center">
-                            <canvas id="canvas" width="280" height="280"></canvas>
+                            <canvas id="canvas" width="500" height="500"></canvas>
                         </p>
 
                     </div>
@@ -134,7 +134,7 @@
                 </div>
 
 
-                <div class="col-sm-7  ">
+                <div class="col-sm-5  ">
                     <p>Lorem ipsum dolor sit amet, laboris do enim cupidatat velit velit et. Ullamco quis nostrud esse excepteur amet deserunt dolor Lorem culpa eu deserunt. Anim consequat laborum Lorem aliqua ea cupidatat id qui commodo elit eu ad pariatur. Nostrud labore minim quis laborum commodo nisi et aute velit nulla eiusmod. Reprehenderit quis aliqua irure id esse aliquip tempor reprehenderit magna. Adipisicing aliquip ex elit Lorem eu elit amet consectetur cillum ad cupidatat minim minim esse ullamco et aliquip do do. Aute officia mollit reprehenderit ex aliqua esse dolore culpa culpa minim non. Ut laborum minim nostrud excepteur ex veniam cupidatat. Est consequat amet ullamco exercitation aliquip culpa adipisicing. Aute aliqua velit voluptate id tempor fugiat incididunt.
                     </p>
                 </div>
@@ -148,207 +148,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/ABM.js"></script>
+    <script src="js/main.js"></script>
 
-    <script>
-        var size = 40
-        var caCanvas = new CACanvas(size)
-        
-
-
-
-        class Person extends Agent {
-            constructor(income) {
-                this.income = income
-                this.previousVisits = [null,null,null,null,null]
-                super();
-            }
-
-            update() {
-
-            }
-        }
-
-        class Place extends Patch {
-            constructor(state) {
-                super();
-                this.occupant = []
-            }
-
-            addAgent(agent) {
-                this.occupant.push(agent);
-                agent.home = this;
-            }
-            
-            distance(place){
-                var xDif = Math.abs(this.xPos - place.xPos)
-                var yDif = Math.abs(this.yPos - place.yPos)
-                return Math.sqrt(Math.pow(xDif,2)+Math.pow(yDif,2))
-            }
-        }
-                
-    
-
-        setup = function () {
-            population = new Agents()
-            place = new Patches(size)
-            for (i = 0; i < size * size; i++) {
-                var place = new Place();
-                var person = new Person(atype)
-                plasce.addAgent(person);
-                population.addAgent(person);
-                place.addPatch(patch);
-            }
-            const checked = document.querySelector('#check1:checked') !== null
-            if (checked == true) {
-                var l = population.list.length;
-                var lock = 50
-                while (lock > 0) {
-                    var person = population.list[rndInt(population.list.length - 1)]
-                    if (person.state == 0 && person.locked == false) {
-                        person.locked = true;
-                        lock--;
-                    }
-                }
-            }
-            place.setNeighbors()
-            place.list.forEach(function (patch, index) {
-                var aperson = patch.occupant
-                if (aperson != null) {
-                    aperson.home.neighbors.forEach(function (npatch, i) {
-                        if (npatch.occupant != null) {
-                            aperson.addLink(npatch.occupant)
-                        }
-                    })
-                }
-            });
-            for (var i = 0; i < rlinks.value; i++) {
-                var t = population.list[rndInt(40 * 40)]
-                var f = population.list[rndInt(40 * 40)]
-                t.addLink(f);
-                f.addLink(t);
-            }
-            draw()
-        }
-
-
-        draw = function () {
-            place.list.forEach(function (patch, index) {
-                var person = patch.occupant
-                var col
-                if (person.links.length > 0) {
-                    switch (person.state) {
-                        case 0:
-                            col = "#00ff00";
-                            break;
-                        case 1:
-                            col = "DodgerBlue";
-                            break;
-                        case 2:
-                            col = "#ff0000";
-                            break;
-
-                        default:
-                            col = "#000000";
-                    }
-                    var bCol = "#000000";
-                    if (person.locked) {
-                        bCol = "#FFA500";
-                    }
-                    caCanvas.draw(patch.xPos, patch.yPos, bCol, true, col);
-                }
-            })
-            caCanvas.update("canvas");
-            console.log("draw");
-        }
-
-
-
-        update = function () {
-            var changes = 0
-            draw()
-            population.shuffle();
-            var h = 0;
-            var o = 0;
-            var b = 0;
-            population.list.forEach(function (person, index) {
-                if (person.locked == false) {
-                    if (person.update()) {
-                        changes++
-                    }
-                    if (person.state == 0) {
-                        h++;
-                    }
-                    if (person.state == 1) {
-                        o++;
-                    }
-                    if (person.state == 2) {
-                        b++;
-                    }
-                }
-            });
-            var xArray = ["Healthy", "Overweight", "Obese"];
-            var yArray = [h, o, b];
-
-            var data = [{
-                x: xArray,
-                y: yArray,
-                colors: ['green', 'blue', 'red'],
-                type: "bar"
-            }];
-
-            var layout = {
-                title: "Weight types"
-            };
-
-            Plotly.newPlot("myPlot", data, layout);
-            if ((changes > 0) && (flag == true)) {
-                console.log(flag);
-                setTimeout(function () {
-                    window.requestAnimationFrame(update);
-                }, 1000 / Number(speed.value));
-
-            } else {
-                console.log("DONE");
-            }
-        }
-
-        stop = function () {
-            flag = false;
-            console.log(flag);
-        }
-        go = function () {
-            flag = true;
-            update()
-        }
-
-
-
-        setup();
-        draw();
-        test = function () {
-            console.log("test");
-        }
-        var runBtn = document.getElementById("run");
-        runBtn.addEventListener("click", go);
-        var setupBtn = document.getElementById("setup");
-        setupBtn.addEventListener("click", setup);
-        var stopBtn = document.getElementById("stop");
-        stopBtn.addEventListener("click", stop);
-
-        function openCity(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-    </script>
 
 </body>
 
