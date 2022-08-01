@@ -41,6 +41,13 @@ class FILOSet{
     }
 }
 
+class IncomeClass{
+    constructor(price,distance,color){
+        this.color = color;
+        this.distance = distance;
+        this.price = price;
+    }
+}
 
 class Person {
     constructor(income,xPos,yPos) {
@@ -48,6 +55,20 @@ class Person {
         this.yPos = yPos;
         this.income = income;
         this.previousVisits = new FILOSet(4)
+        this.distances=[]
+    }
+    distance(shops){
+        let length = shops.length;
+        this.distances=[]
+        for(let i=0;i<length;i++){
+            const shop = shops[i]
+            let d = 1
+            let distance = shop.distance(this.xPos,this.yPos)
+            if(distance>0){
+                d =     1 - (distance/this.income.distance)
+            }
+            this.distances.push(d)
+        }
     }
 }
 
@@ -57,7 +78,19 @@ class Shop{
         this.xPos = xPos;
         this.yPos = yPos;
         this.type = type;
-    }   
+    } 
+    
+    distance( xPos, yPos){
+        let dx = Math.abs(this.xPos-xPos)
+        let dy = Math.abs(this.yPos-yPos)
+        if(dy>size/2){
+            dy = size-dy
+        }
+        if(dx>size/2){
+            dx = size-dx
+        }
+        return Math.sqrt((dx*dx)+(dy*dy))
+    }
 }
 
 
@@ -65,31 +98,62 @@ class Shop{
 setup = function () {
     population = []
     shops=[]
+    income=[new IncomeClass(0.8,140,"blue"), new IncomeClass(0.1,35,"red")]
+    // create shops random placement random type
     for(let i=0;i<numberOfShops;i++){
-        shops.push(new Shop(rndInt(2),rndInt(size),rndInt(size)))
+        const xPos = rndInt(size)
+        const yPos = rndInt(size)
+        const shopType = rndInt(2)
+        shops.push(new Shop(shopType,xPos,yPos))
     }
+    // create households grid placment random type
     for(let x=0;x<size;x++){
         for (let y = 0; y < size; y++) {
-            population.push(new Person(rndInt(2),x,y))
+            incomeType = income[rndInt(2)]
+            const person = new Person(incomeType,x,y)
+            person.distance(shops)
+            population.push(person)
         }
     }
-    draw()
+    debugDraw()
+}
+
+
+
+debugDraw = function(){
+    let length = population.length
+    let person = population[rndInt(length)]
+    caCanvas.drawSquare(person.xPos,person.yPos,person.income.color);
+    
+    length = shops.length;
+
+    for(let i=0; i<length;i++){
+        let shop = shops[i]
+        if((person.distances[i]>1)||(person.distances[i]<0)){
+            console.log(person.distances[i]);
+        }
+
+        col = "rgb(0,"+person.distances[i]*255 +",0)"; 
+        caCanvas.drawCircle(shop.xPos,shop.yPos,col)
+    }
+    caCanvas.update("canvas");
+
 }
 
 
 draw = function () {
-    var bCol = "#000000";
-    //caCanvas.clear(bCol);
-    population.forEach(function (person, index) {
-        var col = "#ff0000"
-        if (person.income == 1 ){ col = "#0000ff"} 
-        caCanvas.drawSquare(person.xPos,person.yPos, col);
-    })
-    shops.forEach(function(shop,index){
+    let length = population.length;
+    for(let i=0; i<length;i++){
+        let person = population[i]
+        caCanvas.drawSquare(person.xPos,person.yPos,person.income.color);
+    }
+    length = shops.length;
+    for(let i=0; i<length;i++){
+        let shop = shops[i]
         var col="white"
         if (shop.type==1){col="black"}
         caCanvas.drawCircle(shop.xPos,shop.yPos,col)
-    })
+    }
     caCanvas.update("canvas");
 }
 
