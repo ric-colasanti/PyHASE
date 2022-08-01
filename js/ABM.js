@@ -25,8 +25,24 @@ class CACanvas {
             this.ctx.fill();
             this.ctx.strokeStyle = '#000000';
             this.ctx.stroke();
-
         }
+    }
+
+    drawCircle(x, y,colour) {
+        let offset = Math.floor(this.cSize / 2);
+        this.ctx.beginPath();
+        this.ctx.arc(x * this.cSize + offset, y * this.cSize + offset, offset - 1, 0, 2 * Math.PI)
+        this.ctx.fillStyle = colour;
+        this.ctx.fill();
+    }
+
+    drawSquare(x, y, colour) {
+        this.ctx.beginPath();
+        this.ctx.rect(x * this.cSize, y * this.cSize, this.cSize, this.cSize)
+        this.ctx.fillStyle = colour;
+        this.ctx.fill();
+        this.ctx.strokeStyle = '#000000';
+        //this.ctx.stroke();
     }
 
     drawLine(x1,y1,x2,y2){

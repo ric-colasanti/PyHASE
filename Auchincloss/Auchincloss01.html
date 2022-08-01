@@ -9,31 +9,14 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
-    <title>Bhar</title>
+    <title>Template2</title>
 
-
-    <style>
-        .scroller {
-            height: 700px;
-            overflow: scroll;
-            overflow-x: hidden;
-        }
-
-        .ref {
-            font-size: x-small;
-            font-style: italic;
-        }
-
-        /* .card-link {
-      color:black;
-    } */
-    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Bhar</a>
+            <a class="navbar-brand" href="#">Template2</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,97 +32,10 @@
 
     <div class="container" style="margin-top:80px">
         <!-- <a href="#test">test</a>  -->
-        <div class="model-area" id="model">
-            <h2>An Agent-Based Model of Income Inequalities in Diet in the
-                Context of Residential Segregation</h2>
-            <div class="ref">Auchincloss, Amy H., et al. "An agent-based model of income inequalities in diet in the context of residential segregation." American journal of preventive medicine 40.3 (2011): 303-311.</div>
-            <br>
-            <div class="row">
-                <div class="col-sm-7">
-
-
-                    <div class="row">
-                        <div class="col" align="center">
-                            <button class="btn btn-primary tablinks" onclick="openCity(event, 'Grid')">Grid</button>
-                        </div>
-                        <div class="col" align="center">
-                            <button class="btn btn-primary tablinks" onclick="openCity(event, 'Graph')">Graph</button>
-                        </div>
-                    </div>
-
-                    <div id="Grid" class="tabcontent active" style="display: block;">
-                        <br>
-                        <p align="center">
-                            <canvas id="canvas" width="500" height="500"></canvas>
-                        </p>
-
-                    </div>
-
-                    <div id="Graph" class="tabcontent" style="display: none;">
-                        <p align="left">
-                            <div id="myPlot" style="width:350px"></div>
-                        </p>
-                    </div>
-
-
-                    <div class="form-check">
-                        <div class="slidecontainer">
-                            <div class="row">
-                                <div class="col"><span style="color:rgb(0, 255, 0); background-color: black;">
-                                        &#9679;</span> Healthy
-                                </div>
-                                <div class="col"><input type="range" min="1" max="100" value="30" class="slider"
-                                        id="healthy"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col"><span style="color:DodgerBlue; background-color: black;">
-                                        &#9679;</span> Over </div>
-                                <div class="col"><input type="range" min="1" max="100" value="30" class="slider"
-                                        id="over"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col"> <span style="color:red; background-color: black;"> &#9679;</span>
-                                    Obese </div>
-                                <div class="col"><input type="range" min="1" max="100" value="30" class="slider"
-                                        id="obese"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col">Random links</div>
-                                <div class="col"><input type="range" min="0" max="3000" value="0" class="slider"
-                                        id="rlinks"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col">Speed </div>
-                                <div class="col"> <input type="range" min="1" max="100" value="2" class="slider"
-                                        id="speed"></div>
-                            </div>
-                        </div>
-                        <br>
-                        <input class="form-check-input" type="checkbox" id="check1" name="option1" unchecked>
-                        <label class="form-check-label">Lock 50 <span
-                                style="color:rgb(0, 255, 0); background-color: orange;">
-                                &#9679;</span> healthy</label>
-                    </div>
-
-
-                    <br>
-                    <div class="row">
-                        <div class="col" align="center"><button id="setup" class="btn btn-primary mt-3">Setup</button>
-                        </div>
-                        <div class="col" align="center"><button id="run" class="btn btn-primary mt-3">Run</button></div>
-                        <div class="col" align="center"><button id="stop" class="btn btn-primary mt-3">Stop</button>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-sm-5  ">
-                    <p>Lorem ipsum dolor sit amet, laboris do enim cupidatat velit velit et. Ullamco quis nostrud esse excepteur amet deserunt dolor Lorem culpa eu deserunt. Anim consequat laborum Lorem aliqua ea cupidatat id qui commodo elit eu ad pariatur. Nostrud labore minim quis laborum commodo nisi et aute velit nulla eiusmod. Reprehenderit quis aliqua irure id esse aliquip tempor reprehenderit magna. Adipisicing aliquip ex elit Lorem eu elit amet consectetur cillum ad cupidatat minim minim esse ullamco et aliquip do do. Aute officia mollit reprehenderit ex aliqua esse dolore culpa culpa minim non. Ut laborum minim nostrud excepteur ex veniam cupidatat. Est consequat amet ullamco exercitation aliquip culpa adipisicing. Aute aliqua velit voluptate id tempor fugiat incididunt.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <p id="demo1"></p>
+        <p align="center">
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </p>
     </div>
 
     <!-- Latest compiled JavaScript -->
