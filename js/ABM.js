@@ -28,10 +28,10 @@ class CACanvas {
         }
     }
 
-    drawCircle(x, y,colour) {
+    drawCircle(x, y,colour,sz=0) {
         let offset = Math.floor(this.cSize / 2);
         this.ctx.beginPath();
-        this.ctx.arc(x * this.cSize + offset, y * this.cSize + offset, offset - 1, 0, 2 * Math.PI)
+        this.ctx.arc(x * this.cSize + offset-sz, y * this.cSize + offset, offset - (sz+1), 0, 2 * Math.PI)
         this.ctx.fillStyle = colour;
         this.ctx.fill();
     }

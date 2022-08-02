@@ -17,19 +17,12 @@ class FILOSet{
             this.dataArray.unshift(value);
         }else{
             // if not get index of new element
-            const pos = this.dataArray.indexOf(value)
-            // test if in array [ if pos -1 then not in array]
-            if(pos>=0){
-                // remove from position and push in first
-                this.dataArray.splice(pos,1)
-            }else{
-                this.dataArray.pop();
-            }
+            this.dataArray.pop();
             this.dataArray.unshift(value);
         }
     }
-    isMember(value){
-        return this.dataArray.indexOf(value)>=0
+    lastVisit(value){
+        return this.dataArray.indexOf(value)
     }
 
     toString(){
@@ -42,10 +35,12 @@ class FILOSet{
 }
 
 class IncomeClass{
-    constructor(price,distance,color){
+    constructor(price,distance,preferanceLower,preferanceUpper,color){
         this.color = color;
         this.distance = distance;
         this.price = price;
+        this.preferanceLower = preferanceLower;
+        this.preferanceUpper = preferanceUpper;
     }
 }
 
@@ -55,20 +50,28 @@ class Person {
         this.yPos = yPos;
         this.income = income;
         this.previousVisits = new FILOSet(4)
-        this.distances=[]
+        this.preferance = Math.random()*this.income.preferanceUpper+this.income.preferanceLower;
+        this.choice = null
     }
-    distance(shops){
+
+    shop(shops){
         let length = shops.length;
-        this.distances=[]
+        let best =0
+        this.choice = null;
         for(let i=0;i<length;i++){
             const shop = shops[i]
-            let d = 1
             let distance = shop.distance(this.xPos,this.yPos)
-            if(distance>0){
-                d =     1 - (distance/this.income.distance)
+            let score = (1 - (distance/this.income.distance)) * 0.5
+            const lastVisit = this.previousVisits.lastVisit(shop)
+            if(lastVisit>=0){
+                score +=  (5-lastVisit)/5 * 0.1  
             }
-            this.distances.push(d)
+            if(score>best){
+                best = score
+                this.choice = shop
+            }
         }
+        this.previousVisits.add(this.choice)
     }
 }
 
@@ -98,7 +101,7 @@ class Shop{
 setup = function () {
     population = []
     shops=[]
-    income=[new IncomeClass(0.8,140,"blue"), new IncomeClass(0.1,35,"red")]
+    income=[new IncomeClass(0.8,140,0.4,1.0,"blue"), new IncomeClass(0.1,35,0.0,0.6,"red")]
     // create shops random placement random type
     for(let i=0;i<numberOfShops;i++){
         const xPos = rndInt(size)
@@ -111,11 +114,10 @@ setup = function () {
         for (let y = 0; y < size; y++) {
             incomeType = income[rndInt(2)]
             const person = new Person(incomeType,x,y)
-            person.distance(shops)
             population.push(person)
         }
     }
-    debugDraw()
+    draw();
 }
 
 
@@ -137,29 +139,42 @@ debugDraw = function(){
         caCanvas.drawCircle(shop.xPos,shop.yPos,col)
     }
     caCanvas.update("canvas");
-
+    
 }
 
 
 draw = function () {
-    let length = population.length;
-    for(let i=0; i<length;i++){
-        let person = population[i]
-        caCanvas.drawSquare(person.xPos,person.yPos,person.income.color);
-    }
-    length = shops.length;
+    let length = shops.length;
     for(let i=0; i<length;i++){
         let shop = shops[i]
         var col="white"
         if (shop.type==1){col="black"}
-        caCanvas.drawCircle(shop.xPos,shop.yPos,col)
+        caCanvas.drawSquare(shop.xPos,shop.yPos,col)
+    }
+    length = population.length;
+    for(let i=0; i<length;i++){
+        let person = population[i]
+        caCanvas.drawCircle(person.xPos,person.yPos,person.income.color,3);
+    }
+    for(let i=0; i<length;i++){
+        let person = population[i]
+        if(person.choice != null){
+           // caCanvas.drawLine(person.xPos,person.yPos,person.choice.xPos,person.choice.yPos)
+        }
     }
     caCanvas.update("canvas");
+    
 }
 
 
 
 update = function () {
+    let length = population.length;
+    for(let i=0; i<length;i++){
+        let person = population[i]
+        person.shop(shops)
+    }
+    draw();
 }
 
 stop = function () {
@@ -174,4 +189,8 @@ go = function () {
 
 
 setup();
-
+update();
+update();
+update();
+update();
+update();
