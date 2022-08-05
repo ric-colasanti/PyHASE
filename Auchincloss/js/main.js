@@ -48,6 +48,8 @@ class Person {
     constructor(income,xPos,yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
+        this.homeXPos = xPos;
+        this.homeYPos = yPos;
         this.income = income;
         this.previousVisits = new FILOSet(4)
         this.preferance = Math.random()*this.income.preferanceUpper+this.income.preferanceLower;
@@ -173,6 +175,11 @@ update = function () {
     for(let i=0; i<length;i++){
         let person = population[i]
         person.shop(shops)
+        //person.xPos = person.choice.xPos;
+        //person.yPos = person.choice.yPos;
+        draw()
+        //person.xPos = person.homeYPos;
+        //person.yPos = person.homeYPos;
     }
     draw();
 }
