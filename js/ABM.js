@@ -34,6 +34,8 @@ class CACanvas {
         this.ctx.arc(x * this.cSize + offset, y * this.cSize + offset, offset - (sz+1), 0, 2 * Math.PI)
         this.ctx.fillStyle = colour;
         this.ctx.fill();
+        this.ctx.strokeStyle = '#000000';
+        this.ctx.stroke();
     }
 
     drawSquare(x, y, colour) {
@@ -59,6 +61,7 @@ class CACanvas {
         this.ctx.rect(0,0, this.buffer.width, this.buffer.height)
         this.ctx.fillStyle = colour;
         this.ctx.fill();
+        
     }
 
     update(canvasID) {

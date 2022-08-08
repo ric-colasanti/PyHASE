@@ -3,6 +3,10 @@ var caCanvas = new CACanvas(size)
 let population =[]
 let shops=[]
 let numberOfShops = 50;
+const weightPrice = 0.2
+const weightDistance = 0.5
+const weightHabit = 0.1
+const weightPreferance = 0.2
 
 
 class FILOSet{
@@ -34,25 +38,17 @@ class FILOSet{
     }
 }
 
-class IncomeClass{
-    constructor(price,distance,preferanceLower,preferanceUpper,color){
-        this.color = color;
-        this.distance = distance;
-        this.price = price;
-        this.preferanceLower = preferanceLower;
-        this.preferanceUpper = preferanceUpper;
-    }
-}
+
 
 class Person {
-    constructor(income,xPos,yPos) {
+    constructor(income,preferance,xPos,yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.homeXPos = xPos;
         this.homeYPos = yPos;
         this.income = income;
         this.previousVisits = new FILOSet(4)
-        this.preferance = Math.random()*this.income.preferanceUpper+this.income.preferanceLower;
+        this.preferance = preferance
         this.choice = null
     }
 
@@ -62,39 +58,76 @@ class Person {
         this.choice = null;
         for(let i=0;i<length;i++){
             const shop = shops[i]
-            let distance = shop.distance(this.xPos,this.yPos)
-            let score = (1 - (distance/this.income.distance)) * 0.5
+            // distance weight 0.5
+            let score = shop.distance(this) * weightDistance
+            // food preferance
+            score += shop.preferance(this) * weightPreferance
+            // price
+            score += shop.priceTest(this) * weightPrice
+            // habit
             const lastVisit = this.previousVisits.lastVisit(shop)
             if(lastVisit>=0){
-                score +=  (5-lastVisit)/5 * 0.1  
+                score +=  (5-lastVisit)/5 * weightHabit
             }
+            
+            // noise
+            score+= Math.random()*0.1
+            // select
+        
             if(score>best){
                 best = score
                 this.choice = shop
             }
         }
+        
         this.previousVisits.add(this.choice)
     }
 }
 
 
 class Shop{
-    constructor(type,xPos,yPos) {
+    constructor(xPos,yPos,type,price) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.type = type;
+        this.price = price;
+        this.visits = 0
     } 
     
-    distance( xPos, yPos){
-        let dx = Math.abs(this.xPos-xPos)
-        let dy = Math.abs(this.yPos-yPos)
+    distance(person){
+        let dx = Math.abs(this.xPos-person.xPos)
+        let dy = Math.abs(this.yPos-person.yPos)
         if(dy>size/2){
             dy = size-dy
         }
         if(dx>size/2){
             dx = size-dx
         }
-        return Math.sqrt((dx*dx)+(dy*dy))
+        const d = Math.sqrt((dx*dx)+(dy*dy))
+        if(d==0){
+            return 1
+        } 
+        if(person.income==0){
+            return 1-(d/130) 
+        }
+        return 1- d/30 
+    }
+
+    preferance(person){
+        if(this.type==1){
+            return person.preferance 
+        }
+        return 1-person.preferance 
+    }
+
+    priceTest(person){
+        if(this.price == 0){
+            return weightPrice
+        }
+        if(person.income==0){
+            return 0.1 
+        }
+        return 0.8 
     }
 }
 
@@ -103,19 +136,26 @@ class Shop{
 setup = function () {
     population = []
     shops=[]
-    income=[new IncomeClass(0.8,140,0.4,1.0,"blue"), new IncomeClass(0.1,35,0.0,0.6,"red")]
     // create shops random placement random type
     for(let i=0;i<numberOfShops;i++){
         const xPos = rndInt(size)
         const yPos = rndInt(size)
         const shopType = rndInt(2)
-        shops.push(new Shop(shopType,xPos,yPos))
+        const price = rndInt(2)
+        shops.push(new Shop(xPos,yPos,shopType,price))
     }
     // create households grid placment random type
-    for(let x=0;x<size;x++){
-        for (let y = 0; y < size; y++) {
-            incomeType = income[rndInt(2)]
-            const person = new Person(incomeType,x,y)
+    for(let x=0;x<50;x++){
+        for (let y = 0; y < 50; y++) {
+            const income = rndInt(2)
+            let person = null
+            if(income==0){
+                const pref = Math.random()*0.6
+                person = new Person(0,pref,x,y)
+            }else{
+                const pref = Math.random()*0.6+0.4
+                person = new Person(1,pref,x,y)
+            }
             population.push(person)
         }
     }
@@ -124,48 +164,29 @@ setup = function () {
 
 
 
-debugDraw = function(){
-    let length = population.length
-    let person = population[rndInt(length)]
-    caCanvas.drawSquare(person.xPos,person.yPos,person.income.color);
-    
-    length = shops.length;
-
-    for(let i=0; i<length;i++){
-        let shop = shops[i]
-        if((person.distances[i]>1)||(person.distances[i]<0)){
-            console.log(person.distances[i]);
-        }
-
-        col = "rgb(0,"+person.distances[i]*255 +",0)"; 
-        caCanvas.drawCircle(shop.xPos,shop.yPos,col)
-    }
-    caCanvas.update("canvas");
-    
-}
-
 
 draw = function () {
+    caCanvas.clear("lightgrey")
     let length = shops.length;
     for(let i=0; i<length;i++){
         let shop = shops[i]
-        var col="white"
-        if (shop.type==1){col="black"}
+        var col="red"
+        if (shop.type==1){col="blue"}
         caCanvas.drawSquare(shop.xPos,shop.yPos,col)
     }
     length = population.length;
     for(let i=0; i<length;i++){
         let person = population[i]
-        caCanvas.drawCircle(person.xPos,person.yPos,person.income.color,3);
-    }
-    for(let i=0; i<length;i++){
-        let person = population[i]
-        if(person.choice != null){
-           // caCanvas.drawLine(person.xPos,person.yPos,person.choice.xPos,person.choice.yPos)
+        let col ="red"
+        if(person.income == 0){
+            col = "green"
+        }else{
+            col = "orange"
         }
+        caCanvas.drawCircle(person.xPos,person.yPos,col,2);
     }
-    caCanvas.update("canvas");
     
+    caCanvas.update("canvas");
 }
 
 
@@ -175,11 +196,6 @@ update = function () {
     for(let i=0; i<length;i++){
         let person = population[i]
         person.shop(shops)
-        //person.xPos = person.choice.xPos;
-        //person.yPos = person.choice.yPos;
-        draw()
-        //person.xPos = person.homeYPos;
-        //person.yPos = person.homeYPos;
     }
     draw();
 }
@@ -196,8 +212,4 @@ go = function () {
 
 
 setup();
-update();
-update();
-update();
-update();
-update();
+//update();
