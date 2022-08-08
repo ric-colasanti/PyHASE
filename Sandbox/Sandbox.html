@@ -112,14 +112,8 @@
         }
 
         distance(xPos, yPos) {
-          let dx = Math.abs(this.pos.xPos - xPos);
-          let dy = Math.abs(this.pos.yPos - yPos);
-          if (dy > size / 2) {
-            dy = size - dy;
-          }
-          if (dx > size / 2) {
-            dx = size - dx;
-          }
+          let dx = Math.abs(this.xPos - xPos);
+          let dy = Math.abs(this.yPos - yPos);
           return Math.sqrt(dx * dx + dy * dy);
         }
 
@@ -161,22 +155,22 @@
         }
         move() {
           if (
-            Math.abs(this.pos.xPos - this.target.xPos) > 4 &&
+            Math.abs(this.pos.xPos - this.target.xPos) > 4 ||
             Math.abs(this.pos.yPos - this.target.yPos) > 4
           ) {
             this.pos.move(this.dx, this.dy);
             this.draw();
           } else {
             if (this.atHome) {
-              this.pos.xPos = this.home.xPos;
-              this.pos.yPos = this.home.yPos;
+              //this.pos.xPos = this.home.xPos;
+              //this.pos.yPos = this.home.yPos;
               this.drawHome();
               if (this.shoped == false) {
                 this.shoped = true;
               }
             } else {
-              this.pos.xPos = this.shop.xPos;
-              this.pos.yPos = this.shop.yPos;
+              //this.pos.xPos = this.shop.xPos;
+              //this.pos.yPos = this.shop.yPos;
               this.setTarget(this.home);
               this.atHome = true;
               this.draw();
@@ -193,13 +187,23 @@
       }
 
       function setup() {
-        shops = [];
-        for (let i = 0; i < 50; i++) {
+        let shops = [];
+        for (let i = 0; i < 5; i++) {
           shops.push(new Pos(rndInt(50) * 10, rndInt(50) * 10));
         }
         for (let x = 1; x < 49; x++) {
           for (let y = 1; y < 49; y++) {
             const person = new Person(new Pos(x * 10, y * 10));
+            let dMin = 10000
+            let s = 0
+            let shop = 0
+            for(s=0;s<shops.length;s++){
+                const d = person.distance(shops[s])
+                if(d<dMin){
+                    dMin = d
+                    shop = s
+                }
+            }
             person.shop = shops[rndInt(shops.length)];
             person.setTarget(person.shop);
             population.push(person);
