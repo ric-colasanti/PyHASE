@@ -27,7 +27,8 @@ class CACanvas {
             this.ctx.stroke();
         }
     }
-
+ 
+    
     drawCircle(x, y,colour,sz=0,thick=1) {
         let offset = Math.floor(this.cSize / 2);
         this.ctx.beginPath();

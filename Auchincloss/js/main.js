@@ -100,7 +100,7 @@ class Person {
             }
 
             // noise
-            const r = Math.random() * 0.1
+            const r = Math.random() * random
             // select
             score = d + f + w + h + r
             if (workings) {
