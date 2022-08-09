@@ -28,14 +28,16 @@ class CACanvas {
         }
     }
 
-    drawCircle(x, y,colour,sz=0) {
+    drawCircle(x, y,colour,sz=0,thick=1) {
         let offset = Math.floor(this.cSize / 2);
         this.ctx.beginPath();
+        this.ctx.lineWidth = thick;
         this.ctx.arc(x * this.cSize + offset, y * this.cSize + offset, offset - (sz+1), 0, 2 * Math.PI)
         this.ctx.fillStyle = colour;
         this.ctx.fill();
         this.ctx.strokeStyle = '#000000';
         this.ctx.stroke();
+        this.ctx.lineWidth=1
     }
 
     drawSquare(x, y, colour) {
@@ -47,13 +49,15 @@ class CACanvas {
         //this.ctx.stroke();
     }
 
-    drawLine(x1,y1,x2,y2){
+    drawLine(x1,y1,x2,y2,color= '#000000', thick = 1){
         this.ctx.beginPath();
-        this.ctx.strokeStyle = '#000000';
+        this.ctx.strokeStyle = color;
+        this.ctx.lineWidth = thick;
         let offset = Math.floor(this.cSize / 2);
         this.ctx.moveTo(x1 * this.cSize+offset, y1 * this.cSize+offset)
         this.ctx.lineTo(x2 * this.cSize+offset, y2 * this.cSize+offset)
         this.ctx.stroke();
+        this.ctx.lineWidth=1;
     }
 
     clear(colour){
