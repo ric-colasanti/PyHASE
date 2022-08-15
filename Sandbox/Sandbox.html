@@ -91,16 +91,15 @@
           this.target = null;
           this.shop = null;
           this.deg = 0;
-          this.atHome = false;
-          this.shoped = false;
+          this.atTarget = false;
         }
 
         setTarget(target) {
           this.target = new Pos(target.xPos, target.yPos);
           let dx = target.dx(this.pos);
           let dy = target.dy(this.pos);
-          this.dx = (dx / Math.sqrt(dx * dx + dy * dy)) * 6;
-          this.dy = (dy / Math.sqrt(dx * dx + dy * dy)) * 6;
+          this.dx = (dx / Math.sqrt(dx * dx + dy * dy)) * 3;
+          this.dy = (dy / Math.sqrt(dx * dx + dy * dy)) * 3;
 
           this.deg = getAngleDegrees(
             this.pos.xPos,
@@ -158,24 +157,27 @@
             Math.abs(this.pos.xPos - this.target.xPos) > 4 ||
             Math.abs(this.pos.yPos - this.target.yPos) > 4
           ) {
+            this.atTarget=false;
             this.pos.move(this.dx, this.dy);
             this.draw();
-          } else {
-            if (this.atHome) {
-              //this.pos.xPos = this.home.xPos;
-              //this.pos.yPos = this.home.yPos;
-              this.drawHome();
-              if (this.shoped == false) {
-                this.shoped = true;
-              }
-            } else {
-              //this.pos.xPos = this.shop.xPos;
-              //this.pos.yPos = this.shop.yPos;
-              this.setTarget(this.home);
-              this.atHome = true;
-              this.draw();
-            }
+          }else {
+            this.atTarget=true;
           }
+          //   if (this.atHome) {
+          //     //this.pos.xPos = this.home.xPos;
+          //     //this.pos.yPos = this.home.yPos;
+          //     this.drawHome();
+          //     if (this.shoped == false) {
+          //       this.shoped = true;
+          //     }
+          //   } else {
+          //     //this.pos.xPos = this.shop.xPos;
+          //     //this.pos.yPos = this.shop.yPos;
+          //     this.setTarget(this.home);
+          //     this.atHome = true;
+          //     this.draw();
+          //   }
+          // }
         }
       }
 
@@ -185,10 +187,12 @@
           elementName
         );
       }
-
+      let shops = [];
+      const d = new Date();
+      let time = d.getTime();
       function setup() {
-        let shops = [];
-        for (let i = 0; i < 5; i++) {
+        
+        for (let i = 0; i < 50; i++) {
           shops.push(new Pos(rndInt(50) * 10, rndInt(50) * 10));
         }
         for (let x = 1; x < 49; x++) {
@@ -208,30 +212,44 @@
             person.setTarget(person.shop);
             population.push(person);
             frame.appendChild(person.shape);
+            person.drawHome()
           }
         }
       }
 
       update = function () {
-        shoppedOut = true;
-        let count = 0;
+        //shoppedOut = true;
+        // let count = 0;
+        const d = new Date();
+        if(d.getTime()-time  >3000){
         for (let i = 0; i < population.length; i++) {
-          population[i].move();
-          if (population[i].shoped == false) {
-            shoppedOut = false;
-            count++;
+          let person = population[i];
+          person.move();
+          // if (population[i].shoped == false) {
+          //   shoppedOut = false;
+          //   count++;
+          // }
+          if (person.atTarget){
+            if(Math.random()<0.01){
+              person.shop = shops[rndInt(shops.length)];
+              person.setTarget(person.shop);
+              person.atTarget = false;
+              // population[i].target = shops[rndInt(shops.length)];
+              // population[i].atTarget = false;
+            }
           }
         }
-        if (shoppedOut == true) {
-          for (let i = 0; i < population.length; i++) {
-            population[i].shoped = false;
-            population[i].setTarget(population[i].shop);
-          }
+        // if (shoppedOut == true) {
+        //   for (let i = 0; i < population.length; i++) {
+        //     population[i].shoped = false;
+        //     population[i].setTarget(population[i].shop);
+        //   }
+        // }
         }
 
-        setTimeout(function () {
-          window.requestAnimationFrame(update);
-        }, 1);
+         setTimeout(function () {
+           window.requestAnimationFrame(update);
+         }, 1);
       };
 
       setup();
