@@ -1,0 +1,19 @@
+<script>
+    console.log("scratch");
+    class Test{
+        constructor(v){
+            this.v=v
+        }
+    }
+
+    a = new Test(1)
+    b = new Test(2)
+    c = new Test(3)
+    d = new Test(4)
+    ar =[a,b,c,d]    
+    console.log(ar);
+    
+    ar.splice(ar.findIndex(b , 1))
+    console.log(ar);
+
+    </script>
