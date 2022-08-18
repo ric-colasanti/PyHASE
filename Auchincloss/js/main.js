@@ -1,3 +1,4 @@
+console.log("Main");
 var size = 50
 var caCanvas = new CACanvas(size)
 let population = []

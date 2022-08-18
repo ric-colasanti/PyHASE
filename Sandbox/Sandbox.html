@@ -33,6 +33,7 @@
       let population = [];
       var frame = document.getElementById("svg01");
       let shoppedOut = false;
+      const size = 50
 
       function getAngleDegrees(fromX, fromY, toX, toY, force360 = true) {
         let deltaX = fromX - toX;
@@ -190,14 +191,20 @@
       let shops = [];
       const d = new Date();
       let time = d.getTime();
-      function setup() {
-        
+
+
+
+
+      function setup() {  
         for (let i = 0; i < 50; i++) {
           shops.push(new Pos(rndInt(50) * 10, rndInt(50) * 10));
         }
-        for (let x = 1; x < 49; x++) {
-          for (let y = 1; y < 49; y++) {
-            const person = new Person(new Pos(x * 10, y * 10));
+        // for (let x = 1; x < 49; x++) {
+        //   for (let y = 1; y < 49; y++) {
+          for(let i=0; i<size*size*0.8; i++){
+            const xPos = rndInt(size)
+          const yPos = rndInt(size)           
+            const person = new Person(new Pos(xPos * 10, yPos * 10));
             let dMin = 10000
             let s = 0
             let shop = 0
@@ -214,7 +221,11 @@
             frame.appendChild(person.shape);
             person.drawHome()
           }
-        }
+        // }
+        frame.setAttribute(
+            "transform",
+            "scale(0.5,0.5)"
+          );
       }
 
       update = function () {
