@@ -115,9 +115,17 @@
           this.highCustomers = 0;
           this.lowCustomers = 0;
           this.shape = SVG("g")
+          this.pos = pos
           this.highArc = SVG("path")
           this.lowArc = SVG("path")
           this.circle = SVG("circle")
+          this.circle.setAttribute("cx", pos.xPos);
+          this.circle.setAttribute("cy", pos.yPos);
+          this.circle.setAttribute("r", 15);
+          this.circle.setAttribute("fill","rgba(255,0,0,0.3)");
+          this.circle.setAttribute("stroke-width",5)
+          this.circle.setAttribute("stroke", "rgba(0,0,0,1)");
+          this.shape.appendChild(this.circle)
         }
       }
 
@@ -220,21 +228,10 @@
         for (let i = 0; i < 20; i++) {
           const xPos = rndInt(size);
           const yPos = rndInt(size);
-          shops.push(new Pos(xPos * 10, yPos * 10));
-          let group = SVG("g")
-          let arc = SVG("path");
-          arc.setAttribute("stroke","#111688")
-          arc.setAttribute("stroke-width",3)
-          arc.setAttribute("fill","none")
-          arc.setAttribute("d", describeArc(xPos*10, yPos*10, 15, 50, 250));
-          let circle = SVG("circle")
-          circle.setAttribute("cx", xPos * 10);
-          circle.setAttribute("cy", yPos * 10);
-          circle.setAttribute("r", 15);
-          circle.setAttribute("fill","rgba(255,0,0,0.3)");
-          group.appendChild(circle);
-          group.appendChild(arc);
-          frame.append(group)
+          const target = new Pos(xPos * 10, yPos * 10) 
+          const shop = new Shop(1,target)
+          shops.push(target);
+          frame.append(shop.shape)
         }
         // for (let x = 1; x < 49; x++) {
         //   for (let y = 1; y < 49; y++) {
@@ -264,7 +261,7 @@
 
       update = function () {
         const d = new Date();
-        if (d.getTime() - time > 3000) {
+        if (d.getTime() - time > 1000) {
           for (let i = 0; i < population.length; i++) {
             let person = population[i];
             person.move();
