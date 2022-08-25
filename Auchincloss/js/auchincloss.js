@@ -223,9 +223,10 @@ class Person {
 
     setShop(shops, workings = false) {
         let length = shops.length;
+        console.log(length);
         let best = 0
         let score = 0
-        this.choice = null;
+        let choice = null;
         for (let i = 0; i < length; i++) {
             const shop = shops[i]
             // distance weight 0.5
@@ -245,22 +246,27 @@ class Person {
             const r = Math.random() * random
             // select
             score = d + f + w + h + r
-            if (workings) {
-                console.log(shop.xPos, shop.yPos, d.toFixed(2), f.toFixed(2), w.toFixed(2), h.toFixed(2), r.toFixed(2), score.toFixed(2));
+            if (true) {
+                //console.log(shop.pos.xPos, shop.pos.yPos, d.toFixed(2), f.toFixed(2), w.toFixed(2), h.toFixed(2), r.toFixed(2), score.toFixed(2),best);               
+                console.log(score.toFixed(2),best);
             }
             if (score > best) {
                 best = score
-                this.choice = shop
+                choice = shop
             }
 
         }
         if (workings) {
             console.log(this.choice.xPos, this.choice.yPos, best.toFixed(2));
         }
-        if (this.choice != null) {
-            this.target = this.choice.pos
-            this.previousVisits.add(this.choice)
+        if (choice != null) {
+            this.shop = choice
+            this.setTarget(this.shop.pos)
+            console.log(choice.pos.xPos, choice.pos.yPos);
+            this.previousVisits.add(choice)
         }
+        // this.shop = shops[rndInt(shops.length)]
+        // this.setTarget(this.shop.pos)
     }
 }
 
@@ -299,7 +305,6 @@ var setup = function (populationNumber) {
         person.draw()
         person.setTarget(shops[rndInt(shops.length)].pos)
         population.push(person)
-        console.log(person);
     }
 }
 
@@ -319,7 +324,7 @@ var update = function () {
             let length = population.length;
             for (let i = 0; i < length; i++) {
                 let person = population[i]
-                person.setShop(shops);//,i==25*25)
+                person.setShop(shops);
             }
         }
 
@@ -343,12 +348,12 @@ container.appendChild(frame);
 let population = []; // list of agents
 let shops = []
 const size = 50;
-let numberOfShops = 10;
+let numberOfShops = 20;
 var weightPrice = 0.2;
 var weightDistance = 0.5;
 var weightHabit = 0.1;
 var weightPreferance = 0.2;
-var random = 0.1;
+var random = 1;
 
 const d = new Date();
 let time = d.getTime();
