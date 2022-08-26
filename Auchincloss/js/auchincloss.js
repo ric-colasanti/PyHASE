@@ -24,6 +24,7 @@ function rndInt(maxVal) {
 
 
 
+
 class FILOSet {
     constructor(size) {
         this.dataArray = [];
