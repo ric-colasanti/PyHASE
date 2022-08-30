@@ -123,9 +123,16 @@
           this.circle.setAttribute("cy", pos.yPos);
           this.circle.setAttribute("r", 15);
           this.circle.setAttribute("fill","rgba(255,0,0,0.3)");
-          this.circle.setAttribute("stroke-width",5)
-          this.circle.setAttribute("stroke", "rgba(0,0,0,1)");
+          //this.circle.setAttribute("stroke-width",5)
+          //this.circle.setAttribute("stroke", "rgba(0,0,0,0.3)");
           this.shape.appendChild(this.circle)
+          this.arc = SVG("path");
+          this.arc.setAttribute("stroke","rgba(255,0,0,0.8)")
+          this.arc.setAttribute("stroke-width",3)
+          this.arc.setAttribute("fill","none")
+          this.arc.setAttribute("d", describeArc(pos.xPos, pos.yPos, 15, 50, 250));
+          
+          this.shape.appendChild(this.arc)
         }
       }
 

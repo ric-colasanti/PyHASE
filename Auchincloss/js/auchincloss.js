@@ -6,6 +6,15 @@ function SVG(elementName) {
     );
 }
 
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+    var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
+
+    return {
+        x: centerX + radius * Math.cos(angleInRadians),
+        y: centerY + radius * Math.sin(angleInRadians),
+    };
+}
+
 function getAngleDegrees(fromX, fromY, toX, toY, force360 = true) {
     let deltaX = fromX - toX;
     let deltaY = fromY - toY; // reverse
@@ -23,7 +32,28 @@ function rndInt(maxVal) {
 }
 
 
+function describeArc(x, y, radius, startAngle, endAngle) {
+    var start = polarToCartesian(x, y, radius, endAngle);
+    var end = polarToCartesian(x, y, radius, startAngle);
 
+    var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
+    var d = [
+        "M",
+        start.x,
+        start.y,
+        "A",
+        radius,
+        radius,
+        0,
+        largeArcFlag,
+        0,
+        end.x,
+        end.y,
+    ].join(" ");
+
+    return d;
+}
 
 class FILOSet {
     constructor(size) {
@@ -77,7 +107,7 @@ class Pos {
 
 
 class Shop {
-    constructor(sClass, price, pos) {
+    constructor(sClass, price, pos, id) {
         this.customers = 0
         this.sClass = sClass;
         this.highCustomers = 0;
@@ -85,7 +115,22 @@ class Shop {
         this.price = price;
         this.visits = 0
         this.pos = pos
+        this.draw()
+        this.shape.appendChild(this.circle)
+        this.circle.setAttribute("id",id)
+        this.circle.addEventListener('mouseover', function(e){
+            document.getElementById("shopid").innerHTML = id
+            document.getElementById("shoptype").innerHTML = shops[e.target.id].sClass;           
+            document.getElementById("shopcustomers").innerHTML = shops[e.target.id].customers;
+        })
+        this.shape.appendChild(this.arc1)
+        this.shape.appendChild(this.arc2)
+    }
+    data(){
+        console.log(rndInt(20),this.sClass);
+    }
 
+    draw() {
         this.shape = SVG("g")
         this.highArc = SVG("path")
         this.lowArc = SVG("path")
@@ -93,23 +138,33 @@ class Shop {
         this.circle.setAttribute("cx", this.pos.xPos);
         this.circle.setAttribute("cy", this.pos.yPos);
         this.circle.setAttribute("r", 15);
-        this.circle.setAttribute("fill", "rgba(255,0,0,0.3)");
-        this.circle.setAttribute("stroke-width", 5)
-        this.circle.setAttribute("stroke", "rgba(0,0,0,1)");
-        this.shape.appendChild(this.circle)
-    }
+        if (this.sClass == 0) {
+            this.circle.setAttribute("fill", "rgba(255,0,0,0.4)");
+        } else {
+            this.circle.setAttribute("fill", "rgba(0,0,255,0.4)");
+        }
+        this.circle.setAttribute("stroke-width", 3)
+        // if (this.price == 0) {
+        //     this.circle.setAttribute("stroke", "rgba(255,0,0,0.9)");
+        // } else {
+        //     this.circle.setAttribute("stroke", "rgba(0,0,255,0.9)");
+        // }
+        this.arc1 = SVG("path");
+        this.arc1.setAttribute("stroke", "rgba(255,0,0,0.8)")
+        this.arc1.setAttribute("stroke-width", 3)
+        this.arc1.setAttribute("fill", "none")
+        this.arc1.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, 0, 250));
+        this.arc2 = SVG("path");
+        this.arc2.setAttribute("stroke", "rgba(0,0,255,0.8)")
+        this.arc2.setAttribute("stroke-width", 3)
+        this.arc2.setAttribute("fill", "none")
+        this.arc2.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, 250, 360));
 
+    }
     distance(person) {
-        let dx = Math.abs(this.pos.xPos - person.pos.xPos)
-        let dy = Math.abs(this.pos.yPos - person.pos.yPos)
-        // if (dy > size / 2) {
-        //     dy = size - dy
-        // }
-        // if (dx > size / 2) {
-        //     dx = size - dx
-        // }
+        let dx = Math.abs(this.pos.xPos / 10 - person.pos.xPos / 10)
+        let dy = Math.abs(this.pos.yPos / 10 - person.pos.yPos / 10)
         const d = Math.sqrt((dx * dx) + (dy * dy))
-        //console.log(d);
         if (d == 0) {
             return 1
         }
@@ -144,9 +199,9 @@ class Person {
         this.poly = SVG("polygon");
         this.poly.setAttribute("stroke", "black");
         if (this.sClass == 0) {
-            this.poly.setAttribute("fill", "red");
+            this.poly.setAttribute("fill", "rgba(255,0,0,0.5)");
         } else {
-            this.poly.setAttribute("fill", "blue");
+            this.poly.setAttribute("fill", "rgba(0,0,255,0.5)");
         }
         let array = [
             [0, -10],
@@ -168,14 +223,24 @@ class Person {
         this.atTarget = false;
         this.previousVisits = new FILOSet(4)
         this.preferance = preferance
+        this.home = SVG("rect")
+        if (this.sClass == 0) {
+            this.home.setAttribute("fill", "rgba(255,0,0,0.3)");
+        } else {
+            this.home.setAttribute("fill", "rgba(0,0,255,0.3)");
+        }
+        this.home.setAttribute('x', this.pos.xPos);
+        this.home.setAttribute('y', this.pos.yPos);
+        this.home.setAttribute('height', '10');
+        this.home.setAttribute('width', '10');
     }
 
     setTarget(target) {
         this.target = new Pos(target.xPos, target.yPos);
         let dx = target.dx(this.pos);
         let dy = target.dy(this.pos);
-        this.dx = (dx / Math.sqrt(dx * dx + dy * dy)) * 3;
-        this.dy = (dy / Math.sqrt(dx * dx + dy * dy)) * 3;
+        this.dx = (dx / Math.sqrt(dx * dx + dy * dy)) * 5;
+        this.dy = (dy / Math.sqrt(dx * dx + dy * dy)) * 5;
 
         this.deg = getAngleDegrees(
             this.pos.xPos,
@@ -224,7 +289,6 @@ class Person {
 
     setShop(shops, workings = false) {
         let length = shops.length;
-        console.log(length);
         let best = 0
         let score = 0
         let choice = null;
@@ -247,10 +311,7 @@ class Person {
             const r = Math.random() * random
             // select
             score = d + f + w + h + r
-            if (d<0) {
-                //console.log(shop.pos.xPos, shop.pos.yPos, d.toFixed(2), f.toFixed(2), w.toFixed(2), h.toFixed(2), r.toFixed(2), score.toFixed(2),best);               
-                console.log(d,score.toFixed(2),best);
-            }
+
             if (score > best) {
                 best = score
                 choice = shop
@@ -263,11 +324,8 @@ class Person {
         if (choice != null) {
             this.shop = choice
             this.setTarget(this.shop.pos)
-            console.log(choice.pos.xPos, choice.pos.yPos);
             this.previousVisits.add(choice)
         }
-        // this.shop = shops[rndInt(shops.length)]
-        // this.setTarget(this.shop.pos)
     }
 }
 
@@ -284,28 +342,31 @@ var setup = function (populationNumber) {
         const xPos = rndInt(size - 2) + 2;
         const yPos = rndInt(size - 2) + 2;
         const target = new Pos(xPos * 10, yPos * 10)
-        const shop = new Shop(shopType, price, target)
+        const shop = new Shop(shopType, price, target,i)
         shops.push(shop)
-        frame.append(shop.shape);
+        
     }
-
-    for (let i = 0; i < populationNumber; i++) {
-        const xPos = rndInt(size - 1) + 1;
-        const yPos = rndInt(size - 1) + 1;
-        const pos = new Pos(xPos * 10, yPos * 10);
-        const income = rndInt(2)
-        let person = null
-        if (income == 0) {
-            const pref = Math.random() * 0.6
-            person = new Person(0, pref, pos)
-        } else {
-            const pref = Math.random() * 0.6 + 0.4
-            person = new Person(1, pref, pos)
+    for (let x = 0; x < size; x++) {
+        for (let y = 0; y < size; y++) {
+            const pos = new Pos(x * 10, y * 10);
+            const income = rndInt(2)
+            let person = null
+            if (income == 0) {
+                const pref = Math.random() * 0.6
+                person = new Person(0, pref, pos)
+            } else {
+                const pref = Math.random() * 0.6 + 0.4
+                person = new Person(1, pref, pos)
+            }
+            frame.append(person.shape);
+            frame.append(person.home);
+            person.draw()
+            person.setTarget(shops[rndInt(shops.length)].pos)
+            population.push(person)
         }
-        frame.append(person.shape);
-        person.draw()
-        person.setTarget(shops[rndInt(shops.length)].pos)
-        population.push(person)
+    }
+    for(let i =0; i<shops.length;i++){
+        frame.append(shops[i].shape);
     }
 }
 
@@ -323,18 +384,26 @@ var update = function () {
         }
         if (stoped == true) {
             let length = population.length;
+            for(let i=0; i<shops.length;i++){
+                shops[i].customers=0
+            }
             for (let i = 0; i < length; i++) {
                 let person = population[i]
                 person.setShop(shops);
+                person.shop.customers++;
             }
+            count++;
+           // console.log(count);
         }
 
     }
 
 
-    setTimeout(function () {
-        window.requestAnimationFrame(update);
-    }, 1);
+    if (count < 100) {
+        setTimeout(function () {
+            window.requestAnimationFrame(update);
+        }, 1);
+    }
 };
 
 
@@ -349,16 +418,17 @@ container.appendChild(frame);
 let population = []; // list of agents
 let shops = []
 const size = 50;
-const maxSize = Math.sqrt(50*50+50*50)
-const relativeTransportCost = 5;
+const maxSize = Math.sqrt(50 * 50 + 50 * 50)
+const relativeTransportCost = 2;
 let numberOfShops = 20;
 var weightPrice = 0.2;
 var weightDistance = 0.5;
 var weightHabit = 0.1;
 var weightPreferance = 0.2;
-var random = 1;
+var random = 0.1;
 
 const d = new Date();
 let time = d.getTime();
-setup(300)
+let count = 0
+setup(50 * 50)
 update()
