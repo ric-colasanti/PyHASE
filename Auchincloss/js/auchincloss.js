@@ -102,21 +102,21 @@ class Shop {
     distance(person) {
         let dx = Math.abs(this.pos.xPos - person.pos.xPos)
         let dy = Math.abs(this.pos.yPos - person.pos.yPos)
-        if (dy > size / 2) {
-            dy = size - dy
-        }
-        if (dx > size / 2) {
-            dx = size - dx
-        }
+        // if (dy > size / 2) {
+        //     dy = size - dy
+        // }
+        // if (dx > size / 2) {
+        //     dx = size - dx
+        // }
         const d = Math.sqrt((dx * dx) + (dy * dy))
         //console.log(d);
         if (d == 0) {
             return 1
         }
         if (person.income == 0) {
-            return 1 - (d / 130)
+            return 1 - (d / maxSize * relativeTransportCost)
         }
-        return 1 - d / 30
+        return 1 - (d / maxSize)
     }
 
     preferance(person) {
@@ -247,9 +247,9 @@ class Person {
             const r = Math.random() * random
             // select
             score = d + f + w + h + r
-            if (true) {
+            if (d<0) {
                 //console.log(shop.pos.xPos, shop.pos.yPos, d.toFixed(2), f.toFixed(2), w.toFixed(2), h.toFixed(2), r.toFixed(2), score.toFixed(2),best);               
-                console.log(score.toFixed(2),best);
+                console.log(d,score.toFixed(2),best);
             }
             if (score > best) {
                 best = score
@@ -349,6 +349,8 @@ container.appendChild(frame);
 let population = []; // list of agents
 let shops = []
 const size = 50;
+const maxSize = Math.sqrt(50*50+50*50)
+const relativeTransportCost = 5;
 let numberOfShops = 20;
 var weightPrice = 0.2;
 var weightDistance = 0.5;
