@@ -104,7 +104,13 @@ class Pos {
         return this.yPos - point.yPos;
     }
 }
-
+function toHTML(e) {
+    document.getElementById("shopid").innerHTML = "id:" + e.target.id
+    document.getElementById("shoptype").innerHTML = "type:" + shops[e.target.id].sClass;
+    document.getElementById("shopcustomers").innerHTML = "Total customers:" + shops[e.target.id].customers;
+    document.getElementById("lowcustomers").innerHTML = "Low customers:" + shops[e.target.id].lowCustomers;
+    document.getElementById("highcustomers").innerHTML = "High customers:" + shops[e.target.id].highCustomers;
+}
 
 class Shop {
     constructor(sClass, price, pos, id) {
@@ -115,26 +121,28 @@ class Shop {
         this.price = price;
         this.visits = 0
         this.pos = pos
-        this.draw()
-        this.shape.appendChild(this.circle)
-        this.circle.setAttribute("id",id)
-        this.circle.addEventListener('mouseover', function(e){
-            document.getElementById("shopid").innerHTML = id
-            document.getElementById("shoptype").innerHTML = shops[e.target.id].sClass;           
-            document.getElementById("shopcustomers").innerHTML = shops[e.target.id].customers;
-        })
-        this.shape.appendChild(this.arc1)
-        this.shape.appendChild(this.arc2)
-    }
-    data(){
-        console.log(rndInt(20),this.sClass);
-    }
-
-    draw() {
+        this.arc1 = SVG("path");
+        this.arc2 = SVG("path");
         this.shape = SVG("g")
         this.highArc = SVG("path")
         this.lowArc = SVG("path")
         this.circle = SVG("circle")
+        this.draw()
+        this.shape.appendChild(this.circle)
+        this.circle.setAttribute("id", id)
+        this.circle.addEventListener('mouseover', function (e) {
+            toHTML(e)
+        })
+        this.shape.appendChild(this.arc1)
+        this.shape.appendChild(this.arc2)
+    }
+    data() {
+        console.log(rndInt(20), this.sClass);
+    }
+
+
+    draw() {
+
         this.circle.setAttribute("cx", this.pos.xPos);
         this.circle.setAttribute("cy", this.pos.yPos);
         this.circle.setAttribute("r", 15);
@@ -144,21 +152,24 @@ class Shop {
             this.circle.setAttribute("fill", "rgba(0,0,255,0.4)");
         }
         this.circle.setAttribute("stroke-width", 3)
-        // if (this.price == 0) {
-        //     this.circle.setAttribute("stroke", "rgba(255,0,0,0.9)");
-        // } else {
-        //     this.circle.setAttribute("stroke", "rgba(0,0,255,0.9)");
-        // }
-        this.arc1 = SVG("path");
+        let w = 0
+        let le = 180
+        if (this.customers > 0) {
+            w = 3
+            le = this.lowCustomers/this.customers * 360
+        }
+
         this.arc1.setAttribute("stroke", "rgba(255,0,0,0.8)")
-        this.arc1.setAttribute("stroke-width", 3)
+        this.arc1.setAttribute("stroke-width", w)
         this.arc1.setAttribute("fill", "none")
-        this.arc1.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, 0, 250));
-        this.arc2 = SVG("path");
+        this.arc1.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, 0, le));
+
         this.arc2.setAttribute("stroke", "rgba(0,0,255,0.8)")
-        this.arc2.setAttribute("stroke-width", 3)
+        this.arc2.setAttribute("stroke-width", w)
         this.arc2.setAttribute("fill", "none")
-        this.arc2.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, 250, 360));
+        this.arc2.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, le, 360));
+
+
 
     }
     distance(person) {
@@ -342,9 +353,9 @@ var setup = function (populationNumber) {
         const xPos = rndInt(size - 2) + 2;
         const yPos = rndInt(size - 2) + 2;
         const target = new Pos(xPos * 10, yPos * 10)
-        const shop = new Shop(shopType, price, target,i)
+        const shop = new Shop(shopType, price, target, i)
         shops.push(shop)
-        
+
     }
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
@@ -365,7 +376,7 @@ var setup = function (populationNumber) {
             population.push(person)
         }
     }
-    for(let i =0; i<shops.length;i++){
+    for (let i = 0; i < shops.length; i++) {
         frame.append(shops[i].shape);
     }
 }
@@ -384,18 +395,26 @@ var update = function () {
         }
         if (stoped == true) {
             let length = population.length;
-            for(let i=0; i<shops.length;i++){
-                shops[i].customers=0
+            for (let i = 0; i < shops.length; i++) {
+                shops[i].customers = 0;
+                shops[i].highCustomers = 0;
+                shops[i].lowCustomers = 0;
             }
             for (let i = 0; i < length; i++) {
                 let person = population[i]
                 person.setShop(shops);
                 person.shop.customers++;
+                if (person.sClass == 1) {
+                    person.shop.highCustomers++;
+                } else {
+                    person.shop.lowCustomers++;
+                }
             }
             count++;
-           // console.log(count);
+            for (let i = 0; i < shops.length; i++) {
+                shops[i].draw()
+            }
         }
-
     }
 
 
@@ -417,10 +436,10 @@ container.appendChild(frame);
 
 let population = []; // list of agents
 let shops = []
-const size = 50;
-const maxSize = Math.sqrt(50 * 50 + 50 * 50)
+const size = 40;
+const maxSize = Math.sqrt(size*size+size*size)
 const relativeTransportCost = 2;
-let numberOfShops = 20;
+let numberOfShops = 8;
 var weightPrice = 0.2;
 var weightDistance = 0.5;
 var weightHabit = 0.1;
