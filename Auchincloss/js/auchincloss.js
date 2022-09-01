@@ -242,8 +242,8 @@ class Person {
         }
         this.home.setAttribute('x', this.pos.xPos);
         this.home.setAttribute('y', this.pos.yPos);
-        this.home.setAttribute('height', '10');
-        this.home.setAttribute('width', '10');
+        this.home.setAttribute('height', 10);
+        this.home.setAttribute('width', 10);
     }
 
     setTarget(target) {
@@ -427,8 +427,8 @@ var update = function () {
 
 
 var frame = SVG("svg");
-frame.setAttribute("width", "500");
-frame.setAttribute("height", "500");
+frame.setAttribute("width", "400");
+frame.setAttribute("height", "400");
 frame.setAttribute("border-style", "solid");
 frame.setAttribute("id", "svg02");
 var container = document.getElementById("display");
@@ -449,5 +449,5 @@ var random = 0.1;
 const d = new Date();
 let time = d.getTime();
 let count = 0
-setup(50 * 50)
+setup(40 * 40)
 update()
