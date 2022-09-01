@@ -305,7 +305,7 @@ class Person {
         let choice = null;
         for (let i = 0; i < length; i++) {
             const shop = shops[i]
-            // distance weight 0.5
+            // distance 
             const d = shop.distance(this) * weightDistance
             // food preferance
             const f = shop.preferance(this) * weightPreferance
@@ -440,11 +440,11 @@ const size = 40;
 const maxSize = Math.sqrt(size*size+size*size)
 const relativeTransportCost = 2;
 let numberOfShops = 8;
-var weightPrice = 0.2;
-var weightDistance = 0.5;
+var weightPrice = 0.8;
+var weightDistance = 0.2;
 var weightHabit = 0.1;
 var weightPreferance = 0.2;
-var random = 0.1;
+var random = 0.3;
 
 const d = new Date();
 let time = d.getTime();
