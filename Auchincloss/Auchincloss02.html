@@ -1,41 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Latest compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Auchincloss</title>
-  </head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
-  <body>
-    <div class="container" style="margin-top: 80px">
-      <div class="row">
-        <div class="col-sm-8">
-          <div id="display"></div>
+  <title>Auchincloss</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Auchincloss</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#model">Model</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="margin-top: 80px">
+    <!-- <a href="#test">test</a>  -->
+    <h2>Brief introductory guide to agent-based modeling and an illustration from urban health research</h2>
+    <div class="ref">Auchincloss, Amy H., and Leandro Martin Totaro Garcia. "Brief introductory guide to agent-based
+      modeling and an illustration from urban health research." Cadernos de saude publica 31 (2015): 65-78.</div>
+    <br>
+    <div class="row">
+      <div class="col-sm-7">
+        <div id="display"></div>
+      </div>
+      <div class="col-sm-5>
+          <div class=" form-check">
+        <div class="slidecontainer">
+          <div class="row">
+            <div class="col">
+              Price
+            </div>
+            <div class="col">
+              <input type="range" min="0" max="100" value="20" class="slider" id="price" />
+            </div>
+            <div class="col">
+              <span id="pricelable">0</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              Distance
+            </div>
+            <div class="col">
+              <input type="range" min="0" max="100" value="50" class="slider" id="distance" />
+            </div>
+            <div class="col">
+              <span id="distancelable">0</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              Habit
+            </div>
+            <div class="col">
+              <input type="range" min="0" max="100" value="10" class="slider" id="habit" />
+            </div>
+            <div class="col">
+              <span id="habitlable">0</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">Food Preferance</div>
+            <div class="col">
+              <input type="range" min="0" max="100" value="20" class="slider" id="preference" />
+            </div>
+            <div class="col">
+              <span id="preferencelable">0</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">Noise</div>
+            <div class="col">
+              <input type="range" min="0" max="100" value="20" class="slider" id="noise" />
+            </div>
+            <div class="col">
+              <span id="noiselable">0</span>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-4">
-          <div id="shopid"></div>
-          <div id="shoptype"></div>
-          <div id="shopcustomers"></div>
-          <div id="lowcustomers"></div>
-          <div id="highcustomers"></div>
-        </div>
+        <button class="btn btn-primary tablinks" onclick="setup()">Reset</button>
+
+
+        <br>
+        <br>
+        <br>
+        <div id="shopid">Click moues over shop to see information</div>
+        <div id="shoptype"></div>
+        <div id="shopprice"></div>
+        <div id="shopcustomers"></div>
+        <div id="lowcustomers"></div>
+        <div id="highcustomers"></div>
       </div>
     </div>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/auchincloss.js"></script>
+  </div>
+  </div>
+  <div class="container" style="margin-top: 80px">
+    <h2>
+      Why is this a good example?
+    </h2>
+    <p>This is an excellent example of using modelling to ask “what if” question of aspects of individual behaviour
+      that would be very difficult to replicate with a real population. In this case the positioning of food outlets.</p>
+      <p>This is a model of the inequalities in diet in the context of urban residential segregation. It has been used by
+      Auchincloss and Garcia as an example of how to create an Agent Based Model (ABM) to address complex Non
+      Communicable Disease(NDC) problems. The model is used as an introductory guide to the philosophy and practices of
+      ABMs and is used to illustrate why ABMs are a good fit for NDC investigation. The paper describes very clearly how
+      to take descriptions of individual behaviour and incorporate them into an ABM framework and run “what if “
+      experiments with it.
+    <h2>What is the NCD prevention challenge being addressed?</h2>
+    <p>This model investigates  the inequalities in diet in the context of urban residential segregation</p>
+    <p>One of the contributory factors to obesity and obesity related health conditions and illness is the high consumption of nutrient-poor energy-dense foods. It has been shown in numerous population studies that there is a higher prevalence of nutrient-poor energy-dense foods in the diets of lower income families. It has also been shown that one of the contributing factors to this difference in diet quality is access to healthy food outlets. It has long been recognised that urban landscapes are influenced by residential  segregation by both economic and ethnic factors and that there is a marked difference in resources and services between these areas. ( see the model by Thomas Schelling included in this series for an abm model of segregation ). It has been shown that lower income neighbourhoods have far fewer  outlets that provide healthy foods. Auchincloss and Garcia model looks at the role of economic segregation on food outlet distribution and looks at possible “policy levers” that may be used to counteract this. 
+    </p>
+    <h2>How is ABM suited to address this challenge?</h2>
+    <p>As is demonstrated by the Schelling model segregation and an individual's response to it is a function of the spatial location of populations. The nature of the spatial location of the individuals is governed by local factors and tends to be heterogeneous. By that we mean that the spatial pattern of the population tends not to a smooth gradation but tends to be a more patchy pattern. This type of spatial distribution is very hard to be incorporated in traditional mathematical or statistical models but is very easy to implement with an Agent Based Model (ABM). In this model we are mainly looking at the decisions that outlets make on their location, and food and price. The rule based nature of ABMs makes construction of a shop based model both simpler and transparent.</p>
+    <h2>What are the key components of the model?</h2>
+    <p>The simulation recreated here models a population of individual agents (people) that are
+      represented as different coloured dots on the grid. Each agent can be in one of three weight states:
+      healthy weight (<span style="color:green;"" >green</span>)over weight (<span style=" color:blue;"">blue</span>)
+      and obese (<span style="color:red;"" >red</span>). In this version of the Bhar model each agent occupies an individual space on a 40 by 40 grid. Each agent has a social network consisting of the agent’s eight immediate neighbours on the grid. As the model runs, at each iteration step an agent will change its weight state to match that of the majority of its social network neighbours (i.e. the surrounding agents on the grid).</p>
+              <p>Because the agents are linked together in a grid-like network, it means that each agent has two friends in common with every other agent in their social network, although note that these will be two different friends for each agent within the social network. This results in a network that has a high clustering coefficient with agents likely to take on the weight-state of their neighbours . The effect of this can be seen in the relatively stable clustering of weight type when the simulation is run. The number of common friends, and thus the clustering coefficient can be reduced by adding random links within the model so that each agent is also connected to other agents who are not next to them in the grid. </p>
+          <h2>How does the model work?</h2>
+          <p>Click the Setup button, which will assign each agent to an individual space on the 40 by 40
+                        grid. Each agent then makes a friendship link with its eight closest neighbours. Additional
+                        friendship links can be made to random members of the population. The number of such links
+                        is controlled by the random links slider. The top three sliders in the model (Healthy, Over,
+                        and Obese) determine the proportion of the population assigned to one of the three weight
+                        states at the model setup: healthy weight(<span
+                          style=" color:green;"">green</span>) over weight (<span style=" color:blue;"">blue</span>)
+                        and obese (<span style=" color:red;"">red</span>).</p>
+    <p>To run the model, click on the Run button. The model will run until there is no change in the population or until
+      you click the stop button. The speed the simulation runs at can be altered with the Speed slider. You can change
+      the initial conditions by changing the values of the sliders and then clicking the Setup followed by the Run
+      button</p>
+    <p>If you run the model a few times you will note that the outcomes will not always be the same. This is because the
+      initial distribution of agents and types has a random element in it. </p>
+    <p>The aim of the model is to demonstrate the effect that social network structure has on population behaviour. Try
+      running the model a few times after making each of the following adjustments:</p>
 
-  </body>
+    <h6>&#9679 No random links between agents</h6>
+    <p>With no random links, there are many common friends and you can see strong clustering in weight behaviours.
+      Friends influence friends and where there are common friends, a group behaviour is reinforced.</p>
+
+    <h6>&#9679 Select Lock 50 healthy</h6>
+    <p>When you choose 50 healthy people and lock their weight type to being constant for all of the simulation the
+      group reinforcement can be seen more clearly. These healthy individuals act as group centres and help maintain
+      healthy group behaviour.</p>
+
+    <h6>&#9679 Increase the number of random links between agents</h6>
+    <p>You see that group cohesion and clustering coefficient is reduced by adding random links and the effect of
+      locking in 50 individuals is greatly reduced.</p>
+    <h2>What are the implications of these findings for policy or practice?</h2>
+    <p>This is an abstract model: people don't vote with their friends as to what weight
+      they should be, and social networks are not as uniform in real life as they are in
+      this version of the Bhar model. Also, fixing a set number of people at a healthy
+      weight will not solve the obesity epidemic. What this model does show is the
+      qualitative effect that social networks have on group behaviour and this is just the
+      type of behaviour documented by Christakis and Fowler. The model presented here is
+      just one version of the models outlined in the full Bhar et al paper where the
+      authors explore a wider range of social network structures and differing methods
+      that influence the majority state of each agent’s social network neighbours.</p>
+    <p>What this model and the Bhar et al paper show is that weight regulation is not
+      solely an individual act and that any intervention to help people regulate their
+      weight needs to take social connections into account. One of the interventions
+      looked at in the Bhar et al paper is dieting with friends. More realistic models
+      have been created from both the Bhar et al and the Christakis and Fowler papers.,
+      For example Giabbanelli et al. applied network theory to generate artificial social
+      networks. They include a simple model of human metabolism and simulated how
+      individuals influence each other with respect to food consumption and physical
+      activity. They applied their model to both synthetic and real-world populations and
+      demonstrated the importance of the structural properties of each individual’s social
+      network on the distribution of body mass and obesity at the population level. In
+      another example by Shi et al a networked ABM was created with an age and height
+      structured metabolic model to investigate weight loss interventions in a real
+      Chinese population.</p>
+    <div class="card-body">
+      <p>[1]Christakis, Nicholas A., and James H. Fowler. "The spread of obesity in a large social
+        network over 32 years." New England journal of medicine 357.4 (2007): 370-379.</p>
+      <p>[2]Christakis, Nicholas A., and James H. Fowler. Connected: The surprising power of our social networks and how
+        they shape our lives. Little, Brown Spark, 2009.</p>
+      <p>[3]Giabbanelli, Philippe J., et al. "Modeling the influence of social networks and
+        environment on energy balance and obesity." Journal of Computational Science 3.1-2
+        (2012): 17-27.</p>
+      <p>[4]Mahmood, Syed S., et al. "The Framingham Heart Study and the epidemiology of
+        cardiovascular disease: a historical perspective." The lancet 383.9921 (2014): 999-1008.
+      </p>
+      <p>[5]Shi, Liuyan, Liang Zhang, and Yun Lu. "Evaluating social network-based weight loss
+        interventions in Chinese population: An agent-based simulation."Plos one 15.8 (2020):
+        e0236716.</p>
+    </div>
+
+  </div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/auchincloss.js"></script>
+
+</body>
+
 </html>

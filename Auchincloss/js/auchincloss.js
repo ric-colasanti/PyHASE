@@ -6,6 +6,38 @@ function SVG(elementName) {
     );
 }
 
+const HIGH = 0;
+const LOW = 1;
+
+var numberOfShops = 10;
+var weightPrice = 0.2;
+var weightDistance = 0.5;
+var weightHabit = 0.1;
+var weightPreference = 0.2;
+var random = 0.1;
+
+function setVals() {
+    weightPrice = Number(document.getElementById("price").value);
+    weightDistance = Number(document.getElementById("distance").value);
+    weightHabit = Number(document.getElementById("habit").value);
+    weightPreference = Number(document.getElementById("preference").value);
+    random = Number(document.getElementById("noise").value) / 100;
+    total = weightPrice + weightDistance + weightHabit + weightPreference;
+    weightPrice = weightPrice / total
+    weightDistance = weightDistance / total
+    weightHabit = weightHabit / total
+    weightPreference = weightPreference / total
+    // console.log(weightPrice , weightDistance , weightHabit , weightPreference,total);
+    
+    document.getElementById("pricelable").innerHTML = parseFloat(weightPrice).toFixed(2).toLocaleString()
+    document.getElementById("distancelable").innerHTML = parseFloat(weightDistance).toFixed(2).toLocaleString()
+    document.getElementById("habitlable").innerHTML = parseFloat(weightHabit).toFixed(2).toLocaleString()
+    document.getElementById("preferencelable").innerHTML = parseFloat(weightPreference).toFixed(2).toLocaleString()
+    document.getElementById("noiselable").innerHTML = parseFloat(random).toFixed(2).toLocaleString()
+}
+
+
+setVals()
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
 
@@ -106,13 +138,19 @@ class Pos {
 }
 function toHTML(e) {
     document.getElementById("shopid").innerHTML = "id:" + e.target.id
-    document.getElementById("shoptype").innerHTML = "type:" + shops[e.target.id].sClass;
+    document.getElementById("shoptype").innerHTML = "type:" + shops[e.target.id].getShopType();
+    document.getElementById("shopprice").innerHTML = "price:" + shops[e.target.id].getShopPrice();
     document.getElementById("shopcustomers").innerHTML = "Total customers:" + shops[e.target.id].customers;
     document.getElementById("lowcustomers").innerHTML = "Low customers:" + shops[e.target.id].lowCustomers;
     document.getElementById("highcustomers").innerHTML = "High customers:" + shops[e.target.id].highCustomers;
 }
 
 class Shop {
+    // lowPrice = 0
+    // highPrice =  1
+    // convenience = 0
+    // healthy = 1
+
     constructor(sClass, price, pos, id) {
         this.customers = 0
         this.sClass = sClass;
@@ -140,6 +178,20 @@ class Shop {
         console.log(rndInt(20), this.sClass);
     }
 
+    getShopType(){
+        if(this.sClass==1){
+            return " Healthy foods"
+        }
+        return " Convenience foods"
+    }
+
+    getShopPrice(){
+        if (this.price==1){
+            return "High end foods"
+        }
+        return " Budget foods"
+    }
+
 
     draw() {
 
@@ -147,10 +199,17 @@ class Shop {
         this.circle.setAttribute("cy", this.pos.yPos);
         this.circle.setAttribute("r", 15);
         if (this.sClass == 0) {
-            this.circle.setAttribute("fill", "rgba(255,0,0,0.4)");
+            if(this.price ==1){
+                this.circle.setAttribute("fill", "rgba(255,0,0,0.4)");
+            }else{
+                this.circle.setAttribute("fill", "rgba(255,255,0,0.4)");
+            }
         } else {
-            this.circle.setAttribute("fill", "rgba(0,0,255,0.4)");
-        }
+            if(this.price ==1){
+                this.circle.setAttribute("fill", "rgba(0,0,255,0.4)");
+            }else{
+                this.circle.setAttribute("fill", "rgba(0,255,255,0.4)");
+            }    }
         this.circle.setAttribute("stroke-width", 3)
         let w = 0
         let le = 180
@@ -185,17 +244,20 @@ class Shop {
         return 1 - (d / maxSize)
     }
 
-    preferance(person) {
+    preference(person) {
+        // if shop is healthy then return the persons food type preference else 1- persons food preference 
         if (this.type == 1) {
-            return person.preferance
+            return person.preference
         }
-        return 1 - person.preferance
+        return 1 - person.preference
     }
 
     priceTest(person) {
+        // if shop low price then return 1
         if (this.price == 0) {
-            return weightPrice
+            1
         }
+        // if shop high price then return 0.8 if person is high income 0.1 if person is low income
         if (person.income == 0) {
             return 0.1
         }
@@ -204,7 +266,7 @@ class Shop {
 }
 
 class Person {
-    constructor(sClass, preferance, pos) {
+    constructor(sClass, preference, pos) {
         this.sClass = sClass;
         this.shape = SVG("g")
         this.poly = SVG("polygon");
@@ -233,7 +295,7 @@ class Person {
         this.deg = 0;
         this.atTarget = false;
         this.previousVisits = new FILOSet(4)
-        this.preferance = preferance
+        this.preference = preference
         this.home = SVG("rect")
         if (this.sClass == 0) {
             this.home.setAttribute("fill", "rgba(255,0,0,0.3)");
@@ -307,10 +369,10 @@ class Person {
             const shop = shops[i]
             // distance 
             const d = shop.distance(this) * weightDistance
-            // food preferance
-            const f = shop.preferance(this) * weightPreferance
+            // food preference
+            const f = shop.preference(this) * weightPreference
             // price
-            const w = shop.priceTest(this) * weightPrice
+            const w = shop.priceTest(this) 
             // habit
             const lastVisit = this.previousVisits.lastVisit(shop)
             let h = 0
@@ -345,6 +407,14 @@ class Person {
 var setup = function (populationNumber) {
     population = []
     shops = []
+    frame = SVG("svg");
+frame.setAttribute("width", "400");
+frame.setAttribute("height", "400");
+frame.setAttribute("border-style", "solid");
+frame.setAttribute("id", "svg02");
+container = document.getElementById("display");
+container.innerHTML = "";
+container.append(frame);
     // create shops random placement random type
     for (let i = 0; i < numberOfShops; i++) {
 
@@ -384,6 +454,7 @@ var setup = function (populationNumber) {
 var update = function () {
     const d = new Date();
     let stoped = false
+    setVals();
     if (d.getTime() - time > 1000) { /// delay update
         stoped = true
         for (let i = 0; i < population.length; i++) {
@@ -439,12 +510,12 @@ let shops = []
 const size = 40;
 const maxSize = Math.sqrt(size*size+size*size)
 const relativeTransportCost = 2;
-let numberOfShops = 8;
-var weightPrice = 0.8;
-var weightDistance = 0.2;
-var weightHabit = 0.1;
-var weightPreferance = 0.2;
-var random = 0.3;
+// let numberOfShops = 8;
+// var weightPrice = 0.8;
+// var weightDistance = 0.2;
+// var weightHabit = 0.1;
+// var weightPreference = 0.2;
+// var random = 0.3;
 
 const d = new Date();
 let time = d.getTime();

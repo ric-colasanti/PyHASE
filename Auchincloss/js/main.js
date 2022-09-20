@@ -21,7 +21,7 @@ function setVals() {
     weightDistance = weightDistance / total
     weightHabit = weightHabit / total
     weightPreferance = weightPreferance / total
-    console.log(weightPrice,weightDistance,weightHabit,weightPreferance);
+    // console.log(weightPrice,weightDistance,weightHabit,weightPreferance);
 }
 
 const popMap = makeArray(50, 50, null)
