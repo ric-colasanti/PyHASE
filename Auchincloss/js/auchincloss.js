@@ -9,12 +9,6 @@ function SVG(elementName) {
 const HIGH = 0;
 const LOW = 1;
 
-var numberOfShops = 10;
-var weightPrice = 0.2;
-var weightDistance = 0.5;
-var weightHabit = 0.1;
-var weightPreference = 0.2;
-var random = 0.1;
 
 function setVals() {
     weightPrice = Number(document.getElementById("price").value);
@@ -232,16 +226,16 @@ class Shop {
 
     }
     distance(person) {
-        let dx = Math.abs(this.pos.xPos / 10 - person.pos.xPos / 10)
-        let dy = Math.abs(this.pos.yPos / 10 - person.pos.yPos / 10)
+        let dx = Math.abs(this.pos.xPos - person.pos.xPos )
+        let dy = Math.abs(this.pos.yPos - person.pos.yPos )
         const d = Math.sqrt((dx * dx) + (dy * dy))
         if (d == 0) {
             return 1
         }
         if (person.income == 0) {
-            return 1 - (d / maxSize * relativeTransportCost)
+            return 1 - (d / maxSize * 10)
         }
-        return 1 - (d / maxSize)
+        return 1 - (d / maxSize*10)
     }
 
     preference(person) {
@@ -370,20 +364,20 @@ class Person {
             // distance 
             const d = shop.distance(this) * weightDistance
             // food preference
-            const f = shop.preference(this) * weightPreference
+            const f = 0//shop.preference(this) * weightPreference
             // price
-            const w = shop.priceTest(this) 
+            const w = 0//shop.priceTest(this) 
             // habit
-            const lastVisit = this.previousVisits.lastVisit(shop)
+            const lastVisit = 0//this.previousVisits.lastVisit(shop)
             let h = 0
-            if (lastVisit >= 0) {
-                h += (5 - lastVisit) / 5 * weightHabit
-            }
+            // if (lastVisit >= 0) {
+            //     h += (5 - lastVisit) / 5 * weightHabit
+            // }
 
             // noise
-            const r = Math.random() * random
+            // const r = Math.random() * random
             // select
-            score = d + f + w + h + r
+            score = d //+ f + w + h + r
 
             if (score > best) {
                 best = score
@@ -495,6 +489,14 @@ var update = function () {
         }, 1);
     }
 };
+
+var numberOfShops = 2;
+var weightPrice = 0.2;
+var weightDistance = 0.5;
+var weightHabit = 0.1;
+var weightPreference = 0.2;
+var random = 0.1;
+
 
 
 var frame = SVG("svg");
