@@ -423,6 +423,7 @@ container.append(frame);
     }
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
+            if(rndInt(20)<1){
             const pos = new Pos(x * 10, y * 10);
             const income = rndInt(2)
             let person = null
@@ -438,6 +439,7 @@ container.append(frame);
             person.draw()
             person.setTarget(shops[rndInt(shops.length)].pos)
             population.push(person)
+        }
         }
     }
     for (let i = 0; i < shops.length; i++) {
