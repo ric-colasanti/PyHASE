@@ -21,8 +21,7 @@ function setVals() {
     weightDistance = weightDistance / total
     weightHabit = weightHabit / total
     weightPreference = weightPreference / total
-    // console.log(weightPrice , weightDistance , weightHabit , weightPreference,total);
-    
+ 
     document.getElementById("pricelable").innerHTML = parseFloat(weightPrice).toFixed(2).toLocaleString()
     document.getElementById("distancelable").innerHTML = parseFloat(weightDistance).toFixed(2).toLocaleString()
     document.getElementById("habitlable").innerHTML = parseFloat(weightHabit).toFixed(2).toLocaleString()
@@ -161,7 +160,6 @@ class Shop {
         this.highArc = SVG("path")
         this.lowArc = SVG("path")
         this.circle = SVG("circle")
-        this.draw()
         this.shape.appendChild(this.circle)
         this.circle.setAttribute("id", id)
         this.circle.addEventListener('mouseover', function (e) {
@@ -169,20 +167,34 @@ class Shop {
         })
         this.shape.appendChild(this.arc1)
         this.shape.appendChild(this.arc2)
-    }
-    data() {
-        console.log(rndInt(20), this.sClass);
+        this.fill = "rgba(255,0,0,0.8)"
+        if (this.sClass == 0) {
+            if (this.price == 1) {
+                this.fill = "rgba(255,0,0,0.4)";
+            } else {
+                this.fill = "rgba(255,255,0,0.4)";
+            }
+        } else {
+            if (this.price == 1) {
+                this.fill = "rgba(0,0,255,0.4)";
+            } else {
+                this.fill = "rgba(0,255,255,0.4)";
+            }
+        }
+        this.draw()
+        
     }
 
-    getShopType(){
-        if(this.sClass==1){
+
+    getShopType() {
+        if (this.sClass == 1) {
             return " Healthy foods"
         }
         return " Convenience foods"
     }
 
-    getShopPrice(){
-        if (this.price==1){
+    getShopPrice() {
+        if (this.price == 1) {
             return "High end foods"
         }
         return " Budget foods"
@@ -194,31 +206,21 @@ class Shop {
         this.circle.setAttribute("cx", this.pos.xPos);
         this.circle.setAttribute("cy", this.pos.yPos);
         this.circle.setAttribute("r", 15);
-        if (this.sClass == 0) {
-            if(this.price ==1){
-                this.circle.setAttribute("fill", "rgba(255,0,0,0.4)");
-            }else{
-                this.circle.setAttribute("fill", "rgba(255,255,0,0.4)");
-            }
-        } else {
-            if(this.price ==1){
-                this.circle.setAttribute("fill", "rgba(0,0,255,0.4)");
-            }else{
-                this.circle.setAttribute("fill", "rgba(0,255,255,0.4)");
-            }    }
+
         this.circle.setAttribute("stroke-width", 3)
+        this.circle.setAttribute("fill", this.fill);
         let w = 0
         let le = 180
         if (this.customers > 0) {
             w = 3
-            le = this.lowCustomers/this.customers * 360
+            le = this.lowCustomers / this.customers * 360
         }
 
         this.arc1.setAttribute("stroke", "rgba(255,0,0,0.8)")
         this.arc1.setAttribute("stroke-width", w)
         this.arc1.setAttribute("fill", "none")
         this.arc1.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, 0, le));
-
+        
         this.arc2.setAttribute("stroke", "rgba(0,0,255,0.8)")
         this.arc2.setAttribute("stroke-width", w)
         this.arc2.setAttribute("fill", "none")
@@ -226,8 +228,9 @@ class Shop {
     }
 
     distance(person) {
-        let dx = Math.abs(this.pos.xPos - person.pos.xPos )
-        let dy = Math.abs(this.pos.yPos - person.pos.yPos )
+
+        let dx = Math.abs(this.pos.xPos - person.home.xPos)
+        let dy = Math.abs(this.pos.yPos - person.home.yPos)
         const d = Math.sqrt((dx * dx) + (dy * dy))
         if (d == 0) {
             return 1
@@ -235,7 +238,7 @@ class Shop {
         if (person.income == 0) {
             return 1 - (d / (maxSize * 10))
         }
-        return 1 - (d / (maxSize*10))
+        return 1 - (d / (maxSize * 10))
     }
 
     preference(person) {
@@ -290,16 +293,16 @@ class Person {
         this.atTarget = false;
         this.previousVisits = new FILOSet(4)
         this.preference = preference
-        this.home = SVG("rect")
+        this.homeSquare = SVG("rect")
         if (this.sClass == 0) {
-            this.home.setAttribute("fill", "rgba(255,0,0,0.3)");
+            this.homeSquare.setAttribute("fill", "rgba(255,0,0,0.3)");
         } else {
-            this.home.setAttribute("fill", "rgba(0,0,255,0.3)");
+            this.homeSquare.setAttribute("fill", "rgba(0,0,255,0.3)");
         }
-        this.home.setAttribute('x', this.pos.xPos);
-        this.home.setAttribute('y', this.pos.yPos);
-        this.home.setAttribute('height', 10);
-        this.home.setAttribute('width', 10);
+        this.homeSquare.setAttribute('x', this.pos.xPos);
+        this.homeSquare.setAttribute('y', this.pos.yPos);
+        this.homeSquare.setAttribute('height', 10);
+        this.homeSquare.setAttribute('width', 10);
     }
 
     setTarget(target) {
@@ -354,22 +357,22 @@ class Person {
         }
     }
 
+
     setShop(shops, workings = false) {
         let length = shops.length;
         let best = 0
-        let score = 0
-        let choice = null;
+        let choice
         for (let i = 0; i < length; i++) {
             const shop = shops[i]
             // distance 
             const d = shop.distance(this) * weightDistance
             // food preference
-            const f = 0//shop.preference(this) * weightPreference
+            //const f = 0//shop.preference(this) * weightPreference
             // price
-            const w = 0//shop.priceTest(this) 
+            //const w = 0//shop.priceTest(this) 
             // habit
-            const lastVisit = 0//this.previousVisits.lastVisit(shop)
-            let h = 0
+            //const lastVisit = 0//this.previousVisits.lastVisit(shop)
+            //let h = 0
             // if (lastVisit >= 0) {
             //     h += (5 - lastVisit) / 5 * weightHabit
             // }
@@ -377,7 +380,7 @@ class Person {
             // noise
             // const r = Math.random() * random
             // select
-            score = d //+ f + w + h + r
+            const score = d //+ f + w + h + r
 
             if (score > best) {
                 best = score
@@ -385,9 +388,7 @@ class Person {
             }
 
         }
-        if (workings) {
-            console.log(this.choice.xPos, this.choice.yPos, best.toFixed(2));
-        }
+
         if (choice != null) {
             this.shop = choice
             this.setTarget(this.shop.pos)
@@ -396,7 +397,7 @@ class Person {
     }
 }
 
-function reset(){
+function reset() {
     frame = SVG("svg");
     frame.setAttribute("width", "400");
     frame.setAttribute("height", "400");
@@ -438,11 +439,11 @@ var setup = function (populationNumber) {
                 person = new Person(1, pref, pos)
             }
             frame.append(person.shape);
-            frame.append(person.home);
+            frame.append(person.homeSquare);
             person.draw()
             person.setTarget(shops[rndInt(shops.length)].pos)
             population.push(person)
-        
+
         }
     }
     for (let i = 0; i < shops.length; i++) {
@@ -450,6 +451,27 @@ var setup = function (populationNumber) {
     }
 }
 
+var updateShop = function(){
+    for (let i = 0; i < shops.length; i++) {
+        shops[i].customers = 0;
+        shops[i].highCustomers = 0;
+        shops[i].lowCustomers = 0;
+    }
+    for (let i = 0; i < population.length; i++) {
+        let person = population[i]
+        person.setShop(shops);
+        person.shop.customers++;
+        if (person.sClass == 1) {
+            person.shop.highCustomers++;
+        } else {
+            person.shop.lowCustomers++;
+        }
+    }
+    count++;
+    for (let i = 0; i < shops.length; i++) {
+        shops[i].draw()
+    }
+}
 var update = function () {
     const d = new Date();
     let stoped = false
@@ -464,26 +486,7 @@ var update = function () {
             }
         }
         if (stoped == true) {
-            let length = population.length;
-            for (let i = 0; i < shops.length; i++) {
-                shops[i].customers = 0;
-                shops[i].highCustomers = 0;
-                shops[i].lowCustomers = 0;
-            }
-            for (let i = 0; i < length; i++) {
-                let person = population[i]
-                person.setShop(shops);
-                person.shop.customers++;
-                if (person.sClass == 1) {
-                    person.shop.highCustomers++;
-                } else {
-                    person.shop.lowCustomers++;
-                }
-            }
-            count++;
-            for (let i = 0; i < shops.length; i++) {
-                shops[i].draw()
-            }
+            updateShop()
         }
     }
 
