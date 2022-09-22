@@ -31,7 +31,7 @@ function setVals() {
 }
 
 
-setVals()
+
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
 
@@ -130,6 +130,8 @@ class Pos {
         return this.yPos - point.yPos;
     }
 }
+
+
 function toHTML(e) {
     document.getElementById("shopid").innerHTML = "id:" + e.target.id
     document.getElementById("shoptype").innerHTML = "type:" + shops[e.target.id].getShopType();
@@ -221,10 +223,8 @@ class Shop {
         this.arc2.setAttribute("stroke-width", w)
         this.arc2.setAttribute("fill", "none")
         this.arc2.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, le, 360));
-
-
-
     }
+
     distance(person) {
         let dx = Math.abs(this.pos.xPos - person.pos.xPos )
         let dy = Math.abs(this.pos.yPos - person.pos.yPos )
@@ -233,9 +233,9 @@ class Shop {
             return 1
         }
         if (person.income == 0) {
-            return 1 - (d / maxSize * 10)
+            return 1 - (d / (maxSize * 10))
         }
-        return 1 - (d / maxSize*10)
+        return 1 - (d / (maxSize*10))
     }
 
     preference(person) {
@@ -396,19 +396,22 @@ class Person {
     }
 }
 
-
+function reset(){
+    frame = SVG("svg");
+    frame.setAttribute("width", "400");
+    frame.setAttribute("height", "400");
+    frame.setAttribute("border-style", "solid");
+    frame.setAttribute("id", "svg02");
+    container = document.getElementById("display");
+    container.innerHTML = "";
+    container.append(frame);
+    setup()
+}
 
 var setup = function (populationNumber) {
     population = []
     shops = []
-    frame = SVG("svg");
-frame.setAttribute("width", "400");
-frame.setAttribute("height", "400");
-frame.setAttribute("border-style", "solid");
-frame.setAttribute("id", "svg02");
-container = document.getElementById("display");
-container.innerHTML = "";
-container.append(frame);
+
     // create shops random placement random type
     for (let i = 0; i < numberOfShops; i++) {
 
@@ -423,7 +426,7 @@ container.append(frame);
     }
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
-            if(rndInt(20)<1){
+
             const pos = new Pos(x * 10, y * 10);
             const income = rndInt(2)
             let person = null
@@ -439,7 +442,7 @@ container.append(frame);
             person.draw()
             person.setTarget(shops[rndInt(shops.length)].pos)
             population.push(person)
-        }
+        
         }
     }
     for (let i = 0; i < shops.length; i++) {
@@ -450,7 +453,7 @@ container.append(frame);
 var update = function () {
     const d = new Date();
     let stoped = false
-    setVals();
+    //setVals();
     if (d.getTime() - time > 1000) { /// delay update
         stoped = true
         for (let i = 0; i < population.length; i++) {
@@ -492,37 +495,3 @@ var update = function () {
     }
 };
 
-var numberOfShops = 2;
-var weightPrice = 0.2;
-var weightDistance = 0.5;
-var weightHabit = 0.1;
-var weightPreference = 0.2;
-var random = 0.1;
-
-
-
-var frame = SVG("svg");
-frame.setAttribute("width", "400");
-frame.setAttribute("height", "400");
-frame.setAttribute("border-style", "solid");
-frame.setAttribute("id", "svg02");
-var container = document.getElementById("display");
-container.appendChild(frame);
-
-let population = []; // list of agents
-let shops = []
-const size = 40;
-const maxSize = Math.sqrt(size*size+size*size)
-const relativeTransportCost = 2;
-// let numberOfShops = 8;
-// var weightPrice = 0.8;
-// var weightDistance = 0.2;
-// var weightHabit = 0.1;
-// var weightPreference = 0.2;
-// var random = 0.3;
-
-const d = new Date();
-let time = d.getTime();
-let count = 0
-setup(40 * 40)
-update()
