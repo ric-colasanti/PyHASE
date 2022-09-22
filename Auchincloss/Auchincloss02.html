@@ -93,7 +93,7 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary tablinks" onclick="setup()">Reset</button>
+        <button class="btn btn-primary tablinks" onclick="reset()">Reset</button>
 
 
         <br>
@@ -218,6 +218,44 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/auchincloss.js"></script>
 
+
+  <script>
+    var numberOfShops = 2;
+var weightPrice = 0.2;
+var weightDistance = 0.5;
+var weightHabit = 0.1;
+var weightPreference = 0.2;
+var random = 0.1;
+
+setVals()
+
+var frame = SVG("svg");
+frame.setAttribute("width", "400");
+frame.setAttribute("height", "400");
+frame.setAttribute("border-style", "solid");
+frame.setAttribute("id", "svg02");
+var container = document.getElementById("display");
+container.appendChild(frame);
+
+let population = []; // list of agents
+let shops = []
+const size = 40;
+const maxSize = Math.sqrt(size*size+size*size)
+const relativeTransportCost = 2;
+// let numberOfShops = 8;
+// var weightPrice = 0.8;
+// var weightDistance = 0.2;
+// var weightHabit = 0.1;
+// var weightPreference = 0.2;
+// var random = 0.3;
+
+const d = new Date();
+let time = d.getTime();
+let count = 0
+setup()
+
+update()
+  </script>
 </body>
 
 </html>
