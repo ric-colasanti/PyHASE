@@ -16,6 +16,8 @@ function setVals() {
     weightHabit = Number(document.getElementById("habit").value);
     weightPreference = Number(document.getElementById("preference").value);
     random = Number(document.getElementById("noise").value) / 100;
+    segragation = document.getElementById("segragation").checked;
+
     total = weightPrice + weightDistance + weightHabit + weightPreference;
     weightPrice = weightPrice / total
     weightDistance = weightDistance / total
@@ -161,6 +163,7 @@ class Shop {
         this.lowArc = SVG("path")
         this.circle = SVG("circle")
         this.shape.appendChild(this.circle)
+        this.id = id
         this.circle.setAttribute("id", id)
         this.circle.addEventListener('mouseover', function (e) {
             toHTML(e)
@@ -213,9 +216,8 @@ class Shop {
         let le = 180
         if (this.customers > 0) {
             w = 3
-            le = this.lowCustomers / this.customers * 360
+            le = this.lowCustomers / this.customers * 359
         }
-
         this.arc1.setAttribute("stroke", "rgba(255,0,0,0.8)")
         this.arc1.setAttribute("stroke-width", w)
         this.arc1.setAttribute("fill", "none")
@@ -224,7 +226,7 @@ class Shop {
         this.arc2.setAttribute("stroke", "rgba(0,0,255,0.8)")
         this.arc2.setAttribute("stroke-width", w)
         this.arc2.setAttribute("fill", "none")
-        this.arc2.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, le, 360));
+        this.arc2.setAttribute("d", describeArc(this.pos.xPos, this.pos.yPos, 15, le, 359));
     }
 
     distance(person) {
@@ -243,22 +245,38 @@ class Shop {
 
     preference(person) {
         // if shop is healthy then return the persons food type preference else 1- persons food preference 
-        if (this.type == 1) {
+        if (this.type == 0) {
             return person.preference
         }
         return 1 - person.preference
     }
 
     priceTest(person) {
-        // if shop low price then return 1
-        if (this.price == 0) {
-            1
-        }
+        if( person.sClass==0){
+            if ( this.price==0){
+                return 1
+            }else{
+                return 0.1
+            }
+        }else{
+            if ( this.price==0){
+                return 0.1
+            }else{
+                return 1
+            }
+       }
+        
         // if shop high price then return 0.8 if person is high income 0.1 if person is low income
-        if (person.income == 0) {
-            return 0.1
-        }
-        return 0.8
+        // if (person.sClass == 0) {
+        //     if (this.price == 0) {
+        //         1
+        //     }
+        //     return 0.1
+        // }
+        // if (this.price == 0) {
+        //     0.1
+        // }
+        // return 1
     }
 }
 
@@ -269,9 +287,9 @@ class Person {
         this.poly = SVG("polygon");
         this.poly.setAttribute("stroke", "black");
         if (this.sClass == 0) {
-            this.poly.setAttribute("fill", "rgba(255,0,0,0.5)");
+            this.poly.setAttribute("fill", "rgba(255,0,0,0.8)");
         } else {
-            this.poly.setAttribute("fill", "rgba(0,0,255,0.5)");
+            this.poly.setAttribute("fill", "rgba(0,0,255,0.8)");
         }
         let array = [
             [0, -10],
@@ -361,34 +379,39 @@ class Person {
     setShop(shops, workings = false) {
         let length = shops.length;
         let best = 0
-        let choice
+        let choice = shops[0]
         for (let i = 0; i < length; i++) {
-            const shop = shops[i]
+            let shop = shops[i]
+            //console.log("*",shop.id,shop.price);
             // distance 
-            const d = shop.distance(this) * weightDistance
+            let d = shop.distance(this) * weightDistance
             // food preference
-            //const f = 0//shop.preference(this) * weightPreference
+            let f = shop.preference(this) * weightPreference
             // price
-            //const w = 0//shop.priceTest(this) 
+            let w = shop.priceTest(this) * weightPrice
+
             // habit
-            //const lastVisit = 0//this.previousVisits.lastVisit(shop)
-            //let h = 0
-            // if (lastVisit >= 0) {
-            //     h += (5 - lastVisit) / 5 * weightHabit
-            // }
+            let lastVisit = this.previousVisits.lastVisit(shop)
+            let h = 0
+            if (lastVisit >= 0) {
+                 h += (5 - lastVisit) / 5 * weightHabit
+             }
 
             // noise
-            // const r = Math.random() * random
+            let r = Math.random() * random
             // select
-            const score = d //+ f + w + h + r
-
+            // if(this.sClass==0){
+            //     w=d
+            // }
+            let score = w + d +r + f + h//+ f + w + h + r
             if (score > best) {
                 best = score
                 choice = shop
             }
+            //console.log(shop.id,d,f,w);
 
         }
-
+        //console.log(this.sClass,best,choice.id);
         if (choice != null) {
             this.shop = choice
             this.setTarget(this.shop.pos)
@@ -406,13 +429,36 @@ function reset() {
     container = document.getElementById("display");
     container.innerHTML = "";
     container.append(frame);
+    //counter = 0
     setup()
+    update()
+}
+
+var placePerson = function(pos){
+    if(segragation){
+        if(pos.xPos<size*10/2){
+            const pref = Math.random() * 0.6
+            return new Person(0, pref, pos)
+        }
+        const pref = Math.random() * 0.6 + 0.4
+        return new Person(1, pref, pos)
+    }else{
+        const income = rndInt(2)
+        let person = null
+        if (income == 0) {
+            const pref = Math.random() * 0.6
+            return new Person(0, pref, pos)
+        } else {
+            const pref = Math.random() * 0.6 + 0.4
+            return new Person(1, pref, pos)
+        }
+    }
 }
 
 var setup = function (populationNumber) {
     population = []
     shops = []
-
+    count = 0;
     // create shops random placement random type
     for (let i = 0; i < numberOfShops; i++) {
 
@@ -429,15 +475,7 @@ var setup = function (populationNumber) {
         for (let y = 0; y < size; y++) {
 
             const pos = new Pos(x * 10, y * 10);
-            const income = rndInt(2)
-            let person = null
-            if (income == 0) {
-                const pref = Math.random() * 0.6
-                person = new Person(0, pref, pos)
-            } else {
-                const pref = Math.random() * 0.6 + 0.4
-                person = new Person(1, pref, pos)
-            }
+            person = placePerson(pos)
             frame.append(person.shape);
             frame.append(person.homeSquare);
             person.draw()
@@ -475,7 +513,6 @@ var updateShop = function(){
 var update = function () {
     const d = new Date();
     let stoped = false
-    //setVals();
     if (d.getTime() - time > 1000) { /// delay update
         stoped = true
         for (let i = 0; i < population.length; i++) {
@@ -487,6 +524,8 @@ var update = function () {
         }
         if (stoped == true) {
             updateShop()
+            console.log(count);
+            count++;
         }
     }
 

@@ -46,7 +46,7 @@
               Price
             </div>
             <div class="col">
-              <input type="range" min="0" max="100" value="20" class="slider" id="price" />
+              <input type="range" min="0" max="100" value="20" class="slider" id="price" onchange="setVals()" />
             </div>
             <div class="col">
               <span id="pricelable">0</span>
@@ -57,7 +57,7 @@
               Distance
             </div>
             <div class="col">
-              <input type="range" min="0" max="100" value="50" class="slider" id="distance" />
+              <input type="range" min="0" max="100" value="50" class="slider" id="distance" onchange="setVals()"/>
             </div>
             <div class="col">
               <span id="distancelable">0</span>
@@ -68,7 +68,7 @@
               Habit
             </div>
             <div class="col">
-              <input type="range" min="0" max="100" value="10" class="slider" id="habit" />
+              <input type="range" min="0" max="100" value="10" class="slider" id="habit"onchange="setVals()" />
             </div>
             <div class="col">
               <span id="habitlable">0</span>
@@ -77,7 +77,7 @@
           <div class="row">
             <div class="col">Food Preferance</div>
             <div class="col">
-              <input type="range" min="0" max="100" value="20" class="slider" id="preference" />
+              <input type="range" min="0" max="100" value="20" class="slider" id="preference" onchange="setVals()"/>
             </div>
             <div class="col">
               <span id="preferencelable">0</span>
@@ -86,13 +86,22 @@
           <div class="row">
             <div class="col">Noise</div>
             <div class="col">
-              <input type="range" min="0" max="100" value="20" class="slider" id="noise" />
+              <input type="range" min="0" max="100" value="20" class="slider" id="noise" onchange="setVals()" />
             </div>
             <div class="col">
               <span id="noiselable">0</span>
             </div>
           </div>
         </div>
+        <div>
+          <input type="radio" name="segragation" value="yes" id="segragation">
+          <label for="xs">segregated</label>
+      </div>
+      <div>
+          <input type="radio" name="segragation" value="no" id="un-segragation" checked = "true">
+          <label for="s">un-segregated</label>
+      </div>
+      <div>
         <button class="btn btn-primary tablinks" onclick="reset()">Reset</button>
 
 
@@ -226,6 +235,7 @@ var weightDistance = 0.5;
 var weightHabit = 0.1;
 var weightPreference = 0.2;
 var random = 0.1;
+var segragation = false;
 
 setVals()
 
