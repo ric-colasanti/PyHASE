@@ -10,12 +10,12 @@ const HIGH = 0;
 const LOW = 1;
 
 
-function setVals() {
+var setVals = function () {
     weightPrice = Number(document.getElementById("price").value);
     weightDistance = Number(document.getElementById("distance").value);
-    weightHabit = Number(document.getElementById("habit").value);
+    //weightHabit = Number(document.getElementById("habit").value);
     weightPreference = Number(document.getElementById("preference").value);
-    random = Number(document.getElementById("noise").value) / 100;
+    //random = Number(document.getElementById("noise").value) / 100;
     segragation = document.getElementById("segragation").checked;
 
     total = weightPrice + weightDistance + weightHabit + weightPreference;
@@ -26,9 +26,9 @@ function setVals() {
  
     document.getElementById("pricelable").innerHTML = parseFloat(weightPrice).toFixed(2).toLocaleString()
     document.getElementById("distancelable").innerHTML = parseFloat(weightDistance).toFixed(2).toLocaleString()
-    document.getElementById("habitlable").innerHTML = parseFloat(weightHabit).toFixed(2).toLocaleString()
+    //document.getElementById("habitlable").innerHTML = parseFloat(weightHabit).toFixed(2).toLocaleString()
     document.getElementById("preferencelable").innerHTML = parseFloat(weightPreference).toFixed(2).toLocaleString()
-    document.getElementById("noiselable").innerHTML = parseFloat(random).toFixed(2).toLocaleString()
+    //document.getElementById("noiselable").innerHTML = parseFloat(random).toFixed(2).toLocaleString()
 }
 
 
@@ -175,11 +175,11 @@ class Shop {
             if (this.price == 1) {
                 this.fill = "rgba(255,0,0,0.4)";
             } else {
-                this.fill = "rgba(255,255,0,0.4)";
+                this.fill = "rgba(255,0,255,0.4)";
             }
         } else {
             if (this.price == 1) {
-                this.fill = "rgba(0,0,255,0.4)";
+                this.fill = "rgba(0,255,0,0.4)";
             } else {
                 this.fill = "rgba(0,255,255,0.4)";
             }
@@ -382,7 +382,6 @@ class Person {
         let choice = shops[0]
         for (let i = 0; i < length; i++) {
             let shop = shops[i]
-            //console.log("*",shop.id,shop.price);
             // distance 
             let d = shop.distance(this) * weightDistance
             // food preference
@@ -408,10 +407,8 @@ class Person {
                 best = score
                 choice = shop
             }
-            //console.log(shop.id,d,f,w);
 
         }
-        //console.log(this.sClass,best,choice.id);
         if (choice != null) {
             this.shop = choice
             this.setTarget(this.shop.pos)
@@ -420,7 +417,7 @@ class Person {
     }
 }
 
-function reset() {
+var reset = function() {
     frame = SVG("svg");
     frame.setAttribute("width", "400");
     frame.setAttribute("height", "400");
@@ -429,7 +426,7 @@ function reset() {
     container = document.getElementById("display");
     container.innerHTML = "";
     container.append(frame);
-    //counter = 0
+    setVals()
     setup()
     update()
 }
@@ -524,7 +521,6 @@ var update = function () {
         }
         if (stoped == true) {
             updateShop()
-            console.log(count);
             count++;
         }
     }

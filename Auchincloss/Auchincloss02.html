@@ -63,7 +63,7 @@
               <span id="distancelable">0</span>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col">
               Habit
             </div>
@@ -73,7 +73,7 @@
             <div class="col">
               <span id="habitlable">0</span>
             </div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="col">Food Preferance</div>
             <div class="col">
@@ -83,7 +83,7 @@
               <span id="preferencelable">0</span>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col">Noise</div>
             <div class="col">
               <input type="range" min="0" max="100" value="20" class="slider" id="noise" onchange="setVals()" />
@@ -91,7 +91,7 @@
             <div class="col">
               <span id="noiselable">0</span>
             </div>
-          </div>
+          </div> -->
         </div>
         <div>
           <input type="radio" name="segragation" value="yes" id="segragation">
@@ -107,8 +107,22 @@
 
         <br>
         <br>
-        <br>
-        <div id="shopid">Click moues over shop to see information</div>
+        <div id="shopid">
+          <p>Click moues over shop to see information</p>
+          <svg height="130" width="250">
+            <circle cx="22" cy="22" r="10" stroke="red" stroke-width="0" fill="rgba(255,0,0,0.4)" />
+            <text x="50" y="29" fill="black">High cost convenience </text>
+            
+            <circle cx="22" cy="52" r="10" stroke="red" stroke-width="0" fill="rgba(255,0,255,0.4)" />
+            <text x="50" y="56" fill="black">Low cost convenience </text>
+
+            <circle cx="22" cy="82" r="10" stroke="red" stroke-width="0" fill="rgba(0,255,0,0.4)" />
+            <text x="50" y="86" fill="black">High cost healthy </text>
+
+            <circle cx="22" cy="112" r="10" stroke="red" stroke-width="0" fill="rgba(0,255,255,0.4)" />
+            <text x="50" y="116" fill="black">Low cost healthy </text>
+         </svg>
+        </div>
         <div id="shoptype"></div>
         <div id="shopprice"></div>
         <div id="shopcustomers"></div>
@@ -232,9 +246,9 @@
     var numberOfShops = 20;
 var weightPrice = 0.2;
 var weightDistance = 0.5;
-var weightHabit = 0.1;
+var weightHabit = 0.0;
 var weightPreference = 0.2;
-var random = 0.1;
+var random = 0.01;
 var segragation = false;
 
 setVals()
