@@ -1,69 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+    <title>Auchincloss</title>
+  </head>
 
-  <title>Auchincloss</title>
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Auchincloss</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#model">Model</a>
-          </li>
-        </ul>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Auchincloss</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#model">Model</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-  <div class="container" style="margin-top: 80px">
-    <!-- <a href="#test">test</a>  -->
-    <h2>Brief introductory guide to agent-based modeling and an illustration from urban health research</h2>
-    <div class="ref">Auchincloss, Amy H., and Leandro Martin Totaro Garcia. "Brief introductory guide to agent-based
-      modeling and an illustration from urban health research." Cadernos de saude publica 31 (2015): 65-78.</div>
-    <br>
-    <div class="row">
-      <div class="col-sm-7">
-        <div id="display"></div>
+    </nav>
+    <div class="container" style="margin-top: 80px">
+      <!-- <a href="#test">test</a>  -->
+      <h2>
+        Brief introductory guide to agent-based modeling and an illustration
+        from urban health research
+      </h2>
+      <div class="ref">
+        Auchincloss, Amy H., and Leandro Martin Totaro Garcia. "Brief
+        introductory guide to agent-based modeling and an illustration from
+        urban health research." Cadernos de saude publica 31 (2015): 65-78.
       </div>
-      <div class="col-sm-5>
-          <div class=" form-check">
-        <div class="slidecontainer">
-          <div class="row">
-            <div class="col">
-              Price
+      <br />
+      <div class="row">
+        <div class="col-sm-7">
+          <div id="display"></div>
+        </div>
+        <div class="col-sm-5>
+        <div class="form-check">
+          <div class="slidecontainer">
+            <div class="row">
+              <div class="col">Price</div>
+              <div class="col">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="20"
+                  class="slider"
+                  id="price"
+                  onchange="setVals()"
+                />
+              </div>
+              <div class="col">
+                <span id="pricelable">0</span>
+              </div>
             </div>
-            <div class="col">
-              <input type="range" min="0" max="100" value="20" class="slider" id="price" onchange="setVals()" />
+            <div class="row">
+              <div class="col">Distance</div>
+              <div class="col">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="50"
+                  class="slider"
+                  id="distance"
+                  onchange="setVals()"
+                />
+              </div>
+              <div class="col">
+                <span id="distancelable">0</span>
+              </div>
             </div>
-            <div class="col">
-              <span id="pricelable">0</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              Distance
-            </div>
-            <div class="col">
-              <input type="range" min="0" max="100" value="50" class="slider" id="distance" onchange="setVals()"/>
-            </div>
-            <div class="col">
-              <span id="distancelable">0</span>
-            </div>
-          </div>
-          <!-- <div class="row">
+            <!-- <div class="row">
             <div class="col">
               Habit
             </div>
@@ -74,16 +99,24 @@
               <span id="habitlable">0</span>
             </div>
           </div> -->
-          <div class="row">
-            <div class="col">Food Preferance</div>
-            <div class="col">
-              <input type="range" min="0" max="100" value="20" class="slider" id="preference" onchange="setVals()"/>
+            <div class="row">
+              <div class="col">Food Preferance</div>
+              <div class="col">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="20"
+                  class="slider"
+                  id="preference"
+                  onchange="setVals()"
+                />
+              </div>
+              <div class="col">
+                <span id="preferencelable">0</span>
+              </div>
             </div>
-            <div class="col">
-              <span id="preferencelable">0</span>
-            </div>
-          </div>
-          <!-- <div class="row">
+            <!-- <div class="row">
             <div class="col">Noise</div>
             <div class="col">
               <input type="range" min="0" max="100" value="20" class="slider" id="noise" onchange="setVals()" />
@@ -92,144 +125,253 @@
               <span id="noiselable">0</span>
             </div>
           </div> -->
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="segragation"
+              value="yes"
+              id="segragation"
+            />
+            <label for="xs">segregated</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="segragation"
+              value="no"
+              id="un-segragation"
+              checked="true"
+            />
+            <label for="s">un-segregated</label>
+          </div>
+          <div>
+            <button class="btn btn-primary tablinks" onclick="reset()">
+              Reset
+            </button>
+
+            <br />
+            <br />
+            <div id="shopid">
+              <p>Click moues over shop to see information</p>
+              <svg height="130" width="250">
+                <circle
+                  cx="22"
+                  cy="22"
+                  r="10"
+                  stroke="red"
+                  stroke-width="0"
+                  fill="rgba(255,0,0,0.4)"
+                />
+                <text x="50" y="29" fill="black">High cost convenience</text>
+
+                <circle
+                  cx="22"
+                  cy="52"
+                  r="10"
+                  stroke="red"
+                  stroke-width="0"
+                  fill="rgba(255,0,255,0.4)"
+                />
+                <text x="50" y="56" fill="black">Low cost convenience</text>
+
+                <circle
+                  cx="22"
+                  cy="82"
+                  r="10"
+                  stroke="red"
+                  stroke-width="0"
+                  fill="rgba(0,255,0,0.4)"
+                />
+                <text x="50" y="86" fill="black">High cost healthy</text>
+
+                <circle
+                  cx="22"
+                  cy="112"
+                  r="10"
+                  stroke="red"
+                  stroke-width="0"
+                  fill="rgba(0,255,255,0.4)"
+                />
+                <text x="50" y="116" fill="black">Low cost healthy</text>
+              </svg>
+            </div>
+            <div id="shoptype"></div>
+            <div id="shopprice"></div>
+            <div id="shopcustomers"></div>
+            <div id="lowcustomers"></div>
+            <div id="highcustomers"></div>
+          </div>
         </div>
-        <div>
-          <input type="radio" name="segragation" value="yes" id="segragation">
-          <label for="xs">segregated</label>
-      </div>
-      <div>
-          <input type="radio" name="segragation" value="no" id="un-segragation" checked = "true">
-          <label for="s">un-segregated</label>
-      </div>
-      <div>
-        <button class="btn btn-primary tablinks" onclick="reset()">Reset</button>
-
-
-        <br>
-        <br>
-        <div id="shopid">
-          <p>Click moues over shop to see information</p>
-          <svg height="130" width="250">
-            <circle cx="22" cy="22" r="10" stroke="red" stroke-width="0" fill="rgba(255,0,0,0.4)" />
-            <text x="50" y="29" fill="black">High cost convenience </text>
-            
-            <circle cx="22" cy="52" r="10" stroke="red" stroke-width="0" fill="rgba(255,0,255,0.4)" />
-            <text x="50" y="56" fill="black">Low cost convenience </text>
-
-            <circle cx="22" cy="82" r="10" stroke="red" stroke-width="0" fill="rgba(0,255,0,0.4)" />
-            <text x="50" y="86" fill="black">High cost healthy </text>
-
-            <circle cx="22" cy="112" r="10" stroke="red" stroke-width="0" fill="rgba(0,255,255,0.4)" />
-            <text x="50" y="116" fill="black">Low cost healthy </text>
-         </svg>
-        </div>
-        <div id="shoptype"></div>
-        <div id="shopprice"></div>
-        <div id="shopcustomers"></div>
-        <div id="lowcustomers"></div>
-        <div id="highcustomers"></div>
       </div>
     </div>
+    <div class="container" style="margin-top: 80px">
+      <h2>Why is this a good example?</h2>
+      <p>
+        This is an excellent example of using modelling to ask “what if”
+        question of aspects of individual behaviour that would be very difficult
+        to replicate with a real population. In this case the positioning of
+        food outlets.
+      </p>
+      <p>
+        This is a model of the inequalities in diet in the context of urban
+        residential segregation. It has been used by Auchincloss and Garcia as
+        an example of how to create an Agent Based Model (ABM) to address
+        complex Non Communicable Disease(NDC) problems. The model is used as an
+        introductory guide to the philosophy and practices of ABMs and is used
+        to illustrate why ABMs are a good fit for NDC investigation. The paper
+        describes very clearly how to take descriptions of individual behaviour
+        and incorporate them into an ABM framework and run “what if “
+        experiments with it.
+      </p>
 
-  </div>
-  </div>
-  <div class="container" style="margin-top: 80px">
-    <h2>
-      Why is this a good example?
-    </h2>
-    <p>This is an excellent example of using modelling to ask “what if” question of aspects of individual behaviour
-      that would be very difficult to replicate with a real population. In this case the positioning of food outlets.</p>
-      <p>This is a model of the inequalities in diet in the context of urban residential segregation. It has been used by
-      Auchincloss and Garcia as an example of how to create an Agent Based Model (ABM) to address complex Non
-      Communicable Disease(NDC) problems. The model is used as an introductory guide to the philosophy and practices of
-      ABMs and is used to illustrate why ABMs are a good fit for NDC investigation. The paper describes very clearly how
-      to take descriptions of individual behaviour and incorporate them into an ABM framework and run “what if “
-      experiments with it.
-    <h2>What is the NCD prevention challenge being addressed?</h2>
-    <p>This model investigates  the inequalities in diet in the context of urban residential segregation</p>
-    <p>One of the contributory factors to obesity and obesity related health conditions and illness is the high consumption of nutrient-poor energy-dense foods. It has been shown in numerous population studies that there is a higher prevalence of nutrient-poor energy-dense foods in the diets of lower income families. It has also been shown that one of the contributing factors to this difference in diet quality is access to healthy food outlets. It has long been recognised that urban landscapes are influenced by residential  segregation by both economic and ethnic factors and that there is a marked difference in resources and services between these areas. ( see the model by Thomas Schelling included in this series for an abm model of segregation ). It has been shown that lower income neighbourhoods have far fewer  outlets that provide healthy foods. Auchincloss and Garcia model looks at the role of economic segregation on food outlet distribution and looks at possible “policy levers” that may be used to counteract this. 
-    </p>
-    <h2>How is ABM suited to address this challenge?</h2>
-    <p>As is demonstrated by the Schelling model segregation and an individual's response to it is a function of the spatial location of populations. The nature of the spatial location of the individuals is governed by local factors and tends to be heterogeneous. By that we mean that the spatial pattern of the population tends not to a smooth gradation but tends to be a more patchy pattern. This type of spatial distribution is very hard to be incorporated in traditional mathematical or statistical models but is very easy to implement with an Agent Based Model (ABM). In this model we are mainly looking at the decisions that outlets make on their location, and food and price. The rule based nature of ABMs makes construction of a shop based model both simpler and transparent.</p>
+      <h2>What is the NCD prevention challenge being addressed?</h2>
+      <p>
+        This model investigates the inequalities in diet in the context of urban
+        residential segregation
+      </p>
+      <p>
+        One of the contributory factors to obesity and obesity related health
+        conditions and illness is the high consumption of nutrient-poor
+        energy-dense foods. It has been shown in numerous population studies
+        that there is a higher prevalence of nutrient-poor energy-dense foods in
+        the diets of lower income families. It has also been shown that one of
+        the contributing factors to this difference in diet quality is access to
+        healthy food outlets. It has long been recognised that urban landscapes
+        are influenced by residential segregation by both economic and ethnic
+        factors and that there is a marked difference in resources and services
+        between these areas. ( see the model by Thomas Schelling included in
+        this series for an abm model of segregation ). It has been shown that
+        lower income neighbourhoods have far fewer outlets that provide healthy
+        foods. Auchincloss and Garcia model looks at the role of economic
+        segregation on food outlet distribution and looks at possible “policy
+        levers” that may be used to counteract this.
+      </p>
+      <h2>How is ABM suited to address this challenge?</h2>
+      <p>
+        As is demonstrated by the Schelling model segregation and an
+        individual's response to it is a function of the spatial location of
+        populations. The nature of the spatial location of the individuals is
+        governed by local factors and tends to be heterogeneous. By that we mean
+        that the spatial pattern of the population tends not to a smooth
+        gradation but tends to be a more patchy pattern. This type of spatial
+        distribution is very hard to be incorporated in traditional mathematical
+        or statistical models but is very easy to implement with an Agent Based
+        Model (ABM). In this model we are mainly looking at the decisions that
+        outlets make on their location, and food and price. The rule based
+        nature of ABMs makes construction of a shop based model both simpler and
+        transparent.
+      </p>
 
+      <h2>What are the key components of the model?</h2>
+      <p>
+        This is a simplified version of Auchinclosss model and concentrates on
+        just the effect that segregation has on the success and type of food
+        outlets.
+      </p>
+      <p>
+        The model has two entities, people and shops. Each person is represented
+        as an arrow head . The colour of the shape indicates their economic
+        status. High income is blue. Lower income is red. Each person has a
+        home. This is a square of the same colour. The homes are presented as a
+        grid. People shop for food at shops. The shops also occupy the same grid
+        and are represented as circles. The shops are of one of four types: High
+        cost convenience
+        <span style="color: rgba(255, 0, 0, 0.4)">&#9679;</span>, Low cost
+        convenience<span style="color: rgba(255, 0, 255, 0.4)">&#9679;</span>,
+        High cost healthy<span style="color: rgba(0, 255, 0, 0.4)">&#9679;</span
+        >, Low cost healthy<span style="color: rgba(0, 255, 255, 0.4)">
+          &#9679; </span
+        >.
+      </p>
+      <p>
+        Each person chooses a shop to go to. They choose the shop based on
+        sensitivity to three factors. The first is price. The second is the
+        distance they have to travel. The third is preference for healthy food.
+        When a person has chosen a shop they move to that shop. The proportion
+        of each economic status at each shop is indicated by the size of the
+        solid colour surrounding the shop circle. The exact information on each
+        shop can be accessed by clicking your mouse on the shop circle
+      </p>
+      <p>
+        Each economic class has different underlying preferences. For example it
+        is assumed that distance from shops has less influence for higher
+        economic class. The overall effect of each of the three factors can be
+        altered.
+      </p>
+      <p>
+        The model simulates the effect of economic segregation. This is done by
+        either randomly allocating a home or placing each economic calls in a
+        separate half of the grid.
+      </p>
 
-    <h2>What are the key components of the model?</h2>
-    <p> This is a simplified version of Auchincloss’s model and concentrates on just the effect that segregation has on the success and type of food outlets.<p>The model has two entities, people and shops. Each person is represented as an arrow head . The colour of the shape indicates their economic status. High income is blue. Lower income is red. Each person has a home. This is a square of the same colour. The homes are presented as a grid. People shop for food at shops. The shops also occupy the same grid and are represented as circles. The shops are of one of four types: 
-      High cost convenience <span style=" color:rgba(255,0,0,0.4);"">&#9679 </span>,
-      Low cost convenience<span style=" color:rgba(255,0,255,0.4);"">&#9679 </span>,
-      High cost healthy<span style=" color:rgba(0,255,0,0.4);"">&#9679 </span>,
+      <h2>How does the model work?</h2>
 
-      Low cost healthy<span style=" color:rgba(0,255,255,0.4);""> &#9679 </span>.</p>
-<p>Each person chooses a shop to go to. They choose the shop based on sensitivity to three factors. The first is price. The second is the distance they have to travel. The third is preference for healthy food. When a person has chosen a shop they move to that shop. The proportion of each economic status at each shop is indicated by the size of the solid colour surrounding the shop circle. The exact information on each shop can be accessed by clicking your mouse on the shop circle</p>
-<p>Each economic class has different underlying preferences. For example it is assumed that distance from shops has less influence for higher economic class. The overall effect of each of the three factors can be altered.</p><p>The model simulates the effect of economic segregation. This is done by either randomly allocating a home or placing each economic calls in a separate half of the grid.</p> 
+      <p>
+        The model will run automatically when the page is opened. The overall
+        effect of each of the three factors can be altered with the sliders on
+        the right of the display. The type of population distribution can be
+        chosen from the radio buttons. The model can be restarted with the new
+        values with the restart button. The customers of the shops can be seen
+        within the shop circle. More detailed information on shop type and the
+        number of customers can be seen by clicking on a shop circle.
+      </p>
+      <p>
+        Alter the global preference and the distribution of the population to
+        see the
+      </p>
 
-              
-          <h2>How does the model work?</h2>
-
-          <p>The model will run automatically when the page is opened. The overall effect of each of the three factors can be altered with the sliders on the right of the display. The type of population distribution can be chosen from the radio buttons. The model can be restarted with the new values with the restart button. The customers of the shops can be seen within the shop circle. More detailed information on shop type and the number of customers can be seen by clicking on a shop circle. </p>
-<p>Alter the global preference and the distribution of the population to see the </p>
-
-    
-    
-          <h2>What are the implications of these findings for policy or practice?</h2>
-    <p></p>
-    <div class="card-body">
-      
+      <h2>
+        What are the implications of these findings for policy or practice?
+      </h2>
+      <p></p>
+      <div class="card-body"></div>
     </div>
 
-  </div>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auchincloss.js"></script>
 
-  </div>
-  </div>
-  </div>
-  </div>
+    <script>
+      var numberOfShops = 20;
+      var weightPrice = 0.2;
+      var weightDistance = 0.5;
+      var weightHabit = 0.0;
+      var weightPreference = 0.2;
+      var random = 0.01;
+      var segragation = false;
 
-  <!-- Latest compiled JavaScript -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/auchincloss.js"></script>
+      setVals();
 
+      var frame = SVG("svg");
+      frame.setAttribute("width", "400");
+      frame.setAttribute("height", "400");
+      frame.setAttribute("border-style", "solid");
+      frame.setAttribute("id", "svg02");
+      var container = document.getElementById("display");
+      container.appendChild(frame);
 
-  <script>
-    var numberOfShops = 20;
-var weightPrice = 0.2;
-var weightDistance = 0.5;
-var weightHabit = 0.0;
-var weightPreference = 0.2;
-var random = 0.01;
-var segragation = false;
+      let population = []; // list of agents
+      let shops = [];
+      const size = 40;
+      const maxSize = Math.sqrt(size * size + size * size);
+      const relativeTransportCost = 2;
+      // let numberOfShops = 8;
+      // var weightPrice = 0.8;
+      // var weightDistance = 0.2;
+      // var weightHabit = 0.1;
+      // var weightPreference = 0.2;
+      // var random = 0.3;
 
-setVals()
-
-var frame = SVG("svg");
-frame.setAttribute("width", "400");
-frame.setAttribute("height", "400");
-frame.setAttribute("border-style", "solid");
-frame.setAttribute("id", "svg02");
-var container = document.getElementById("display");
-container.appendChild(frame);
-
-let population = []; // list of agents
-let shops = []
-const size = 40;
-const maxSize = Math.sqrt(size*size+size*size)
-const relativeTransportCost = 2;
-// let numberOfShops = 8;
-// var weightPrice = 0.8;
-// var weightDistance = 0.2;
-// var weightHabit = 0.1;
-// var weightPreference = 0.2;
-// var random = 0.3;
-
-const d = new Date();
-let time = d.getTime();
-let count = 0
-setup()
-updateShop()
-update()
-  </script>
-</body>
-
+      const d = new Date();
+      let time = d.getTime();
+      let count = 0;
+      setup();
+      updateShop();
+      update();
+    </script>
+  </body>
 </html>
