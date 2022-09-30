@@ -151,6 +151,32 @@ class Patches {
         }
     }
 
+    setVonNeighbors() {
+        for (var i = 0; i < this.list.length; i++) {
+            let neighbors = new Array();
+            let patch = this.list[i];
+            let coord = this.coordinates(i);
+            let x = coord.x
+            let y = coord.y
+            let xx = this.yBounds(x-1);
+            let yy = this.yBounds(y);
+            let pos = this.position(xx, yy)
+            patch.neighbors.push(this.list[pos])
+            xx = this.yBounds(x+1);
+            yy = this.yBounds(y);
+            pos = this.position(xx, yy)
+            patch.neighbors.push(this.list[pos])
+            xx = this.yBounds(x);
+            yy = this.yBounds(y-1);
+            pos = this.position(xx, yy)
+            patch.neighbors.push(this.list[pos])
+            xx = this.yBounds(x);
+            yy = this.yBounds(y+1);
+            pos = this.position(xx, yy)
+            patch.neighbors.push(this.list[pos])
+        }
+    }
+
     shuffle() {
         let currentIndex = this.list.length,  randomIndex;
       
