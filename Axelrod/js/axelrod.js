@@ -1,18 +1,24 @@
-var size = 30;
+var size = 10;
+var sSize = 10
 var caCanvas = new CACanvas(size);
 var count = 0
 var population
 var place
-var features = 3
+var features = 6
+var setFetures = 6
+var opinions = 10
+var setOpinions = 10
+var iterations = 400
 var cols = []
 var maxRGB = 255 * 255 * 255
 
-
-
 var setVals = function () {
-    features = Number(document.getElementById("features").value);
-
-    document.getElementById("featureslable").innerHTML = features
+    setFetures = Number(document.getElementById("features").value);
+    document.getElementById("featureslable").innerHTML = setFetures
+    sSize = Number(document.getElementById("size").value);
+    document.getElementById("sizelable").innerHTML = sSize
+    iterations = Number(document.getElementById("iterations").value);
+    document.getElementById("iterationslable").innerHTML = iterations
 }
 
 var reset = function () {
@@ -28,18 +34,17 @@ class Person extends Agent {
         super();
         this.culture = [];
         for (let i = 0; i < features; i++) {
-            this.culture.push(rndInt(10))
+            this.culture.push(rndInt(opinions))
         }
     }
 
     similarity(agent) {
         var count = 0
         for (let i = 0; i < features; i++) {
-            if (agent.culture[i] == this.culture[i]){
+            if (agent.culture[i] == this.culture[i]) {
                 count++
             }
         }
-        //console.log(count);
         return count / features
     }
 
@@ -53,41 +58,38 @@ class Person extends Agent {
     }
 }
 
-var toRGB = function (n) {
-    let rgb = []
-    let d = 255
-    for (let i = 0; i < 3; i++) {
-        let x = n % d
-        rgb.push(parseInt(x / d * 255))
-        n = n - x
-        d = d * 255
-    }
-    return rgb
-}
-
-
 var draw = function () {
-    var maxFeature = 10 ** (features)
     place.list.forEach(function (patch, index) {
         var person = patch.occupant;
-        var cols = 0
-        var d = 0
-        for (let i = 0; i < person.culture.length; i++) {
-            if (i == 0) {
-                cols += person.culture[i]
-            } else {
-                cols += person.culture[i] * (10 ** i)
-            }
+        var r, g, b = 0
+        if (features > 0) {
+            r = parseInt(127 * person.culture[0] / setOpinions)
         }
-        let rgb = toRGB(maxRGB * Math.random())//(cols/maxFeature))
-        //console.log(maxRGB, maxFeature, cols, rgb);
-        var col = "rgba(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
+        if (features > 1) {
+            g = parseInt(127 * person.culture[1] / setOpinions)
+        }
+        if (features > 2) {
+            b = parseInt(127 * person.culture[2] / setOpinions)
+        }
+        if (features > 3) {
+            r += parseInt(127 * person.culture[3] / setOpinions)
+        }
+        if (features > 4) {
+            g += parseInt(127 * person.culture[4] / setOpinions)
+        }
+        if (features > 5) {
+            b += parseInt(127 * person.culture[5] / setOpinions)
+        }
+        var col = "rgba(" + r + "," + g + "," + b + ")";
         caCanvas.draw(patch.xPos, patch.yPos, col);
     });
     caCanvas.update("canvas");
 };
 
 var setup = function () {
+    size = sSize
+    features = setFetures
+    caCanvas = new CACanvas(size);
     population = new Agents();
     place = new Patches(size);
     for (i = 0; i < size * size; i++) {
@@ -100,26 +102,21 @@ var setup = function () {
     place.setVonNeighbors();
 }
 
-
-
-
-
 var update = function () {
     caCanvas.clear()
-    console.log("update", count,population);
-    for(let i=0; i< population.list.length;i++){
+    //console.log("update", count,population);
+    for (let i = 0; i < population.list.length; i++) {
         population.list[rndInt(population.list.length)].dissemination()
-        draw();
+
     }
-    if (count < 1000) {
+    draw();
+    if (count < iterations) {
         setTimeout(function () {
             window.requestAnimationFrame(update);
-        },1);
+        }, 0);
         count++
     }
 };
 
-
-console.log("here", count);
 setup()
 update()

@@ -49,16 +49,50 @@
             <div class="col">
               <input
                 type="range"
-                min="1"
+                min="3"
                 max="6"
-                value="3"
+                value="6"
                 class="slider"
                 id="features"
                 onchange="setVals()"
               />
             </div>
             <div class="col">
-              <span id="featureslable">3</span>
+              <span id="featureslable">6</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">Size</div>
+            <div class="col">
+              <input
+                type="range"
+                min="10"
+                max="40"
+                value="20"
+                class="slider"
+                id="size"
+                onchange="setVals()"
+              />
+            </div>
+            <div class="col">
+              <span id="sizelable">20</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">Iterations</div>
+            <div class="col">
+              <input
+                type="range"
+                min="100"
+                max="4000"
+                value="200"
+                class="slider"
+                id="iterations"
+                onchange="setVals()"
+              />
+            </div>
+            <div class="col">
+              <span id="iterationslable">200</span>
             </div>
           </div>
           <br />
