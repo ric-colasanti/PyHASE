@@ -265,18 +265,6 @@ class Shop {
                 return 1
             }
        }
-        
-        // if shop high price then return 0.8 if person is high income 0.1 if person is low income
-        // if (person.sClass == 0) {
-        //     if (this.price == 0) {
-        //         1
-        //     }
-        //     return 0.1
-        // }
-        // if (this.price == 0) {
-        //     0.1
-        // }
-        // return 1
     }
 }
 

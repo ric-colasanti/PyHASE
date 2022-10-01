@@ -1,5 +1,5 @@
-var size = 10;
-var sSize = 10
+var size = 20;
+var sSize = 20
 var caCanvas = new CACanvas(size);
 var count = 0
 var population
