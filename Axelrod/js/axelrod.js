@@ -1,5 +1,5 @@
-var size = 20;
-var sSize = 20
+var size = 10;
+var sSize = 10
 var caCanvas = new CACanvas(size);
 var count = 0
 var population
@@ -8,7 +8,7 @@ var features = 6
 var setFetures = 6
 var opinions = 10
 var setOpinions = 10
-var iterations = 400
+var iterations = 2000
 var cols = []
 var maxRGB = 255 * 255 * 255
 
