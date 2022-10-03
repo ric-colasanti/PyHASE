@@ -135,7 +135,7 @@ var setup = function () {
 }
 
 var draw = function () {
-    var bCol = "#ffffff";
+    var bCol = "##000000";
     place.list.forEach(function (patch, index) {
         var person = patch.occupant;
         var col;
@@ -150,9 +150,9 @@ var draw = function () {
             if (person.state == 2) {
                 col = "orange";
             }
-            caCanvas.draw(patch.xPos, patch.yPos, col);
+            caCanvas.draw(patch.xPos, patch.yPos,bCol,true, col);
             if(person.watt!=null){
-                caCanvas.drawLine(patch.xPos, patch.yPos,person.watt.xPos,person.watt.yPos,"blue",4)
+                caCanvas.drawLine(patch.xPos, patch.yPos,person.watt.xPos,person.watt.yPos,"#6666dd",3)
             }
         }
 
