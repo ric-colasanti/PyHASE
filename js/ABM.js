@@ -145,6 +145,7 @@ class Patches {
                     let pos = this.position(xx, yy)
                     if (patch !== this.list[pos]) {
                         patch.neighbors.push(this.list[pos])
+                        patch.numberOfNeighbors++
                     }
                 }
             }
@@ -203,6 +204,7 @@ class Patch {
         this.yPos = 0;
         this.neighbors = new Array();
         this.occupant = null
+        this.numberOfNeighbors = 0
     }
 
     addAgent(agent) {
@@ -241,9 +243,11 @@ class Agent {
 class Agents {
     constructor() {
         this.list = new Array();
+        this.size = 0;
     }
     addAgent(anAgent) {
         this.list.push(anAgent);
+        this.size++;
     }
 
     shuffle() {
