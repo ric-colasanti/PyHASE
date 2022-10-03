@@ -8,7 +8,7 @@ var features = 6
 var setFetures = 6
 var opinions = 10
 var setOpinions = 10
-var iterations = 2000
+var iterations = 4000
 var cols = []
 var maxRGB = 255 * 255 * 255
 
