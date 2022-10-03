@@ -16,19 +16,19 @@ var speed = 100
 var setVals = function () {
     rNumber = Number(document.getElementById("R").value)/100;
     links = Number(document.getElementById("links").value)/1000;
-    sickDays = Number(document.getElementById("sick").value);
-    immuneDays = Number(document.getElementById("immune").value);
-    density = Number(document.getElementById("pop").value);
-    size = Number(document.getElementById("size").value);
+   // sickDays = Number(document.getElementById("sick").value);
+   // immuneDays = Number(document.getElementById("immune").value);
+  //  density = Number(document.getElementById("pop").value);
+  //  size = Number(document.getElementById("size").value);
    
 
-    document.getElementById("sizelable").innerHTML = parseFloat(size).toFixed(0).toLocaleString()
+    //document.getElementById("sizelable").innerHTML = parseFloat(size).toFixed(0).toLocaleString()
     document.getElementById("Rlable").innerHTML = parseFloat(rNumber).toFixed(1).toLocaleString()
-    document.getElementById("linkslable").innerHTML = parseFloat(links).toFixed(2).toLocaleString()
-    document.getElementById("sicklable").innerHTML = parseFloat(sickDays).toFixed(0).toLocaleString()
-    document.getElementById("immunelable").innerHTML = parseFloat(immuneDays).toFixed(0).toLocaleString()
-    document.getElementById("poplable").innerHTML = parseFloat(density).toFixed(1).toLocaleString()
-    density = density / 100
+    document.getElementById("linkslable").innerHTML = parseFloat(links).toFixed(3).toLocaleString()
+    //document.getElementById("sicklable").innerHTML = parseFloat(sickDays).toFixed(0).toLocaleString()
+    //document.getElementById("immunelable").innerHTML = parseFloat(immuneDays).toFixed(0).toLocaleString()
+    //document.getElementById("poplable").innerHTML = parseFloat(density).toFixed(1).toLocaleString()
+    //density = density / 100
 }
 
 var reset = function () {
@@ -44,6 +44,7 @@ class Home extends Patch {
         let oldLink = rndInt(this.numberOfNeighbors)
         let newLink = rndInt(population.size)
         this.neighbors[oldLink] = population.list[newLink]
+        return population.list[newLink]
     }
     rndOccupant() {
         return this.neighbors[rndInt(this.numberOfNeighbors)].occupant
@@ -62,9 +63,10 @@ class Person extends Agent {
         this.state = state;
         this.daysIll = 0
         this.daysRecovered = 0
+        this.watt = null;
     }
     makeNewLinks(population) {
-        this.home.makeNewLinks(population)
+        this.watt = this.home.makeNewLinks(population)
     }
     infect() {
         this.state = 1
@@ -146,9 +148,12 @@ var draw = function () {
                 col = "#ff0000";
             }
             if (person.state == 2) {
-                col = "#bbbbbb";
+                col = "orange";
             }
-            caCanvas.draw(patch.xPos, patch.yPos, bCol, true, col);
+            caCanvas.draw(patch.xPos, patch.yPos, col);
+            if(person.watt!=null){
+                caCanvas.drawLine(patch.xPos, patch.yPos,person.watt.xPos,person.watt.yPos,"blue",4)
+            }
         }
 
 
@@ -168,7 +173,7 @@ var update = function () {
         person.pathology(rNumber)
     }
     draw();
-    if (count < 2000) {
+    if (count < 500) {
         setTimeout(function () {
             window.requestAnimationFrame(update);
         }, speed);
