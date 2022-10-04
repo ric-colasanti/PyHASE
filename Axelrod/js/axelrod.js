@@ -11,6 +11,7 @@ var setOpinions = 10
 var iterations = 4000
 var cols = []
 var maxRGB = 255 * 255 * 255
+var displayType = 1
 
 var setVals = function () {
     setFetures = Number(document.getElementById("features").value);
@@ -48,6 +49,15 @@ class Person extends Agent {
         return count / features
     }
 
+    averageSim(){
+        count = 0
+        let n = this.home.neighbors.length
+        for(let i=0; i<n; i++){
+            let agent = this.home.neighbors[i].occupant
+            count+= this.similarity(agent);
+        }
+        return count/n;
+    }
     dissemination() {
         let cell = this.home.neighbors[rndInt(4)]
         let agent = cell.occupant
@@ -62,30 +72,38 @@ var draw = function () {
     place.list.forEach(function (patch, index) {
         var person = patch.occupant;
         var r, g, b = 0
-        if (features > 0) {
-            r = parseInt(127 * person.culture[0] / setOpinions)
-        }
-        if (features > 1) {
-            g = parseInt(127 * person.culture[1] / setOpinions)
-        }
-        if (features > 2) {
-            b = parseInt(127 * person.culture[2] / setOpinions)
-        }
-        if (features > 3) {
-            r += parseInt(127 * person.culture[3] / setOpinions)
-        }
-        if (features > 4) {
-            g += parseInt(127 * person.culture[4] / setOpinions)
-        }
-        if (features > 5) {
-            b += parseInt(127 * person.culture[5] / setOpinions)
+        if(displayType==0){
+            if (features > 0) {
+                r = parseInt(127 * person.culture[0] / setOpinions)
+            }
+            if (features > 1) {
+                g = parseInt(127 * person.culture[1] / setOpinions)
+            }
+            if (features > 2) {
+                b = parseInt(127 * person.culture[2] / setOpinions)
+            }
+            if (features > 3) {
+                r += parseInt(127 * person.culture[3] / setOpinions)
+            }
+            if (features > 4) {
+                g += parseInt(127 * person.culture[4] / setOpinions)
+            }
+            if (features > 5) {
+                b += parseInt(127 * person.culture[5] / setOpinions)
+            }
+        }else{
+            g = parseInt(person.averageSim()*255)
+            r=0
+            b=0
         }
         var col = "rgba(" + r + "," + g + "," + b + ")";
         caCanvas.draw(patch.xPos, patch.yPos, col);
     });
     caCanvas.update("canvas");
 };
-
+var setDisplay = function(){
+    displayType = document.getElementById("similarity").checked
+}
 var setup = function () {
     size = sSize
     features = setFetures
