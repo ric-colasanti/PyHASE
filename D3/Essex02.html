@@ -67,11 +67,12 @@
     d3Select.append("g")
         .call(d3.axisLeft(y));
 
-    var display = function (data) {
-        var htmlString ="<p>ID: " + data[0] + "</p>"
+    var display = function (d)
+     {
+        var htmlString ="<p>ID: " + data[d][0] + "</p>"
     
-        for (let i = 1; i < data.length; i++) {
-                htmlString +="<p>Val"+i+": " +  data[i] + "</p>"
+        for (let i = 1; i < data[d].length; i++) {
+                htmlString +="<p>Val"+i+": " +  data[d][i] + "</p>"
         }
         document.getElementById("output").innerHTML = htmlString
     }
@@ -81,8 +82,8 @@
         list.join(
             enter =>
                 enter.append("circle")
-                    .attr("cx", function (d) { return d[1] })
-                    .attr("cy", function (d) { return d[2] })
+                    .attr("cx", function (d) { return d[xAxis] })
+                    .attr("cy", function (d) { return d[yAxis] })
                     .attr("r", 5)
                     .attr("id", function (d) { return d[0] })
                     .style("fill", "Red")
@@ -97,7 +98,8 @@
                         d3.select(this)
                             .attr("cursor", "pointer");
                         if (this.toggle) {
-                            display(this.__data__);
+                            display(this.id);
+                            console.log(this.id);
                         }
                     })
                     .on("mouseout", function () {
@@ -105,8 +107,8 @@
                     }),
             update =>
                 update
-                    .attr("cx", function (d) { return d[yAxis] })
-                    .attr("cy", function (d) { return d[xAxis] }),
+                    .attr("cx", function (d) { return d[xAxis] })
+                    .attr("cy", function (d) { return d[yAxis] }),
             exit =>
                 exit
                     .transition().duration(100)
