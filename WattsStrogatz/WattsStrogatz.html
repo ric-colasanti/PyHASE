@@ -168,18 +168,19 @@
       <p>As previously stated network models are another modelling type used in complex systems science. Adding an agent based model (ABM) to a network model makes it easier to incorporate geographical position and allows individual agent (person) behaviour rules to be included in the mode. This is particularly important when modelling emergent social behaviour.</p>
 
       <h2>How does the model work?</h2>
-      <p>
-       
+      <p>Each agent can be in one of three states: Susceptible to disease (green <span style="color: rgba(0, 255, 0)">&#9679;</span>), Infectious( ill, red <span style="color: rgba(255, 0, 0)">&#9679;</span>) ,Recovered ( but not susceptible,orange <span style="color: rgba(255, 227, 177)">&#9679;</span>) Each agent is connected to eight other agents. Initially each agent is linked to its eight immediate neighbours on the grid. A random agent is chosen and it then potentially infects the other agents it is linked to with a given probability. This is the now famous R number. The agent remains ill and infectious for a set number of days at which point it recovers. In this state the agent will not catch the disease again. This recovered state lasts for a set time. At the end of that time the agent is then susceptible again. When the model has only local links the disease spreads as a single wave across the population. Most of the time there is only a single wave. You can alter this behaviour by creating a small world. Here you add relatively few links with the links slider. The number represents the probability that a single local link will be replaced by a random link to another part of the grid. These links are shown as a blue line. When the model is reset using the reset button you will see that the disease now has multiple spatial and temporal waves.
       </p>
- 
+      
       <h2>
         What are the implications of these findings for policy or practice?
       </h2>
-      <p>
-        
+      <p>As seen in the Framingham heart study the relationships described by Christakis and Fowler are friends, family and coworkers and an individual propensity to  obesity is seen to be influenced by the nature of these connections. This is also seen in the Bhar diet model. Investigators such as Giabbanelli  and Shi have used this knowledge of networks to test out different intervention strategies targeting the most connected individuals.
       </p>
 
       <div class="card-body">
+        <p>Christakis, Nicholas A., and James H. Fowler. "The spread of obesity in a large social network over 32 years." New England journal of medicine 357.4 (2007): 370-379</p>
+        <p>Giabbanelli, Philippe J., et al. "Modeling the influence of social networks and environment on energy balance and obesity." Journal of Computational Science 3.1-2 (2012): 17-27.</p>
+        <p>Shi, Liuyan, Liang Zhang, and Yun Lu. "Evaluating social network-based weight loss interventions in Chinese population: An agent-based simulation."Plos one 15.8 (2020): e0236716.</p>
         <p>
           Watts, Duncan J., and Steven H. Strogatz. "Collective dynamics of ‘small-world’networks." nature 393.6684 (1998): 440-442.
         </p>
