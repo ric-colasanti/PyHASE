@@ -148,7 +148,7 @@ var draw = function () {
                 col = "#ff0000";
             }
             if (person.state == 2) {
-                col = "orange";
+                col = "#ffe3b1";
             }
             caCanvas.draw(patch.xPos, patch.yPos,bCol,true, col);
             if(person.watt!=null){
