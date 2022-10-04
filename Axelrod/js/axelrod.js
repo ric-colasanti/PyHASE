@@ -11,7 +11,7 @@ var setOpinions = 10
 var iterations = 4000
 var cols = []
 var maxRGB = 255 * 255 * 255
-var displayType = 1
+var displayType = 0
 
 var setVals = function () {
     setFetures = Number(document.getElementById("features").value);
