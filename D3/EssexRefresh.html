@@ -21,8 +21,14 @@
                 <div id="output"></div>
             </div>
         </div>
+        <button class="btn btn-primary tablinks" onclick="reset()">
+            Reset
+          </button>
         <p>Click on a red dot to select it. It will grow in size and turn green. Any selected dot can the be interrogated bu rolling mouse over it. Deselect the point by clicking on it again </p>
+    
+    
     </div>
+   
 </body>
 
 <script>
@@ -33,8 +39,12 @@
     const margin = 40;
     const xMax = xSize - margin * 2;
     const yMax = ySize - margin * 2;
+
+    var yAxis=1
+    var xAxis=2
+
     for (let i = 0; i < numPoints; i++) {
-        data.push([data.length, Math.random() * (xMax - 30) + 15, Math.random() * (yMax - 30) + 15]);
+        data.push([data.length, Math.random() * (xMax - 30) + 15, Math.random() * (yMax - 30) + 15, Math.random() * (yMax - 30) + 15, Math.random() * (yMax - 30) + 15]);
     }
     var d3Select = d3.select("#plot").append("svg")
         .append("g")
@@ -58,7 +68,12 @@
         .call(d3.axisLeft(y));
 
     var display = function (data) {
-        document.getElementById("output").innerHTML = "<p> Id: " + data[0] + "</p><p> XVal: " + data[1] + "</p><p> YVal: " + data[2] + "</p>"
+        var htmlString ="<p>ID: " + data[0] + "</p>"
+    
+        for (let i = 1; i < data.length; i++) {
+                htmlString +="<p>Val"+i+": " +  data[i] + "</p>"
+        }
+        document.getElementById("output").innerHTML = htmlString
     }
 
     var draw = function () {
@@ -90,8 +105,8 @@
                     }),
             update =>
                 update
-                    .attr("cx", function (d) { return d[1] })
-                    .attr("cy", function (d) { return d[2] }),
+                    .attr("cx", function (d) { return d[yAxis] })
+                    .attr("cy", function (d) { return d[xAxis] }),
             exit =>
                 exit
                     .transition().duration(100)
@@ -99,15 +114,22 @@
         )
     }
 
+    var reset =  function(){
+        yAxis=3
+        xAxis=4
+    }
 
     var update = function () {
         //population.shuffle()
 
         for (let i = 0; i < data.length; i++) {
-            data[i][1] += 1 - Math.random() * 2
-            data[i][2] += 1 - Math.random() * 2
+            for (let j = 1; j < data[i].length; j++) {
+            data[i][j] += 1 - Math.random() * 2
+            }
         }
-        data.push([data.length, Math.random() * (xMax - 30) + 15, Math.random() * (yMax - 30) + 15]);
+        if(data.length<150){
+            data.push([data.length, Math.random() * (xMax - 30) + 15, Math.random() * (yMax - 30) + 15, Math.random() * (yMax - 30) + 15, Math.random() * (yMax - 30) + 15]);
+        }
         draw();
         setTimeout(function () {
             window.requestAnimationFrame(update);
