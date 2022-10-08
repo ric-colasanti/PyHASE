@@ -82,8 +82,8 @@
         list.join(
             enter =>
                 enter.append("circle")
-                    .attr("cx", function (d) { return d[xAxis] })
-                    .attr("cy", function (d) { return d[yAxis] })
+                    .attr("cx", function (d) { return x(d[xAxis]) })
+                    .attr("cy", function (d) { return y(d[yAxis]) })
                     .attr("r", 5)
                     .attr("id", function (d) { return d[0] })
                     .style("fill", "Red")
@@ -107,8 +107,8 @@
                     }),
             update =>
                 update
-                    .attr("cx", function (d) { return d[xAxis] })
-                    .attr("cy", function (d) { return d[yAxis] }),
+                    .attr("cx", function (d) { return x(d[xAxis]) })
+                    .attr("cy", function (d) { return y(d[yAxis]) }),
             exit =>
                 exit
                     .transition().duration(100)
