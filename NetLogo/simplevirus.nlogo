@@ -102,10 +102,10 @@ NIL
 1
 
 MONITOR
-405
-561
-645
-606
+217
+472
+457
+517
 NIL
 count turtles with [ color = green ]
 0
