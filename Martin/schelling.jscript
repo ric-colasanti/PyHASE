@@ -80,9 +80,9 @@ function setGrid(density,size,grid,population){
 
 function output(size,grid){
 	let x,y;
-	for(x=0;x<=size;x++){
+	for(x in grid){
 		let line=""
-		for(y=0;y<=size;y++){
+		for(y in grid[x]){
 			let a = grid[x][y].occupant;
 			if (a==null){
 				line+=" * "
@@ -118,7 +118,7 @@ function iterate(happy,size,grid,population){
 				let yn=bounds(yy,size)
 				let o = grid[xn][yn].occupant
 				if(o!=null){
-					if(o.color = agent.color){
+					if(o.color == agent.color){
 						count++;
 					}
 				}
@@ -128,7 +128,8 @@ function iterate(happy,size,grid,population){
 	}
 
 	population = shuffleArray(population)
-	for( let p in population){
+	let p;
+	for( p in population){
 		let a = population[p];
 		let s = sameAs(a); 
 		if( s<happy){
@@ -140,7 +141,17 @@ function iterate(happy,size,grid,population){
 	}
 }
 
-
+function test(population){
+	let p
+	let c = [0,0]
+	for(p in population){
+		let a = population[p]
+		if(a!=null){
+			c[a.color]++
+		}
+	}
+	log(c)
+}
 
 /*
  * run
@@ -152,14 +163,16 @@ let size = 19;
 let happy = 0.5
 let density = 0.9
 let iterations = 2
-let t
+let t=0
 
 setGrid(density,size,grid,population);
 output(size,grid);
-
-for(t=0;t<iterations;t++){
+test(population)
+while (t<iterations){
 	log("");
 	iterate(happy,size,grid,population);
 	output(size,grid);
+	test(population)
+	t++;
 }
 
