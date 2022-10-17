@@ -1,6 +1,10 @@
+globals [ ill ]
+
 to setup
+  set ill  0
   clear-all
-  create-turtles 100 [
+  reset-ticks
+  create-turtles 1000 [
     setxy random-xcor random-ycor
     set color red
   ]
@@ -8,29 +12,35 @@ to setup
     setxy random-xcor random-ycor
     set color green
   ]
-
 end
 
 to go
+  let n count turtles with [color = green ]
   ask turtles [
     rt random 360
     fd 1
     if color = green[
+      if random 1000 < 10[
+      setxy random-xcor random-ycor
+      ]
       ask turtles-here[
         set color green
       ]
     ]
   ]
+  let m count turtles with [color = green ]
+  set ill  m - n
+  tick
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-210
-10
-647
-448
+169
+24
+667
+523
 -1
 -1
-13.0
+15.0
 1
 10
 1
@@ -102,15 +112,62 @@ NIL
 1
 
 MONITOR
-217
-472
-457
-517
+126
+575
+366
+620
 NIL
 count turtles with [ color = green ]
 0
 1
 11
+
+PLOT
+712
+87
+912
+237
+plot 1
+sick
+time
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot count turtles with [ color = green ]"
+
+MONITOR
+738
+488
+813
+533
+iterations
+ticks
+17
+1
+11
+
+PLOT
+788
+298
+988
+448
+plot 2
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot ill"
 
 @#$#@#$#@
 ## WHAT IS IT?
