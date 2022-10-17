@@ -28,10 +28,7 @@
     }
 
     .ref {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      font-size: x-small;
+      font-size: small;
       font-style: italic;
     }
   </style>
@@ -41,7 +38,8 @@
 
   <nav class="navbar navbar-expand-md bgTextBox navbar-light alien">
     <!-- Brand -->
-    <a class="navbar-brand alien" href="index.html"><img src="img/life.png" alt="logo" style="width:40px;"> PHASE Material
+    <a class="navbar-brand alien" href="index.html"><img src="img/life.png" alt="logo" style="width:40px;"> PHASE
+      Material
     </a>
 
     <!-- Toggler/collapsibe Button -->
@@ -53,93 +51,181 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <!-- Dropdown -->
-        <!-- <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Code
+            Models
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="pages/life.html">Life</a>
-            <a class="dropdown-item" href="pages/diffuse.html">Diffuse</a>
-            <a class="dropdown-item" href="pages/agent.html">Agent</a>
-            <a class="dropdown-item" href="pages/ant.html">Ant</a>
-            <a class="dropdown-item" href="pages/abm.html">ABM</a>
-          </div> -->
+            <a class="dropdown-item" href="/Auchincloss/Auchincloss02.html">Auchincloss</a>
+            <a class="dropdown-item" href="/Axelrod/Axelrod.html">Axelrod</a>
+            <a class="dropdown-item" href="/Bhar/BaharNetworkkJS01.html">Bhar</a>
+            <a class="dropdown-item" href="/Gorman/Gorman-drinking-behavior-edit.html">Gorman</a>
+            <a class="dropdown-item" href="/Schelling/Schelling.html">Schelling</a>
+            <a class="dropdown-item" href="/WattsStrogatz/WattsStrogatz.html">Watts & Strogatz</a>
+          </div>
       </ul>
     </div>
   </nav>
   <br>
   <div class="container">
     <h2>PHASE Material</h2>
-    <h5>Complexity Explorer</h5>
+    <br>
+    <br>
+    <h4> <a href="/Auchincloss/Auchincloss02.html"> Introductory guide to agent-based modeling and an illustration from
+        urban health research </a> </h4>
+    <div class="ref">
+
+      Auchincloss, Amy H., and Leandro Martin Totaro Garcia. "Brief
+      introductory guide to agent-based modeling and an illustration from
+      urban health research." Cadernos de saude publica 31 (2015): 65-78.
+
+    </div>
     <div class="row">
 
       <div class="col-sm-4">
-        <img src="img/SantaFe.png" width="100%">
+        <img src="img/Auchincloss.png" width="100%">
       </div>
 
 
       <div class="col-sm-8 bgTextBox">
-        <p>Santa Fe Institute online course <a href="https://www.complexityexplorer.org/courses/23-introduction-to-agent-based-modeling-summer-2016/segments/5164?summary">Introduction to Agent-Based Modeling</a>  This is an in depth 7 module course that is aimed at the programming novice and taking them to intermediate level.It is centred around  It includes the use of R. The modules are in a mooc style with 10 - 15 video sections. The videos are available to download and reuse. </p>
-    </div>
+        <p> This is an excellent example of using modelling to ask “what if” question of aspects of individual behaviour
+          that would be very difficult to replicate with a real population. In this case the positioning of food
+          outlets.
 
+          This is a model of the inequalities in diet in the context of urban residential segregation. It has been used
+          by Auchincloss and Garcia as an example of how to create an Agent Based Model (ABM) to address complex Non
+          Communicable Disease(NDC) problems. The model is used as an introductory guide to the philosophy and practices
+          of ABMs and is used to illustrate why ABMs are a good fit for NDC investigation. The paper describes very
+          clearly how to take descriptions of individual behaviour and incorporate them into an ABM framework and run
+          “what if “ experiments with it. </p>
+      </div>
+    </div>
+    <br>
+    <br>
+
+    <h4> <a href=""> The dissemination of culture </a> </h4>
+    <div class="ref">Axelrod, Robert. "The dissemination of culture: A model with local convergence and global
+      polarization." Journal of conflict resolution 41.2 (1997): 203-226. </div>
+    <div class="row">
+
+      <div class="col-sm-4">
+        <img src="img/Axelrod.png" width="100%">
+      </div>
+
+
+      <div class="col-sm-8 bgTextBox">
+        <p> Like Schelling, Axelrod is a pioneer in the use of agent based models in social science. Like the Schelling
+          segregation model the Axelrod model looks at the influence on the behaviour of an individual agent ( person )
+          by a social network of it’s immediate neighbours. In the Axelrod model it is not its geographic position that
+          changes but that agent ideas or culture. Like the Shelling model the Axelrod model is a theoretical model but
+          one that is equal powerful as the Shelling model in ilumiation the emergent complex behaviours of social
+          networks.</p>
+      </div>
     </div>
     <br>
 
-    <h5>Computer simulations</h5>
+    <h4> <a href="/Bhar/BaharNetworkkJS01.html"> Exploiting Social Networks to Mitigate the Obesity Epidemic</a> </h4>
+    <div class="ref">Bahr, David B., et al. "Exploiting social networks to mitigate the obesity epidemic." Obesity 17.4
+      (2009): 723-728. </div>
     <div class="row">
 
       <div class="col-sm-4">
-        <img src="img/UCDavis.png" width="100%">
+        <img src="img/Bhar.png" width="100%">
       </div>
 
 
       <div class="col-sm-8 bgTextBox">
-        <p>UCDavis has a MOOC on Cousere <a href="https://www.coursera.org/learn/computer-simulations/home/welcome">Computer Simulations</a>  This is an other course that is aimed at the programming novice and is centerd arond NetLogo. The videos are not available to download</p>
-    </div>
-
+        <p> This is a good model to explore and understand network theory[ see referance 2 in links]. One of the most
+          important features of an ABM is the way in which the agents interact with each other. In this model social
+          networks within a population are created by forming links between agents. The agent-to-agent links represent
+          connections between a person and their friends. In this model this friendship network is used to simulate the
+          effect that a person's friends have on their body weight. This abstract model shows that the structure of this
+          friendship network is very important in determining population level patterns of behaviour. </p>
+      </div>
     </div>
     <br>
-    
-
-    <h5>Agent-Based Modeling for Archaeology</h5>
+    <br>
+    <h4> <a href="/Gorman/Gorman-drinking-behavior-edit.html"> Agent-Based Modelling of Drinking Behaviour</a> </h4>
+    <div class="ref">Gorman, Dennis M., et al. "Agent-based modeling of drinking behavior: a preliminary model and
+      potential applications to theory and practice." American journal of public health 96.11 (2006): 2055-2060.</div>
     <div class="row">
 
       <div class="col-sm-4">
-        <img src="img/ABMFA.png" width="100%">
+        <img src="img/Gorman.png" width="100%">
       </div>
 
 
       <div class="col-sm-8 bgTextBox">
-        <p>The Santa Fe Institute press has produce a print and online boob <a href="https://www.sfipress.org/books/agent-based-modeling-archaeology">Agent-Based Modeling for Archaeology: Simulating the Complexity of Societies</a>  This a very comprensive worked set of examples of AMB for archaeology. It is centerde around NetLogo</p>
-    </div>
-
+        <p> </p>
+      </div>
     </div>
     <br>
-
-     
-
-    <h5>Agent-Based Modeling for Archaeology</h5>
+    <h4> <a href="/Schelling/Schelling.html"> Schelling Segregation Model</a> </h4>
+    <div class="ref">Schelling, T. 1971. "Dynamic Models of Segregation." Journal of Mathematical Sociology 1:143-86.
+    </div>
     <div class="row">
 
       <div class="col-sm-4">
-        <img src="img/ABMV1.jpg" width="100%">
+        <img src="img/Schelling.png" width="100%">
       </div>
 
 
       <div class="col-sm-8 bgTextBox">
-        <p>The book <a href="https://www.elsevier.com/books/agent-based-spatial-simulation-with-netlogo-volume-1/banos/978-1-78548-055-3">https://www.elsevier.com/books/agent-based-spatial-simulation-with-netlogo-volume-1/banos/978-1-78548-055-3</a>  Contains a number of interesting chapter/pages <p>
-            <ul>
-           <li> 1---Introduction-to-the-Agent-App_2015_Agent-based-Spatial-Simulation-with-N <a href="papers/1---Introduction-to-the-Agent-App_2015_Agent-based-Spatial-Simulation-with-N.pdf">Download</a> </li>
-            <li> 2---Description-Formalisms-in-Agent_2015_Agent-based-Spatial-Simulation-with-NetLogo <a href="papers/2---Description-Formalisms-in-Agent_2015_Agent-based-Spatial-Simulation-with.pdf"> Download</a> </li>
-            <li> 3---Introduction-to-NetLogo_2015_Agent-based-Spatial-Simulation-with-Netlogo <a href="papers/3---Introduction-to-NetLogo_2015_Agent-based-Spatial-Simulation-with-Netlogo.pdf"> Download</a> </li>
-        </ul>
+        <p> Schelling's segregation model can be said to be the first sociology Agent Based Model (ABM). It took a
+          complex social behaviour of racial segregation and asked if it could be captured by some simple rules. What
+          makes the model exceptional are the range and types of behaviours that this simple model exhibits. These types
+          of behaviours are known as emergent and this is one of the first models of its type to exhibit this. Many
+          sociological ABMs can trace their lineage back to this model. If you are interested in ABMs for simulating
+          non-communicable disease (NCD) is well worth your while getting to know Schelling's segregation model.
+        </p>
+      </div>
     </div>
+    <br>
+    <br>
 
+
+    <h4> <a href="/WattsStrogatz/WattsStrogatz.html"> Infections on a "Small World" Model </a> </h4>
+    <div class="ref">Watts, Duncan J., and Steven H. Strogatz. "Collective dynamics of ‘small-world’networks." nature
+      393.6684 (1998): 440-442.</div>
+    <div class="row">
+
+      <div class="col-sm-4">
+        <img src="img/WattsStrogatz.png" width="100%">
+      </div>
+
+
+      <div class="col-sm-8 bgTextBox">
+        <p> One of the other modelling methods in complex systems science is network models. Two of the pioneers of
+          modern network modelling were Duncan Watts and Steven Strogatz. Among their contributions to modelling was the
+          small world network. This model gives one possible explanation for the famous six degrees of separation. In
+          the 1960’ the social psychologist Stanley Milgram tried to get letters sent to random people in the USA by
+          people passing on the letter to people they personally knew who may be closer to the target then they were.
+          The results showed that on average it took just six intermediate people to pass on the letter. If our
+          connections to other people were just random then the number of intermediates required for people to pass on
+          the letter would be much higher. Watts and Strogatz small world model posited that connections are locally
+          made but with the occasional link to someone more distant would account for the behaviour seen by Milgram.The
+          connections between agents (people ) are important to understanding emergent social behaviour. We have all
+          recently experienced this with the spread of COVID19. In this demonstration we use a simple agent based model
+          (AMB) combined with the small world model to show the effect of long distance links to the spread of a
+          disease. </p>
+      </div>
+      <br>
+      <div class="card-body ref">
+        <p>Axelrod, Robert. "The dissemination of culture: A model with local convergence and global polarization."
+          Journal of conflict resolution 41.2 (1997): 203-226. </p>
+        <p>Auchincloss, Amy H., and Leandro Martin Totaro Garcia. "Brief introductory guide to agent-based modeling and
+          an illustration from urban health research." Cadernos de saude publica 31 (2015): 65-78. </p>
+        <p>Bahr, David B., et al. "Exploiting social networks to mitigate the obesity epidemic." Obesity 17.4 (2009):
+          723-728. </p>
+        <p>Gorman, Dennis M., et al. "Agent-based modeling of drinking behavior: a preliminary model and potential
+          applications to theory and practice." American journal of public health 96.11 (2006): 2055-2060.</p>
+        <p>Schelling, T. 1971. "Dynamic Models of Segregation." Journal of Mathematical Sociology 1:143-86. </p>
+        <p>Watts, Duncan J., and Steven H. Strogatz. "Collective dynamics of ‘small-world’networks." nature 393.6684
+          (1998): 440-442.</p>
+      </div>
     </div>
-    <br>   
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -1,174 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-    />
 
-    <title>Schelling</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Schelling</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapsibleNavbar"
-        >
-          <span class="navbar-toggler-icon"></span>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+
+  <title>Schelling</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Schelling</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Models
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/Auchincloss/Auchincloss02.html">Auchincloss</a>
+              <a class="dropdown-item" href="/Axelrod/Axelrod.html">Axelrod</a>
+              <a class="dropdown-item" href="/Bhar/BaharNetworkkJS01.html">Bhar</a>
+              <a class="dropdown-item" href="/Gorman/Gorman-drinking-behavior-edit.html">Gorman</a>
+              <a class="dropdown-item" href="/Schelling/Schelling.html">Schelling</a>
+              <a class="dropdown-item" href="/WattsStrogatz/WattsStrogatz.html">Watts & Strogatz</a>
+            </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="margin-top: 80px">
+    <!-- <a href="#test">test</a>  -->
+    <h2>Schelling Segregation Model</h2>
+    <div class="ref">
+      Schelling, T. 1971. "Dynamic Models of Segregation." Journal of
+      Mathematical Sociology 1:143-86.
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-sm-7">
+        <canvas id="canvas" width="280" height="280"></canvas>
+      </div>
+      <div class="col-sm-5">
+        <div class="row">
+          <div class="col">% alike</div>
+          <div class="col">
+            <input type="range" min="1" max="100" value="40" class="slider" id="alike" onchange="setVals()" />
+          </div>
+          <div class="col">
+            <span id="alikelable">40.0</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">Population density %</div>
+          <div class="col">
+            <input type="range" min="1" max="100" value="95" class="slider" id="pop" onchange="setVals()" />
+          </div>
+          <div class="col">
+            <span id="poplable">95.0</span>
+          </div>
+        </div>
+        <br />
+        <button class="btn btn-primary tablinks" onclick="reset()">
+          Reset
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#model">Model</a>
-            </li>
-          </ul>
-        </div>
       </div>
-    </nav>
-    <div class="container" style="margin-top: 80px">
-      <!-- <a href="#test">test</a>  -->
-      <h2>Schelling Segregation Model</h2>
-      <div class="ref">
-        Schelling, T. 1971. "Dynamic Models of Segregation." Journal of
+    </div>
+  </div>
+  <div class="container" style="margin-top: 80px">
+    <h2>Why is this a good example?</h2>
+    <p>
+      Schelling's segregation model can be said to be the first sociology
+      Agent Based Model (ABM). It took a complex social behaviour of racial
+      segregation and asked if it could be captured by some simple rules. What
+      makes the model exceptional are the range and types of behaviours that
+      this simple model exhibits. These types of behaviours are known as
+      emergent and this is one of the first models of its type to exhibit
+      this. Many sociological ABMs can trace their lineage back to this model.
+      If you are interested in ABMs for simulating non-communicable disease
+      (NCD) is well worth your while getting to know Schelling's segregation
+      model.
+    </p>
+
+    <h2>What is the NCD prevention challenge being addressed?</h2>
+    <p>
+      Schelling's segregation model does not directly address a
+      non-communicable disease (NCD) but social segregation does play a part
+      in a number of NCD issues. See our other modelling example the urban
+      health model of Auchincloss that investigates the inequalities in diet
+      in the context of urban residential segregation.
+    </p>
+
+    <h2>How is ABM suited to address this challenge?</h2>
+    <p>
+      What sets Agent Based Models (ABM) apart from other modelling methods is
+      global behaviour emerging from rules that apply across the whole model
+      but are enacted by individuals based on local information. In this case
+      we are looking at individuals' choice of home based on just the racial
+      makeup of their very local neighbourhood. The model asks the simple
+      question of what happens to the global level of segregation if
+      individuals make their housing choice based on how many people are like
+      them in the local neighbourhood. ABMs can model systems and ask
+      questions of systems like these because ABMs model each of the different
+      individuals that make up the population.
+    </p>
+
+    <h2>How does the model work?</h2>
+    <p>
+      The model is amazingly simple. In this version of the model the world is
+      divided into a 40 by 40 grid. Each cell of the grid can either be empty
+      or have a blue agent (a person) or a red agent. Each agent has a
+      neighbourhood of the closest 8 other cells on the grid. At each
+      iteration every agent counts the number of agents in the closet 8 other
+      cells on the grid and notes the percentage that are the same colour as
+      themselves. If that percentage is less than globally set level then the
+      agent randomly picks an empty cell and moves there. That is all the
+      rules are. They are so simple that Schelling originally did the first
+      models by hand using a paper grid. In this version of the model the
+      total number of agents in the model is set with the population density
+      slider. The global acceptance value is set with the alike slider. Re-run
+      the model with the reset button. Run the model with differing levels of
+      global acceptance. Not how the behaviour changes around 30%.
+    </p>
+    <p>
+      This is such an important model that along with this webbased javascript
+      version we have added links to a NetLogo and a Python version.
+    </p>
+    <h2>
+      What are the implications of these findings for policy or practice?
+    </h2>
+    <p>
+      The main implication for policy that this model demonstrates is that the
+      effect of local individual decisions on global measurable attributes
+      like the segregation of a community are not immediately obvious from
+      just analysing an individual's behaviour in isolation.
+    </p>
+
+    <div class="card-body">
+      <p>
+        [1] Schelling, T. 1971. "Dynamic Models of Segregation." Journal of
         Mathematical Sociology 1:143-86.
-      </div>
-      <br />
-      <div class="row">
-        <div class="col-sm-7">
-          <canvas id="canvas" width="280" height="280"></canvas>
-        </div>
-        <div class="col-sm-5">
-          <div class="row">
-            <div class="col">% alike</div>
-            <div class="col">
-              <input
-                type="range"
-                min="1"
-                max="100"
-                value="40"
-                class="slider"
-                id="alike"
-                onchange="setVals()"
-              />
-            </div>
-            <div class="col">
-              <span id="alikelable">40.0</span>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">Population density %</div>
-            <div class="col">
-              <input
-                type="range"
-                min="1"
-                max="100"
-                value="95"
-                class="slider"
-                id="pop"
-                onchange="setVals()"
-              />
-            </div>
-            <div class="col">
-              <span id="poplable">95.0</span>
-            </div>
-          </div>
-          <br />
-          <button class="btn btn-primary tablinks" onclick="reset()">
-            Reset
-          </button>
-        </div>
-      </div>
+      </p>
+      <p><a
+          href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sample%20Models/Social%20Science/Segregation.nlogo">Netlogo</a>
+        version of the Schelling Segregation Model</p>
+      <p> <a href="https://colab.research.google.com/drive/1sNePJ_l6-7Hj0I9hzCYwJYj2fJA9B1he?usp=sharing"> Python </a>(
+        Google colab ) version of the Schelling Segregation Model</p>
     </div>
-    <div class="container" style="margin-top: 80px">
-      <h2>Why is this a good example?</h2>
-      <p>
-        Schelling's segregation model can be said to be the first sociology
-        Agent Based Model (ABM). It took a complex social behaviour of racial
-        segregation and asked if it could be captured by some simple rules. What
-        makes the model exceptional are the range and types of behaviours that
-        this simple model exhibits. These types of behaviours are known as
-        emergent and this is one of the first models of its type to exhibit
-        this. Many sociological ABMs can trace their lineage back to this model.
-        If you are interested in ABMs for simulating non-communicable disease
-        (NCD) is well worth your while getting to know Schelling's segregation
-        model.
-      </p>
+  </div>
 
-      <h2>What is the NCD prevention challenge being addressed?</h2>
-      <p>
-        Schelling's segregation model does not directly address a
-        non-communicable disease (NCD) but social segregation does play a part
-        in a number of NCD issues. See our other modelling example the urban
-        health model of Auchincloss that investigates the inequalities in diet
-        in the context of urban residential segregation.
-      </p>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/ABM.js"></script>
+  <script src="js/schelling.js"></script>
+</body>
 
-      <h2>How is ABM suited to address this challenge?</h2>
-      <p>
-        What sets Agent Based Models (ABM) apart from other modelling methods is
-        global behaviour emerging from rules that apply across the whole model
-        but are enacted by individuals based on local information. In this case
-        we are looking at individuals' choice of home based on just the racial
-        makeup of their very local neighbourhood. The model asks the simple
-        question of what happens to the global level of segregation if
-        individuals make their housing choice based on how many people are like
-        them in the local neighbourhood. ABMs can model systems and ask
-        questions of systems like these because ABMs model each of the different
-        individuals that make up the population.
-      </p>
-
-      <h2>How does the model work?</h2>
-      <p>
-        The model is amazingly simple. In this version of the model the world is
-        divided into a 40 by 40 grid. Each cell of the grid can either be empty
-        or have a blue agent (a person) or a red agent. Each agent has a
-        neighbourhood of the closest 8 other cells on the grid. At each
-        iteration every agent counts the number of agents in the closet 8 other
-        cells on the grid and notes the percentage that are the same colour as
-        themselves. If that percentage is less than globally set level then the
-        agent randomly picks an empty cell and moves there. That is all the
-        rules are. They are so simple that Schelling originally did the first
-        models by hand using a paper grid. In this version of the model the
-        total number of agents in the model is set with the population density
-        slider. The global acceptance value is set with the alike slider. Re-run
-        the model with the reset button. Run the model with differing levels of
-        global acceptance. Not how the behaviour changes around 30%.
-      </p>
-      <p>
-        This is such an important model that along with this webbased javascript
-        version we have added links to a NetLogo and a Python version.
-      </p>
-      <h2>
-        What are the implications of these findings for policy or practice?
-      </h2>
-      <p>
-        The main implication for policy that this model demonstrates is that the
-        effect of local individual decisions on global measurable attributes
-        like the segregation of a community are not immediately obvious from
-        just analysing an individual's behaviour in isolation.
-      </p>
-
-      <div class="card-body">
-        <p>
-          [1] Schelling, T. 1971. "Dynamic Models of Segregation." Journal of
-          Mathematical Sociology 1:143-86.
-        </p>
-        <p><a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/Sample%20Models/Social%20Science/Segregation.nlogo">Netlogo</a> version of the Schelling Segregation Model</p>
-        <p> <a href="https://colab.research.google.com/drive/1sNePJ_l6-7Hj0I9hzCYwJYj2fJA9B1he?usp=sharing"> Python </a>( Google colab ) version of the Schelling Segregation Model</p>
-      </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/ABM.js"></script>
-    <script src="js/schelling.js"></script>
-  </body>
 </html>
