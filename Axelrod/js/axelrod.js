@@ -128,7 +128,7 @@ var update = function () {
 
     }
     draw();
-    if (count < iterations) {
+    if (( running == true) && (count < iterations))  {
         setTimeout(function () {
             window.requestAnimationFrame(update);
         }, 0);
@@ -136,5 +136,17 @@ var update = function () {
     }
 };
 
+var running = false;
+var run = function(){
+    if ( running){
+        running = false
+        let but = document.getElementById("running").innerHTML=" Run "
+    }else{
+        running = true
+        let but = document.getElementById("running").innerHTML="Stop"
+        update()
+    }
+} 
+
 setup()
-update()
+draw()

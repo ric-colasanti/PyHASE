@@ -173,15 +173,25 @@ var update = function () {
         person.pathology(rNumber)
     }
     draw();
-    if (count < 500) {
+    if ((count < 500) && ( running == true))  {
         setTimeout(function () {
             window.requestAnimationFrame(update);
-        }, speed);
+        },0);
         count++
     }
 };
 
+var running = false;
+var run = function(){
+    if ( running){
+        running = false
+        let but = document.getElementById("running").innerHTML=" Run "
+    }else{
+        running = true
+        let but = document.getElementById("running").innerHTML="Stop"
+        update()
+    }
+} 
 
-console.log("here", count);
 setup()
-update()
+draw()

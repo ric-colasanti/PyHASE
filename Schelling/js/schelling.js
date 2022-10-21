@@ -108,15 +108,25 @@ var update = function () {
         };
     }
     draw();
-    if(count<200){
+    if((count<200) && ( running == true))  {
         setTimeout(function () {
             window.requestAnimationFrame(update);
-        }, 10);
+        }, 500);
         count++
     }
 };
 
+var running = false;
+var run = function(){
+    if ( running){
+        running = false
+        let but = document.getElementById("running").innerHTML=" Run "
+    }else{
+        running = true
+        let but = document.getElementById("running").innerHTML="Stop"
+        update()
+    }
+} 
 
-console.log("here",count);
 setup()
-update()
+draw()
