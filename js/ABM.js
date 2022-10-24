@@ -3,13 +3,17 @@ function rndInt(maxVal) {
 }
 
 class CACanvas {
-    constructor(size, cSize = 20) {
+    constructor(size, cSize = 40) {
         this.size = size;
         this.cSize = cSize;
         this.buffer = document.createElement("canvas");
         this.buffer.width = this.size * this.cSize;
         this.buffer.height = this.size * this.cSize;
+        console.log(this.buffer.width,this.buffer.height);
         this.ctx = this.buffer.getContext("2d");
+        let visible_canvas = document.getElementById("canvas");
+        visible_canvas.width=400
+        visible_canvas.height=400
     }
 
     draw(x, y, cellColor, circle = false, circleColor = "#000000") {
@@ -30,10 +34,10 @@ class CACanvas {
  
     
     drawCircle(x, y,colour,sz=0,thick=1) {
-        let offset = Math.floor(this.cSize / 2);
+        let offset = Math.floor(this.cSize / 2)-2;
         this.ctx.beginPath();
         this.ctx.lineWidth = thick;
-        this.ctx.arc(x * this.cSize + offset, y * this.cSize + offset, offset - (sz+1), 0, 2 * Math.PI)
+        this.ctx.arc(x * this.cSize + offset+sz/2, y * this.cSize + offset+sz/2, offset - (sz+1), 0, 2 * Math.PI)
         this.ctx.fillStyle = colour;
         this.ctx.fill();
         this.ctx.strokeStyle = '#000000';
@@ -73,6 +77,7 @@ class CACanvas {
         let visible_canvas = document.getElementById(canvasID);
         let vctx = visible_canvas.getContext("2d");
         vctx.drawImage(this.buffer, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height, 0, 0, vctx.canvas.width, vctx.canvas.height);
+        console.log(this.ctx.canvas.width, this.ctx.canvas.height, 0, 0, vctx.canvas.width, vctx.canvas.height);
     }
 }
 
