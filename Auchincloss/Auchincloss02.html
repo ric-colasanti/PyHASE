@@ -148,74 +148,39 @@
     <div class="container" style="margin-top: 80px">
       <h2>Why is this a good example?</h2>
       <p>
-        This is an excellent example of using modelling to ask “what if”
-        question of aspects of individual behaviour that would be very difficult
-        to replicate with a real population. In this case the positioning of
-        food outlets.
+        This is an excellent example of using an agent-based model (ABM) to ask “what if” questiona about aspects of individual behaviour that would be very difficult to
+replicate within a real population. In this case the positioning of different types of food outlets within neighbourhoods.
       </p>
       <p>
-        This is a model of the inequalities in diet in the context of urban
-        residential segregation. It has been used by Auchincloss and Garcia as
-        an example of how to create an Agent Based Model (ABM) to address
-        complex Non Communicable Disease(NDC) problems. The model is used as an
-        introductory guide to the philosophy and practices of ABMs and is used
-        to illustrate why ABMs are a good fit for NDC investigation. The paper
-        describes very clearly how to take descriptions of individual behaviour
-        and incorporate them into an ABM framework and run “what if “
-        experiments with it.
+        This is a model of the inequalities in diet in the context of urban residential segregation. Auchincloss and Garcia use this model as an example of how to create an ABM to address complex non-communicable disease(NCD) problems. The model is used as an introductory guide to the philosophy and practices of ABMs and is used to illustrate why ABMs are a good fit for investigating NCD prevention. The paper
+describes very clearly how to take descriptions of individual behaviour and
+incorporate them into an ABM framework and run “what if “ experiments with the model.
       </p>
 
       <h2>What is the NCD prevention challenge being addressed?</h2>
       <p>
-        This model investigates the inequalities in diet in the context of urban
-        residential segregation
+        This model investigates the inequalities in diet in the context of urban residential segregation
       </p>
       <p>
-        One of the contributory factors to obesity and obesity related health
-        conditions and illness is the high consumption of nutrient-poor
-        energy-dense foods. It has been shown in numerous population studies
-        that there is a higher prevalence of nutrient-poor energy-dense foods in
-        the diets of lower income families. It has also been shown that one of
-        the contributing factors to this difference in diet quality is access to
-        healthy food outlets. It has long been recognised that urban landscapes
-        are influenced by residential segregation by both economic and ethnic
-        factors and that there is a marked difference in resources and services
-        between these areas. ( see the model by Thomas Schelling included in
-        this series for an abm model of segregation ). It has been shown that
-        lower income neighbourhoods have far fewer outlets that provide healthy
-        foods. Auchincloss and Garcia model looks at the role of economic
-        segregation on food outlet distribution and looks at possible “policy
-        levers” that may be used to counteract this.
+        One of the contributory factors to obesity and obesity-related health conditions and illness is the high consumption of nutrient-poor energy-dense foods. Numerous population studies have shown that there is a higher prevalence of nutrient-poor energy-dense foods in the diets of lower income families compared with higher
+income families. One of the contributing factors to this difference in diet quality is access to healthy food outlets. It has long been recognised that urban landscapes are influenced by residential segregation based on both economic and ethnic factors and that there is a marked difference in resources and services between these areas. (See the model by Thomas Schelling included in this series for an ABM of
+segregation). Lower income neighbourhoods usually have far fewer outlets that provide healthy foods compared to higher income neighbourhoods. Auchincloss and
+Garcia’s model looks at the role of economic segregation on food outlet distribution and looks at possible “policy levers” that may be used to counteract this.
       </p>
       <h2>How is ABM suited to address this challenge?</h2>
       <p>
-        As is demonstrated by the Schelling model segregation and an
-        individual's response to it is a function of the spatial location of
-        populations. The nature of the spatial location of the individuals is
-        governed by local factors and tends to be heterogeneous. By that we mean
-        that the spatial pattern of the population tends not to a smooth
-        gradation but tends to be a more patchy pattern. This type of spatial
-        distribution is very hard to be incorporated in traditional mathematical
-        or statistical models but is very easy to implement with an Agent Based
-        Model (ABM). In this model we are mainly looking at the decisions that
-        outlets make on their location, and food and price. The rule based
-        nature of ABMs makes construction of a shop based model both simpler and
-        transparent.
+        As is demonstrated by the Schelling model segregation and an individual's response to it is a function of the spatial location of populations. The nature of the spatial location of the individuals is governed by local factors and tends to be
+heterogeneous. By that we mean that the spatial pattern of the population tends not to a smooth gradation but tends to be a more patchy pattern. This type of spatial distribution is very hard to be incorporated in traditional mathematical or statistical
+models but is very easy to implement with an Agent Based Model (ABM). In this model we are mainly looking at the decisions that outlets make on their location, and food and price. The rule based nature of ABMs makes construction of a shop based model both simpler and transparent.
       </p>
 
       <h2>What are the key components of the model?</h2>
       <p>
-        This is a simplified version of Auchinclosss model and concentrates on
-        just the effect that segregation has on the success and type of food
-        outlets.
+        Here we present a simplified version of Auchinclosss model that concentrates on just the effect that segregation has on the success and type of food outlets within a neighbourhood.
       </p>
       <p>
-        The model has two entities, people and shops. Each person is represented
-        as an arrow head . The colour of the shape indicates their economic
-        status. High income is blue. Lower income is red. Each person has a
-        home. This is a square of the same colour. The homes are presented as a
-        grid. People shop for food at shops. The shops also occupy the same grid
-        and are represented as circles. The shops are of one of four types: High
+        The model has two entities, people and shops. Each person is represented as an arrowhead. The colour of the arrowhead indicates their economic status: high income is blue;low income is red. Each person has a home. This is a square of the same colour. The homes are presented as a grid. People go to shops to buy food. The shops also occupy the same grid and are represented as circles. The shops are of one
+of four types:: High
         cost convenience
         <span style="color: rgba(255, 0, 0, 0.4)">&#9679;</span>, Low cost
         convenience<span style="color: rgba(255, 0, 255, 0.4)">&#9679;</span>,
@@ -224,56 +189,44 @@
           &#9679; </span>.
       </p>
       <p>
-        Each person chooses a shop to go to. They choose the shop based on
-        sensitivity to three factors. The first is price. The second is the
-        distance they have to travel. The third is preference for healthy food.
-        When a person has chosen a shop they move to that shop. The proportion
-        of each economic status at each shop is indicated by the size of the
-        solid colour surrounding the shop circle. The exact information on each
-        shop can be accessed by clicking your mouse on the shop circle
+        Each person chooses a shop to go to. They choose the shop based on sensitivity to three factors: 1) price; 2)the distance they have to travel; 3) individual preference for
+healthy food. When a person has chosen a shop they move to that shop. The proportion of each economic status at each shop is indicated by the size of the solid
+colour surrounding the shop circle. The exact information on the type of food sold and number of customers with high or low income for each shop can be accessed by clicking your mouse on the shop circle.
       </p>
       <p>
-        Each economic class has different underlying preferences. For example it
-        is assumed that distance from shops has less influence for higher
-        economic class. The overall effect of each of the three factors can be
-        altered.
+        Each economic class has different underlying preferences. For example, it is assumed
+that distance from shops has less influence for high income people. The overall effect of each of the three factors can be altered.
       </p>
       <p>
-        The model simulates the effect of economic segregation. This is done by
-        either randomly allocating a home or placing each economic calls in a
-        separate half of the grid.
+        Each economic class has different underlying preferences. For example, it is assumed
+that distance from shops has less influence for high income people. The overall effect of each of the three factors can be altered.
       </p>
 
       <h2>How does the model work?</h2>
 
       <p>
-        The model will run automatically when the page is opened. The overall
-        effect of each of the three factors can be altered with the sliders on
-        the right of the display. The type of population distribution can be
-        chosen from the radio buttons. The model can be restarted with the new
-        values with the restart button. The customers of the shops can be seen
-        within the shop circle. More detailed information on shop type and the
-        number of customers can be seen by clicking on a shop circle.
+        The model will run automatically when the page is opened. The overall effect of each of the three factors influencing an individual’s preference for a specific type of shop (price, distance, food preference) can be altered with the sliders on the right of the
+display. The type of population distribution (segregated or unsegregated) can be chosen from the radio buttons. The model can be restarted with the new values using the reset button. The customers visiting each shop can be seen within the shop
+circle. More detailed information on shop type and the number of customers can be seen by clicking on a shop circle.
       </p>
       <p>
-        Alter the three factors and the segregation to see the effect it has on which shops are successful and what the
-        class their customers are.
+        Alter the three factors influencing individual’s shopping preferences and the
+segregation to see the effect it has on which shops are successful and what type of customers they attract.
       </p>
       <p>
-        Do look at Auchincloss's paper[1]. You see how agent based models can be applied to complex social systems. You
-        will see how they constructed their model and how it compares to this simplified example.
+        This is a simplified version of the model constructed by Auchincloss [1]. In the paper you read about how ABMs can be applied to complex social systems, and see how
+        they constructed their more complex model and how it compares to this simplified example.
       </p>
 
       <h2>
         What are the implications of these findings for policy or practice?
       </h2>
       <p>
-        In Auchincloss's other paper[2] she concludes:
-        "<i>The model underscores the challenges of fostering favorable behavior change when
-          people and resources are residentially segregated and behaviors are motivated or constrained by
-          multiple factors. Simulation modeling can be a useful tool for proposing and testing policies or
-          interventions that will ultimately be implemented in a complex system where the consequences of
-          multidimensional interactions are diffıcult to predict.</i>"
+        In a follow-up paper in which Auchincloss's uses this model of residential segregation to look at the impact of income inequalities on diet in more detail, [2] the author concludes:
+        "<i>The model underscores the challenges of fostering favorable
+          behavior change when people and resources are residentially segregated and behaviors are motivated or constrained by multiple factors. Simulation modeling can be a useful
+          tool for proposing and testing policies or interventions that will ultimately be implemented in a complex system where the consequences of multidimensional
+          interactions are diffıcult to predict.</i>"
 
       </p>
       <div class="card-body">

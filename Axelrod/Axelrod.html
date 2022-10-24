@@ -10,15 +10,15 @@
     />
 
     <style>
-    canvas {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 300px;
-    height: 300px;
-}  
+      canvas {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        width: 300px;
+        height: 300px;
+      }
     </style>
     <title>Axelrod</title>
   </head>
@@ -88,9 +88,9 @@
       <br />
       <div class="row">
         <div class="col-sm-5">
-          <canvas id="canvas" ></canvas>
+          <canvas id="canvas"></canvas>
 
-          <br>
+          <br />
 
           <div class="row">
             <div class="col">Features</div>
@@ -158,7 +158,7 @@
             Reset
           </button>
 
-          <button id = "running" class="btn btn-primary tablinks" onclick="run()">
+          <button id="running" class="btn btn-primary tablinks" onclick="run()">
             Run
           </button>
         </div>
@@ -170,26 +170,36 @@
                   What is this?
                 </a>
               </div>
-              <div id="collapsea" class="collapse show" data-parent="#accordion">
+              <div
+                id="collapsea"
+                class="collapse show"
+                data-parent="#accordion"
+              >
                 <div class="card-body">
                   <p>
-                    This is a model of how culture emerges from people (agents) sharing similar opinions, behaviours or fashions. Here the people are represented by a square. The agents opinions, behaviours and fashions are represented by features. The set of features is represented by a color. The more similar the color the more similar an agents culture is to another. Each agent interacts with and influences the culture of the agents in their immediate neighborhood.   
+                    This is a model of how culture emerges from people (agents)
+                    sharing similar opinions, behaviours or fashions. Here the
+                    people are represented by a square. The agents opinions,
+                    behaviours and fashions are represented by features. The set
+                    of features is represented by a color. The more similar the
+                    color the more similar an agents culture is to another. Each
+                    agent interacts with and influences the culture of the
+                    agents in their immediate neighborhood.
                   </p>
                 </div>
-              </div> 
+              </div>
               <div id="collapseOne" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    Like Schelling, Axelrod is a pioneer in the use of agent based
-                    models in social science. Like the Schelling segregation model
-                    the Axelrod model looks at the influence on the behaviour of an
-                    individual agent ( person ) by a social network of it’s
-                    immediate neighbours. In the Axelrod model it is not its
-                    geographic position that changes but that agent ideas or
-                    culture. Like the Shelling model the Axelrod model is a
-                    theoretical model but one that is equal powerful as the Shelling
-                    model in ilumiation the emergent complex behaviours of social
-                    networks.
+                    Like Schelling (see Schelling segrataion model example),
+                    Axelrod is a pioneer in the use of agent-based models (ABM)
+                    in social sciences. The Axelrod model looks at the influence
+                    of a person’s social network on the behaviour of an
+                    individual agent(person).In this model each agent’s ideas or
+                    culture can change depending on the influences from it’s
+                    neighbours or “social networks”. Like the Shelling model,
+                    the Axelrod model is a theoretical model that illuminates
+                    the emergent complex behaviours of social networks.
                   </p>
                 </div>
               </div>
@@ -207,11 +217,13 @@
               <div id="collapseTwo" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    There is no direct non communicable disease (NCD) that is being
-                    addressed her but as is illustrated in the Bhar mode ( social
-                    influence on eating ) and the Gorman model ( social influence on
-                    drinking ) understanding the how agents are influenced by their
-                    social networks is key to many NCDs
+                    This model does not directly address a non-communicable
+                    disease (NCD) challenge, but provides a basis for
+                    understanding more complex models of behaviour. As
+                    illustrated in our other examples based on the Bhar model
+                    (social influence on eating) and the Gorman model (social
+                    influence on drinking) understanding how people’s behaviours
+                    are influenced by their social networks is key to many NCDs.
                   </p>
                 </div>
               </div>
@@ -229,15 +241,14 @@
               <div id="collapseThree" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    As with the Shelling model, what sets Agent Based Models (ABM)
-                    apart from other modelling methods is global behaviour emerging
-                    from rules that apply across the whole model but are enacted by
-                    individuals based on who they are linked to, their social
-                    network. Influence flows across the network altering each
-                    agent's culture but all iterating to produce both local and
-                    global consensus. This dynamic spatially heterogeneous behaviour
-                    of the global culture would be very hard to model with other
-                    methodologies.
+                    What sets ABMs apart from other modelling methods is global
+                    behaviour emerging from rules that apply across the whole
+                    model but are enacted by individuals based on who they are
+                    linked to, their social network. Influence flows across the
+                    network altering each agent's culture in an iterative manner
+                    to produce both local and global consensus. This dynamic
+                    spatially heterogeneous behaviour of the global culture
+                    would be very hard to model with other methodologies.
                   </p>
                 </div>
               </div>
@@ -256,7 +267,7 @@
                 <div class="card-body"></div>
               </div>
             </div>
-    
+
             <div class="card">
               <div class="card-header">
                 <a
@@ -270,49 +281,59 @@
               <div id="collapseFive" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    The Axelrod model is a model of Social influence where a person
-                    becomes more like a person they are linked to. It models the
-                    social convergence of culture. Unlike the Shelling mode each
-                    agent is static in its own cell of a two dimensional matrix.
-                    Each agent can see four neighbours/contacts. North East South
-                    and West of the cell that it occupies. Note that an agent does
-                    not share any contacts with any of its contacts. Each agent's
-                    culture is represented as a set of 5 features. Each feature is
-                    described by a single trait. An agent's similarity to any of its
-                    contacts is measured by how many features that each has that
-                    have the same trait. For example if agent A has a feature set
-                    [5,2,7,4,6] and its contact to the North has the feature set
-                    [2,8,7,7,3] then the two agents share the same trait at feature
-                    3 ( both are trait 7) so have a similarity of ⅕ or 20%.
+                    The Axelrod model is a model of social influence where a
+                    person becomes more like a person they are linked to. It
+                    models the social convergence of culture.
                   </p>
                   <p>
-                    An agent will influence another agent in direct proportion to
-                    their similarity. When one agent does influence the other a
-                    random feature is chosen and the traits of both the agents for
-                    that feature are made equal. So for agent A and agent B above
-                    there is a 20% chance they will interact. A's feature set will
-                    change from [5,2,7,4,6] to [5,2,7,7,6]. Note that there is now a
-                    40% similarity.
+                    Each agent, or person, is static in its own cell within a
+                    two dimensional matrix. Each agent has four
+                    neighbours/contacts within their social network: those
+                    directly above, below, to the left and right of the agent
+                    within the grid matrix. Note that an agent does not share
+                    any other contacts with each of its four contacts.
                   </p>
-    
+                  <p>
+                    Each agent's culture is represented as a set of 5 features.
+                    Each feature is described by a trait, that is a single value
+                    between XX and XX.. An agent's similarity to any of its
+                    contacts is measured by how many features that each has that
+                    have the same trait. For example if agent A has a feature
+                    set [5,2,7,4,6] and the agent it contacts above it has the
+                    feature set [2,8,7,7,3] then the two agents share the same
+                    trait at feature 3 (both are trait 7) so have a similarity
+                    of 1⁄5 or 20%.
+                  </p>
+                  <p>
+                    An agent will influence another agent in direct proportion
+                    to their similarity. When one agent does influence the other
+                    a random feature is chosen and the traits of both the agents
+                    for that feature are made equal. So for agent A and agent B
+                    above there is a 20% chance they will interact. A's feature
+                    set will change from [5,2,7,4,6] to [5,2,7,7,6], a change in
+                    feature 2 to match the trait of its neighbour (both now
+                    trait 7). Note that there is now a 40% similarity.
+                  </p>
+
                   <p>
                     In this simulation the different sets of features are
                     represented by a single colour. Similar feature sets have
                     similar colours. Over a number of iterations the random
-                    patchwork of colours converges on blocks of similar colours as
-                    groups of agents converge on similar cultures.
+                    patchwork of colours converges on blocks of similar colours
+                    as groups of agents converge on similar cultures.
                   </p>
                   <p>
                     What is interesting is to see what effect changing the
                     population size the number of iterations and the number of
-                    features has on the spatial heterogeneity. This can be done with
-                    sliders on the right and re-running the model with the "Reset"
-                    button. The patterns formed by the model can be quite mesmeric
+                    features has on the spatial heterogeneity. This can be done
+                    by moving the sliders on the right of the model and
+                    re-running the model with the "Reset" button. The patterns
+                    formed by the model can be quite mesmeric.
                   </p>
                 </div>
               </div>
             </div>
-    
+
             <div class="card">
               <div class="card-header">
                 <a
@@ -327,17 +348,17 @@
               <div id="collapseSeven" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    Two interesting outcomes from the model are: The move to a
+                    Two interesting outcomes from the model are: the move to a
                     common culture in smaller populations and the occurrence of
                     lockout groups when the number of features that constitute a
-                    culture are small. While this is only a simple theoretical model
-                    it does highlight some possible obstacles that may occur in both
-                    mating diversity and in changing mindsets.
+                    culture are small. While this is only a simple theoretical
+                    model it does highlight some possible obstacles that may
+                    occur in both addressing diversity and in changing mindsets.
                   </p>
                 </div>
               </div>
             </div>
-    
+
             <div class="card">
               <div class="card-header">
                 <a
@@ -351,9 +372,9 @@
               <div id="collapseEight" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    [1] Axelrod, Robert. "The dissemination of culture: A model with
-                    local convergence and global polarization." Journal of conflict
-                    resolution 41.2 (1997): 203-226.
+                    [1] Axelrod, Robert. "The dissemination of culture: A model
+                    with local convergence and global polarization." Journal of
+                    conflict resolution 41.2 (1997): 203-226.
                   </p>
                 </div>
               </div>
@@ -362,8 +383,6 @@
         </div>
       </div>
       <br />
-
-      
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
