@@ -50,10 +50,10 @@ var distance = function () {
             distance = 1 / distance
             total += distance
             if ((person.sClass == 1) && (shop.sClass == 1)) {
-                total += 0.9
+                total += 0.2
             }
             if ((person.sClass == 0) && (shop.sClass == 1)) {
-                total *= 0.1
+                total *= 0.5
             }
             //console.log(distance,total);
             person.shops.push(shop)
@@ -80,7 +80,7 @@ var chooseShop = function () {
         }else{
             person.color = "darkred"
         }
-        
+        person.color = person.shops[j].color
         person.shops[j].customers++;
     }
 }
@@ -93,8 +93,8 @@ var setup = function () {
     for (i = 0; i < size * size; i++) {
         var home = new Home();
         var sclass = 0
-        //if (rndInt(2) == 0) {
-        if (i < size * size / 2) {
+        if (rndInt(2) == 0) {
+        //if (i < size * size / 2) {
             home.color = "#dddddd"
 
         } else {
@@ -158,13 +158,30 @@ var update = function () {
     chooseShop()
     draw()
     count++
+    if(running){
+
     setTimeout(function () {
         window.requestAnimationFrame(update);
-    }, 50);
-
+    }, 500);
+}
+    
 };
+var reset = function () {
+    setup()
+    chooseShop()
+}
 
-
+var running = false;
+var run = function(){
+    if ( running){
+        running = false
+        let but = document.getElementById("running").innerHTML=" Run "
+    }else{
+        running = true
+        let but = document.getElementById("running").innerHTML="Stop"
+        update()
+    }
+} 
 setup()
 chooseShop()
-update()
+draw()
