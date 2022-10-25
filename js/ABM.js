@@ -45,13 +45,14 @@ class CACanvas {
         this.ctx.lineWidth=1
     }
 
-    drawSquare(x, y, colour) {
+    drawSquare(x, y, colour,width=0,bcolor="black") {
         this.ctx.beginPath();
         this.ctx.rect(x * this.cSize, y * this.cSize, this.cSize, this.cSize)
         this.ctx.fillStyle = colour;
         this.ctx.fill();
-        this.ctx.strokeStyle = '#000000';
-        //this.ctx.stroke();
+        this.ctx.strokeStyle = bcolor;
+        this.ctx.lineWidth=width
+        this.ctx.stroke();
     }
 
     drawLine(x1,y1,x2,y2,color= '#000000', thick = 1){
