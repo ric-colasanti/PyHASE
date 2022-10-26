@@ -218,9 +218,22 @@ class Patch {
         agent.home = this;
         // console.log(this,agent);
     }
-    addAgent(agent) {
+    
+    addAgentTo(agent) {
         this.occupants.push(agent);
         agent.home = this;
+    }
+
+    removeAgent(){
+        this.occupant.home = null
+        this.occupant=nul
+    }
+    
+    removeAgentFrom(agent){
+        if(this.occupants.includes(agent)){
+            this.occupants.splice(this.occupants.indexOf(agent),1)
+            agent.home = null;
+        }
     }
 
     getRandomNeighbor(){

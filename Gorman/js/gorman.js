@@ -14,6 +14,17 @@ class Person extends Agent {
         this.color = color;
         this.drinkState = "suspectable"
     }
+    infect(){
+        let test = function(agent){
+            return agent.color="green"
+        }
+        if(this.color=="red"){
+            let x = this.home.occupants.find(test)
+            if( x!=undefined){
+                x.color = "red"
+            }
+        }
+    }
 }
 
 
@@ -51,10 +62,14 @@ var setup = function(){
     }
     for(let i = 0; i < population; i++ ){
         let person = new Person()
-        person.color = "rgb("+rndInt(255)+","+rndInt(255)+","+rndInt(255)+")" 
+        person.color = "green" 
         people.push(person)
-        area[rndInt(size*size)].addAgent(person)
+        area[rndInt(size*size)].addAgentTo(person)
     }
+    let person = new Person()
+    person.color = "red" 
+    people.push(person)
+    area[rndInt(size*size)].addAgentTo(person)
 }
 
 var draw = function(){
@@ -62,7 +77,7 @@ var draw = function(){
         const place = area[i];
         const c = 255*place.gradient
         d = 255-c
-        const color = "rgb("+255+","+d+","+d+")" 
+        const color = "rgb("+d+","+d+","+255+")" 
         caCanvas.draw(place.xPos, place.yPos, color);
     }
     for (let i = 0; i < people.length; i++) {
@@ -75,14 +90,16 @@ var draw = function(){
 var update = function(){
     for (let i = 0; i < people.length; i++) {
         const person = people[i];
-        nhome = person.home.getRandomNeighbor()
-        person.home.occupant = null
-        nhome.addAgent(person)
+        let home = person.home 
+        nhome = home.getRandomNeighbor()
+        home.removeAgentFrom(person)
+        nhome.addAgentTo(person)
+        person.infect()
     }
     draw()
     setTimeout(function () {
         window.requestAnimationFrame(update);
-    }, 50);
+    }, 0);
 }
 
 setup()
