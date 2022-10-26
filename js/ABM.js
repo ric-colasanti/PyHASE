@@ -209,6 +209,7 @@ class Patch {
         this.yPos = 0;
         this.neighbors = new Array();
         this.occupant = null
+        this.occupants=[]
         this.numberOfNeighbors = 0
     }
 
@@ -216,6 +217,14 @@ class Patch {
         this.occupant = agent;
         agent.home = this;
         // console.log(this,agent);
+    }
+    addAgent(agent) {
+        this.occupants.push(agent);
+        agent.home = this;
+    }
+
+    getRandomNeighbor(){
+        return this.neighbors[rndInt(this.neighbors.length)]
     }
 }
 
