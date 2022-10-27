@@ -3,12 +3,16 @@ var size = 40;
 population= 100
 pubs = 1
 var caCanvas = new CACanvas(size);
+var probStart = 0.5
+var probStop = 0.3
 
 var area=[]
 var people = []
 
 var time=[]
 var drinkers=[]
+var suspectable=[]
+var former=[]
 class Person extends Agent {
     constructor(sClass, preference, color) {
         super();
@@ -16,13 +20,28 @@ class Person extends Agent {
         this.drinkState = "suspectable"
     }
     infect(){
-        let test = function(agent){
-            return agent.color="green"
+        let testC = function(agent){
+            return agent.drinkState=="current"
         }
-        if(this.color=="red"){
-            let x = this.home.occupants.find(test)
+        let testF = function(agent){
+            return agent.drinkState=="former"
+        }
+        if(this.drinkState=="suspectable"){
+            let x = this.home.occupants.find(testC)
             if( x!=undefined){
-                x.color = "red"
+                this.drinkState = "current"
+            }
+        }else if(this.drinkState=="current"){
+            let x = this.home.occupants.find(testF)
+            if( x!=undefined){
+                if(Math.random()<0.9){
+                    this.drinkState = "former"
+                }
+            }
+        }else if(this.drinkState=="former"){
+            let x = this.home.occupants.find(testC)
+            if( x!=undefined){
+                this.drinkState = "current"
             }
         }
     }
@@ -75,12 +94,12 @@ var setup = function(){
     }
     for(let i = 0; i < population; i++ ){
         let person = new Person()
-        person.color = "green" 
+        person.drinkState="suspectable"
         people.push(person)
         area[rndInt(size*size)].addAgentTo(person)
     }
     let person = new Person()
-    person.color = "red" 
+    person.drinkState="current"
     people.push(person)
     area[rndInt(size*size)].addAgentTo(person)
 }
@@ -95,32 +114,64 @@ var draw = function(){
     }
     for (let i = 0; i < people.length; i++) {
         const person = people[i];
-        caCanvas.drawCircle(person.xPos(), person.yPos(), person.color, "black", 4, 1);
+        var color = "green"
+        if(person.drinkState ==  "current"){
+            color = "red"
+        }
+        if(person.drinkState ==  "former"){
+            color = "blue"
+        }
+        caCanvas.drawCircle(person.xPos(), person.yPos(),color, "black", 4, 1);
     }
     caCanvas.update("canvas");
 }
 
-var update = function(iterations){
-    var count = 0
-    var plot = function(){
+var plot = function(iterations){
 
-        var data = [{
+    var data = [{
+        x: time,
+        y: drinkers,
+        name: "Current",
+        mode: "lines",
+        type: "scatter",
+        line: {
+        color:"red"
+        }
+      },{
+        x: time,
+        y: suspectable,
+        name: "Suspectable",
+        mode: "lines",
+        type: "scatter",
+        line: {
+            color: "green"
+        }},{
             x: time,
-            y: drinkers,
+            y: former,
+            name: "Former",
             mode: "lines",
-            type: "scatter"
-          }];
-          
-          // Define Layout
-          var layout = {
-            xaxis: {range: [0, ((Math.floor(iterations/100))+1)*100], title: "Time"},
-            yaxis: {range: [0, population], title: "Drinkers"},
-            title: "Number of drinkers"
-          };
-          
-          // Display using Plotly
-          Plotly.newPlot("myPlot", data, layout);
-    }
+            type: "scatter",
+            line: {
+                color: "blue"
+            }
+      }];
+      
+      // Define Layout
+      var layout = {
+        xaxis: {range: [0, ((Math.floor(iterations/100))+1)*100], title: "Time"},
+        yaxis: {range: [0, population], title: "People"},
+        title: "Drinking state"
+      };
+      
+      // Display using Plotly
+      Plotly.newPlot("myPlot", data, layout);
+}
+
+var update = function(iterations){
+    var countC = 0
+    var countS = 0
+    var countF = 0
+    
     
     for (let i = 0; i < people.length; i++) {
         const person = people[i];
@@ -137,16 +188,24 @@ var update = function(iterations){
         home.removeAgentFrom(person)
         nhome.addAgentTo(person)
         person.infect()
-        if(person.color == "red"){
-            count++
+        if(person.drinkState == "current"){
+            countC++
+        }
+        if(person.drinkState == "suspectable"){
+            countS++
+        }
+        if(person.drinkState == "former"){
+            countF++
         }
     }
     time.push(iterations)
-    drinkers.push(count)
+    drinkers.push(countC)
+    suspectable.push(countS)
+    former.push(countF)
     iterations++;
     draw()
-    plot()
-    if(count<population){
+    plot(iterations)
+    if(countC<population){
         setTimeout(function () {
             window.requestAnimationFrame(function(){update(iterations)});
         }, 0);
