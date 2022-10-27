@@ -9,7 +9,6 @@ class CACanvas {
         this.buffer = document.createElement("canvas");
         this.buffer.width = this.size * this.cSize;
         this.buffer.height = this.size * this.cSize;
-        console.log(this.buffer.width,this.buffer.height);
         this.ctx = this.buffer.getContext("2d");
         let visible_canvas = document.getElementById("canvas");
         visible_canvas.width=400
@@ -77,7 +76,6 @@ class CACanvas {
         let visible_canvas = document.getElementById(canvasID);
         let vctx = visible_canvas.getContext("2d");
         vctx.drawImage(this.buffer, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height, 0, 0, vctx.canvas.width, vctx.canvas.height);
-        console.log(this.ctx.canvas.width, this.ctx.canvas.height, 0, 0, vctx.canvas.width, vctx.canvas.height);
     }
 }
 
@@ -105,7 +103,6 @@ class Patches {
         let coord = this.coordinates(point);
         patch.xPos = coord.x;
         patch.yPos = coord.y;
-        // console.log(patch.x);
     }
 
     xBounds(x) {
@@ -134,7 +131,6 @@ class Patches {
 
     getPatch(x, y) {
         var p = this.position(x, y)
-        //console.log(p);
         return this.list[p]
     }
 
@@ -216,7 +212,6 @@ class Patch {
     addAgent(agent) {
         this.occupant = agent;
         agent.home = this;
-        // console.log(this,agent);
     }
     
     addAgentTo(agent) {

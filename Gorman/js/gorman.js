@@ -7,7 +7,8 @@ var caCanvas = new CACanvas(size);
 var area=[]
 var people = []
 
-
+var time=[]
+var drinkers=[]
 class Person extends Agent {
     constructor(sClass, preference, color) {
         super();
@@ -36,7 +37,6 @@ class Place extends Patch{
     }
 
     diffuse(amount){
-        //console.log("diffuse",amount,this.gradient);
         if(this.gradient>=amount){
             return
         }
@@ -45,12 +45,25 @@ class Place extends Patch{
             this.neighbors[i].diffuse(amount/8);
         }
     }
+
+    getMost(){
+        let max = 0
+        let target = null
+        for (let i = 0; i < this.neighbors.length; i++) {
+            if(this.neighbors[i]!=this){
+                if(this.neighbors[i].gradient>max){
+                    max = this.neighbors[i].gradient;
+                    target = this.neighbors[i]
+                }
+            }
+        }
+        return target
+    }
 }
 
 
 var setup = function(){
     var patches = new Patches(size);
-    console.log("setup");
     for (i = 0; i < size * size; i++) {
         var place = new Place();
         patches.addPatch(place)
@@ -87,21 +100,59 @@ var draw = function(){
     caCanvas.update("canvas");
 }
 
-var update = function(){
+var update = function(iterations){
+    var count = 0
+    var plot = function(){
+
+        var data = [{
+            x: time,
+            y: drinkers,
+            mode: "lines",
+            type: "scatter"
+          }];
+          
+          // Define Layout
+          var layout = {
+            xaxis: {range: [0, ((Math.floor(iterations/100))+1)*100], title: "Time"},
+            yaxis: {range: [0, population], title: "Drinkers"},
+            title: "Number of drinkers"
+          };
+          
+          // Display using Plotly
+          Plotly.newPlot("myPlot", data, layout);
+    }
+    
     for (let i = 0; i < people.length; i++) {
         const person = people[i];
         let home = person.home 
-        nhome = home.getRandomNeighbor()
+        if( person.color == "red"){
+            if( Math.random()<0.1){
+                nhome = home.getMost();
+            }else{
+                nhome = home.getRandomNeighbor()
+            }
+        }else{
+            nhome = home.getRandomNeighbor()
+        }
         home.removeAgentFrom(person)
         nhome.addAgentTo(person)
         person.infect()
+        if(person.color == "red"){
+            count++
+        }
     }
+    time.push(iterations)
+    drinkers.push(count)
+    iterations++;
     draw()
-    setTimeout(function () {
-        window.requestAnimationFrame(update);
-    }, 0);
+    plot()
+    if(count<population){
+        setTimeout(function () {
+            window.requestAnimationFrame(function(){update(iterations)});
+        }, 0);
+    }
 }
 
 setup()
 draw()
-update()
+update(0)
