@@ -1,4 +1,5 @@
 var size = 40;
+let visible_canvas = document.getElementById("canvas");
 var caCanvas = new CACanvas(size);
 
 var population = []
