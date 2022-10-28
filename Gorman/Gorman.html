@@ -59,7 +59,7 @@
                 >
                 <a
                   class="dropdown-item"
-                  href="/Gorman/Gorman-drinking-behavior-edit.html"
+                  href="/Gorman/Gorman.html"
                   >Gorman</a
                 >
                 <a class="dropdown-item" href="/Schelling/Schelling.html"
@@ -88,9 +88,10 @@
           <br>
           <canvas
             id="canvas"
-            style="border-style: solid; width: 300px; height: 300px"
+            style="border-style: solid; border-width: 0.5px; width: 300px; height: 300px"
           ></canvas>
           <br />
+          <div style="float: right;">
           <button class="btn btn-primary tablinks" onclick="reset()">
             Reset
           </button>
@@ -98,6 +99,7 @@
           <button id="running" class="btn btn-primary tablinks" onclick="run()">
             Run
           </button>
+        </div>
         </div>
         <div class="col-sm-3">
           <br>
@@ -167,12 +169,12 @@
         </div>
 
 
-        <div class="col-sm-5">
+        <div class="col-sm-5" style="border-style: solid; border-width: 0.5px;">
           <div id="myPlot" style="width: 100%; max-width: 700px"></div>
         </div>
 
       </div>
-
+<br>
       <div class="row">
         <div class="col-sm-12">
           <div id="accordion">

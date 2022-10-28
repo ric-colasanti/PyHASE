@@ -11,6 +11,10 @@ var immuneDays = 30
 var links =0.0
 var speed = 100
 
+var infected=[]
+var recovered=[]
+var suspectable=[]
+var time=[]
     
 
 var setVals = function () {
@@ -106,6 +110,11 @@ class Person extends Agent {
 
 
 var setup = function () {
+    infected=[1]
+    recovered=[0]
+    suspectable=[6000]
+    time=[0]
+    
     caCanvas = new CACanvas(size);
     population = new Agents();
     place = new Patches(size);
@@ -132,7 +141,51 @@ var setup = function () {
         person = place.list[rndInt(place.size)].occupant
     }
     person.infect()
+    plot(100)
 }
+
+
+var plot = function(iterations){
+
+    var data = [{
+        x: time,
+        y: infected,
+        name: "Current",
+        mode: "lines",
+        type: "scatter",
+        line: {
+        color:"red"
+        }
+      },{
+        x: time,
+        y: suspectable,
+        name: "Suspectable",
+        mode: "lines",
+        type: "scatter",
+        line: {
+            color: "green"
+        }},{
+            x: time,
+            y: recovered,
+            name: "Former",
+            mode: "lines",
+            type: "scatter",
+            line: {
+                color: "#ffe3b1"
+            }
+      }];
+      
+      // Define Layout
+      var layout = {
+        xaxis: {range: [0, Math.max(((Math.floor(iterations/100)+1)*100),100)], title: "Time"},
+        yaxis: {range: [0, size*size], title: "People"},
+        title: "Infections"
+      };
+      
+      // Display using Plotly
+      Plotly.newPlot("myPlot", data, layout);
+}
+
 
 var draw = function () {
     var bCol = "##000000";
@@ -164,18 +217,38 @@ var draw = function () {
 
 
 
-var update = function () {
+var update = function (iteration) {
     //population.shuffle()
     caCanvas.clear()
+    let countS=0
+    let countI=0
+    let countR=0
     //console.log("update",population.list.length);
     for (let i = 0; i < population.list.length; i++) {
         var person = population.list[i]
         person.pathology(rNumber)
+
+        if(person.state==0){
+            countS++
+        }
+        if(person.state==1){
+            countI++
+        }
+        if(person.state==2){
+            countR++
+        }
+       
     }
+    suspectable.push(countS)
+    infected.push(countI)
+    recovered.push(countR)
+    time.push(iteration)
     draw();
+    plot(iteration)
+    iteration++
     if ((count < 500) && ( running == true))  {
         setTimeout(function () {
-            window.requestAnimationFrame(update);
+            window.requestAnimationFrame(function(){update(iteration)});
         },0);
         count++
     }
@@ -189,7 +262,7 @@ var run = function(){
     }else{
         running = true
         let but = document.getElementById("running").innerHTML="Stop"
-        update()
+        update(1)
     }
 } 
 

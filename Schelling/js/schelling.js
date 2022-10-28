@@ -5,6 +5,9 @@ var population
 var place
 var likeness = 0.4
 var density = 0.95
+var happy =[]
+var unhappy =[]
+var time = []
 
 var setVals = function () {
     likeness = Number(document.getElementById("alike").value);
@@ -45,8 +48,44 @@ class Person extends Agent {
     }
 }
 
+var plot = function(iterations){
+
+    var data = [{
+        x: time,
+        y: happy,
+        name: "Happy",
+        mode: "lines",
+        type: "scatter",
+        line: {
+        color:"green"
+        }
+      },{x: time,
+      y: unhappy,
+      name: "Unhappy",
+      mode: "lines",
+      type: "scatter",
+      line: {
+      color:"orange"
+      }
+    }];
+      
+      // Define Layout
+      var layout = {
+        xaxis: {range: [0, ((Math.floor(iterations/10))+1)*10], title: "Time"},
+        yaxis: {range: [0, population.size], title: "People"},
+        title: "Happiness"
+      };
+      
+      // Display using Plotly
+      Plotly.newPlot("myPlot", data, layout);
+}
+
+
 
 var setup = function () {
+    happy =[]
+    unhappy =[]
+    time = []
     population = new Agents();
     place = new Patches(size);
     for (i = 0; i < size * size; i++) {
@@ -60,6 +99,7 @@ var setup = function () {
         place.addPatch(patch)
     }
     place.setNeighbors();
+    plot(1)
 }
 
 var draw = function () {
@@ -90,27 +130,37 @@ var findspace = function(){
     return null;
 }
 
-var update = function () {
+var update = function (iteration) {
     place.shuffle();
     caCanvas.clear()
+    countH=0
+    countU=0
     //console.log("update",population.list.length);
     for(let i=0; i<population.list.length;i++){
         var person = population.list[i] 
-        var happy = person.coutSame()
+        var ishappy = person.coutSame()
         //console.log(happy);
-        if(happy<likeness){
+        if(ishappy<likeness){
             var moveTo = findspace()
             if(moveTo!=null){
                 person.home.occupant=null
                 person.home = moveTo
                 moveTo.occupant=person
             }
+            countU++
+        }else{
+            countH++
         };
     }
+    time.push(iteration)
+    happy.push(countH)
+    unhappy.push(countU)
+    plot(iteration)
     draw();
+    iteration++
     if((count<200) && ( running == true))  {
         setTimeout(function () {
-            window.requestAnimationFrame(update);
+            window.requestAnimationFrame(function(){update(iteration)});
         }, 500);
         count++
     }
@@ -124,7 +174,7 @@ var run = function(){
     }else{
         running = true
         let but = document.getElementById("running").innerHTML="Stop"
-        update()
+        update(1)
     }
 } 
 
