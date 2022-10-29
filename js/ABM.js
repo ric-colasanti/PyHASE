@@ -195,6 +195,9 @@ class Patches {
         }
 
       }
+      getRandomPatch(){
+        return this.list[rndInt(this.list.length)]   
+    }
 }
 
 
@@ -234,6 +237,7 @@ class Patch {
     getRandomNeighbor(){
         return this.neighbors[rndInt(this.neighbors.length)]
     }
+    
 }
 
 class Agent {

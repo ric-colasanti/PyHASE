@@ -246,7 +246,7 @@ var update = function (iteration) {
     draw();
     plot(iteration)
     iteration++
-    if ((count < 500) && ( running == true))  {
+    if ( running == true) {
         setTimeout(function () {
             window.requestAnimationFrame(function(){update(iteration)});
         },0);

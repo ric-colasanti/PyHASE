@@ -12,14 +12,15 @@ var iterations = 4000
 var cols = []
 var maxRGB = 255 * 255 * 255
 var displayType = 0
+var time=[]
+var similarity = []
+var cultures = []
 
 var setVals = function () {
     setFetures = Number(document.getElementById("features").value);
     document.getElementById("featureslable").innerHTML = setFetures
     sSize = Number(document.getElementById("size").value);
     document.getElementById("sizelable").innerHTML = sSize
-    iterations = Number(document.getElementById("iterations").value);
-    document.getElementById("iterationslable").innerHTML = iterations
 }
 
 var reset = function () {
@@ -66,9 +67,48 @@ class Person extends Agent {
             this.culture[trait] = agent.culture[trait]
         }
     }
+
+    toString(){
+        return this.culture.toString();
+    }
+}
+
+var plot = function(iterations,graph){
+
+    var data = [{
+        x: time,
+        y: similarity,
+        name: "Similarity",
+        mode: "lines",
+        type: "scatter",
+        line: {
+        color:"blue"
+        }
+      },
+      {
+        x: time,
+        y: cultures,
+        name: "Cultures",
+        mode: "lines",
+        type: "scatter",
+        line: {
+        color:"green"
+        }
+      }];
+      
+      // Define Layout
+      var layout = {
+        xaxis: {range: [0, ((Math.floor(iterations/100))+1)*100], title: "Time"},
+        yaxis: {range: [0.0, 1.0], title: "Fraction"},
+        title: "The dissemination of culture"
+      };
+      
+      // Display using Plotly
+      Plotly.newPlot(graph, data, layout);
 }
 
 var draw = function () {
+    let total = 0
     place.list.forEach(function (patch, index) {
         var person = patch.occupant;
         var r, g, b = 0
@@ -96,9 +136,12 @@ var draw = function () {
             r=0
             b=0
         }
+        total+=person.averageSim()
         var col = "rgba(" + r + "," + g + "," + b + ")";
         caCanvas.draw(patch.xPos, patch.yPos, col);
     });
+    total = total/(size*size)
+    similarity.push(total)
     caCanvas.update("canvas");
 };
 var setDisplay = function(){
@@ -109,6 +152,9 @@ var setup = function () {
     features = setFetures
     caCanvas = new CACanvas(size);
     population = new Agents();
+    time=[]
+    similarity = []
+    cultures = []
     place = new Patches(size);
     for (i = 0; i < size * size; i++) {
         var patch = new Patch();
@@ -120,17 +166,22 @@ var setup = function () {
     place.setVonNeighbors();
 }
 
-var update = function () {
+var update = function (iteration) {
     caCanvas.clear()
     //console.log("update", count,population);
+    culture = new Set()
     for (let i = 0; i < population.list.length; i++) {
         population.list[rndInt(population.list.length)].dissemination()
-
+        culture.add(population.list[rndInt(population.list.length)].toString())
     }
     draw();
-    if (( running == true) && (count < iterations))  {
+    cultures.push(culture.size/(sSize*sSize))
+    time.push(iteration)
+    plot(iteration,"myPlot")
+    iteration++
+    if ( running == true)   {
         setTimeout(function () {
-            window.requestAnimationFrame(update);
+            window.requestAnimationFrame(function(){update(iteration)});
         }, 0);
         count++
     }
@@ -144,7 +195,7 @@ var run = function(){
     }else{
         running = true
         let but = document.getElementById("running").innerHTML="Stop"
-        update()
+        update(10)
     }
 } 
 

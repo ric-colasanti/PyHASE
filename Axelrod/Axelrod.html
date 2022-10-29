@@ -26,7 +26,7 @@
   <body>
     <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Axelrod</a>
+        <a class="navbar-brand" href="/">PHASE</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -48,18 +48,18 @@
                 Models
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="/Auchincloss/Auchincloss02.html"
+                <a class="dropdown-item" href="/Auchincloss/Auchincloss.html"
                   >Auchincloss</a
                 >
                 <a class="dropdown-item" href="/Axelrod/Axelrod.html"
                   >Axelrod</a
                 >
-                <a class="dropdown-item" href="/Bhar/BaharNetworkkJS01.html"
+                <a class="dropdown-item" href="/Bhar/Bhar.html"
                   >Bhar</a
                 >
                 <a
                   class="dropdown-item"
-                  href="/Gorman/Gorman-drinking-behavior-edit.html"
+                  href="/Gorman/Gorman.html"
                   >Gorman</a
                 >
                 <a class="dropdown-item" href="/Schelling/Schelling.html"
@@ -87,7 +87,7 @@
       </div>
       <br />
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-7">
           <canvas id="canvas"></canvas>
 
           <br />
@@ -126,23 +126,6 @@
               <span id="sizelable">10</span>
             </div>
           </div>
-          <div class="row">
-            <div class="col">Iterations</div>
-            <div class="col">
-              <input
-                type="range"
-                min="100"
-                max="4000"
-                value="2000"
-                class="slider"
-                id="iterations"
-                onchange="setVals()"
-              />
-            </div>
-            <div class="col">
-              <span id="iterationslable">2000</span>
-            </div>
-          </div>
           <div>
             <input
               type="checkbox"
@@ -161,10 +144,20 @@
           <button id="running" class="btn btn-primary tablinks" onclick="run()">
             Run
           </button>
+
         </div>
-        <div class="col-sm-7">
-          
-          
+        <div class="col-sm-5" style="border-style: solid; border-width: 0.5px;">
+          <div class="row" >
+            <div id="myPlot" style="width: 100%; max-width: 700px"></div>
+          </div>
+         
+        </div>
+        
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-sm-12">
           <div id="accordion">
             <div class="card">
               <div class="card-header">
@@ -389,13 +382,13 @@
               </div>
             </div>
           </div>
-
-        </div>      
-     
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="../js/ABM.js"></script>
     <script src="js/axelrod.js"></script>
   </body>
