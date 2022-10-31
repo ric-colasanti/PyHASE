@@ -1,7 +1,7 @@
 console.log("gorman");
 var size = 40;
-population= 100
-pubs = 1
+population= 300
+pubs = 0
 var caCanvas = new CACanvas(size);
 var probStart = 0.5
 var probStop = 0.3
@@ -13,6 +13,30 @@ var time=[]
 var drinkers=[]
 var suspectable=[]
 var former=[]
+var ticks = 0
+
+document.getElementById("population").value = population;
+document.getElementById("populationlable").innerHTML = population
+document.getElementById("pubs").value =  pubs 
+document.getElementById("pubslable").innerHTML = pubs
+document.getElementById("quit").value = probStop * 100; 
+document.getElementById("quitlable").innerHTML = probStop
+document.getElementById("restart").value = probStart * 100
+document.getElementById("restartlable").innerHTML = probStart
+
+
+var setVals = function () {
+    let val = Number(document.getElementById("population").value);
+    document.getElementById("populationlable").innerHTML = val
+    val = Number(document.getElementById("pubs").value);
+    document.getElementById("pubslable").innerHTML = val
+    val = Number(document.getElementById("quit").value);
+    document.getElementById("quitlable").innerHTML = val/100.0
+    val = Number(document.getElementById("restart").value);
+    document.getElementById("restartlable").innerHTML = val/100.0
+}
+
+
 class Person extends Agent {
     constructor(sClass, preference, color) {
         super();
@@ -20,27 +44,20 @@ class Person extends Agent {
         this.drinkState = "suspectable"
     }
     infect(){
-        let testC = function(agent){
-            return agent.drinkState=="current"
-        }
-        let testF = function(agent){
-            return agent.drinkState=="former"
-        }
+        let total = this.home.getNumberOfOccupants()
         if(this.drinkState=="suspectable"){
-            let x = this.home.occupants.find(testC)
-            if( x!=undefined){
+            let c = this.home.countTypesAt("current")
+            if (Math.random()< c/total) {
                 this.drinkState = "current"
             }
         }else if(this.drinkState=="current"){
-            let x = this.home.occupants.find(testF)
-            if( x!=undefined){
-                if(Math.random()<0.9){
-                    this.drinkState = "former"
-                }
+            let f = this.home.countTypesAt("former")
+            if (Math.random()< (f/total+probStop)) {
+                this.drinkState = "former"
             }
         }else if(this.drinkState=="former"){
-            let x = this.home.occupants.find(testC)
-            if( x!=undefined){
+            let c = this.home.countTypesAt("current")
+            if (Math.random()< (c/total+probStart)) {
                 this.drinkState = "current"
             }
         }
@@ -78,10 +95,35 @@ class Place extends Patch{
         }
         return target
     }
+
+    countTypesAt(type){
+        let count = 0
+        for (let i = 0; i < this.occupants.length; i++) {
+            if (this.occupants[i].drinkState==type){
+                count ++
+            };
+        }
+        return count
+    }
 }
 
 
 var setup = function(){
+    ticks = 0
+    area=[]
+    people = []
+
+    time=[]
+    drinkers=[]
+    suspectable=[]
+    former=[]
+
+
+    population =  Number(document.getElementById("population").value)
+    pubs =  Number(document.getElementById("pubs").value)
+    probStart =  Number(document.getElementById("restart").value)/100.0
+    probStop = Number(document.getElementById("quit").value)/100.0
+
     var patches = new Patches(size);
     for (i = 0; i < size * size; i++) {
         var place = new Place();
@@ -176,8 +218,8 @@ var update = function(iterations){
     for (let i = 0; i < people.length; i++) {
         const person = people[i];
         let home = person.home 
-        if( person.color == "red"){
-            if( Math.random()<0.1){
+        if( person.drinkState == "current"){
+            if((pubs>0)&&( Math.random()<0.5)){
                 nhome = home.getMost();
             }else{
                 nhome = home.getRandomNeighbor()
@@ -203,9 +245,10 @@ var update = function(iterations){
     suspectable.push(countS)
     former.push(countF)
     iterations++;
+    ticks = iterations;
     draw()
     plot(iterations)
-    if(countC<population){
+    if ( running == true)   {
         setTimeout(function () {
             window.requestAnimationFrame(function(){update(iterations)});
         }, 0);
@@ -214,4 +257,14 @@ var update = function(iterations){
 
 setup()
 draw()
-update(0)
+var running = false;
+var run = function(){
+    if ( running){
+        running = false
+        let but = document.getElementById("running").innerHTML=" Run "
+    }else{
+        running = true
+        let but = document.getElementById("running").innerHTML="Stop"
+        update(ticks)
+    }
+} 

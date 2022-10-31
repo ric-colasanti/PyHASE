@@ -54,14 +54,8 @@
                 <a class="dropdown-item" href="/Axelrod/Axelrod.html"
                   >Axelrod</a
                 >
-                <a class="dropdown-item" href="/Bhar/Bhar.html"
-                  >Bhar</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="/Gorman/Gorman.html"
-                  >Gorman</a
-                >
+                <a class="dropdown-item" href="/Bhar/Bhar.html">Bhar</a>
+                <a class="dropdown-item" href="/Gorman/Gorman.html">Gorman</a>
                 <a class="dropdown-item" href="/Schelling/Schelling.html"
                   >Schelling</a
                 >
@@ -83,16 +77,90 @@
       <div class="ref">Gorman</div>
       <br />
       <div class="row">
-        <div class="col-sm-4">
-          <br>
-          <br>
+        <div class="col-sm-7">
+          <br />
+          <br />
           <canvas
             id="canvas"
-            style="border-style: solid; border-width: 0.5px; width: 300px; height: 300px"
+            style="
+              border-style: solid;
+              border-width: 0.5px;
+              width: 300px;
+              height: 300px;
+            "
           ></canvas>
           <br />
-          <div style="float: right;">
-          <button class="btn btn-primary tablinks" onclick="reset()">
+
+          <div class="row">
+            <div class="col">Population</div>
+            <div class="col">
+              <input
+                type="range"
+                min="2"
+                max="1000"
+                value="300"
+                class="slider"
+                id="population"
+                onchange="setVals()"
+              />
+            </div>
+            <div class="col">
+              <span id="populationlable">200</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">Pubs</div>
+            <div class="col">
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="0"
+                class="slider"
+                id="pubs"
+                onchange="setVals()"
+              />
+            </div>
+            <div class="col">
+              <span id="pubslable">0</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">Probability to quit</div>
+            <div class="col">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="30"
+                class="slider"
+                id="quit"
+                onchange="setVals()"
+              />
+            </div>
+            <div class="col">
+              <span id="quitlable">0.3</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">Probability to restart</div>
+            <div class="col">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                class="slider"
+                id="restart"
+                onchange="setVals()"
+              />
+            </div>
+            <div class="col">
+              <span id="restartlable">0.5</span>
+            </div>
+          </div>
+          <br />
+          <button class="btn btn-primary tablinks" onclick="setup()">
             Reset
           </button>
 
@@ -100,81 +168,12 @@
             Run
           </button>
         </div>
-        </div>
-        <div class="col-sm-3">
-          <br>
-          <br>
-          <div class="row">
-            <div class="col">Features</div>
-            <div class="col">
-              <input
-                type="range"
-                min="3"
-                max="6"
-                value="6"
-                class="slider"
-                id="features"
-                onchange="setVals()"
-              />
-            </div>
-            <div class="col">
-              <span id="featureslable">6</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">Size</div>
-            <div class="col">
-              <input
-                type="range"
-                min="10"
-                max="40"
-                value="10"
-                class="slider"
-                id="size"
-                onchange="setVals()"
-              />
-            </div>
-            <div class="col">
-              <span id="sizelable">10</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">Iterations</div>
-            <div class="col">
-              <input
-                type="range"
-                min="100"
-                max="4000"
-                value="2000"
-                class="slider"
-                id="iterations"
-                onchange="setVals()"
-              />
-            </div>
-            <div class="col">
-              <span id="iterationslable">2000</span>
-            </div>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              name="segragation"
-              value="no"
-              id="similarity"
-              onchange="setDisplay()"
-            />
-            <label>Show similarity</label>
-          </div>
-          
-        </div>
 
-
-        <div class="col-sm-5" style="border-style: solid; border-width: 0.5px;">
+        <div class="col-sm-5" style="border-style: solid; border-width: 0.5px">
           <div id="myPlot" style="width: 100%; max-width: 700px"></div>
         </div>
-
       </div>
-<br>
+      <br />
       <div class="row">
         <div class="col-sm-12">
           <div id="accordion">

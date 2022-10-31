@@ -238,6 +238,9 @@ class Patch {
         return this.neighbors[rndInt(this.neighbors.length)]
     }
     
+    getNumberOfOccupants(){
+        return this.occupants.length
+    }
 }
 
 class Agent {
