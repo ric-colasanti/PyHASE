@@ -180,6 +180,7 @@ var relocate = function(){
     shopL.home = newPos
     newPos.occupant = shopL
     shopL.sClass = rndInt(2)
+    shopL.color = "rgb(" + rndInt(255) + "," + rndInt(255) + "," + rndInt(255) + ")"
 }
 
 var count = 0
