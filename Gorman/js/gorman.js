@@ -251,7 +251,7 @@ var update = function(iterations){
     if ( running == true)   {
         setTimeout(function () {
             window.requestAnimationFrame(function(){update(iterations)});
-        }, 0);
+        }, 200- document.getElementById("speed").value);
     }
 }
 
