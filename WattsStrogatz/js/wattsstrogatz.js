@@ -149,15 +149,6 @@ var plot = function(iterations){
 
     var data = [{
         x: time,
-        y: infected,
-        name: "Current",
-        mode: "lines",
-        type: "scatter",
-        line: {
-        color:"red"
-        }
-      },{
-        x: time,
         y: suspectable,
         name: "Suspectable",
         mode: "lines",
@@ -166,12 +157,21 @@ var plot = function(iterations){
             color: "green"
         }},{
             x: time,
+            y: infected,
+            name: "Infected",
+            mode: "lines",
+            type: "scatter",
+            line: {
+            color:"red"
+            }
+          },{
+            x: time,
             y: recovered,
             name: "Recovered",
             mode: "lines",
             type: "scatter",
             line: {
-                color: "#b1e3ff"
+                color: "#b1b1ff"
             }
       }];
       
@@ -201,7 +201,7 @@ var draw = function () {
                 col = "#ff0000";
             }
             if (person.state == 2) {
-                col = "#b1e3ff";
+                col = "#b1b1ff";
             }
             caCanvas.draw(patch.xPos, patch.yPos,bCol,true, col);
             if(person.watt!=null){
