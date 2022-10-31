@@ -167,11 +167,11 @@ var plot = function(iterations){
         }},{
             x: time,
             y: recovered,
-            name: "Former",
+            name: "Recovered",
             mode: "lines",
             type: "scatter",
             line: {
-                color: "#ffe3b1"
+                color: "#b1e3ff"
             }
       }];
       
@@ -201,7 +201,7 @@ var draw = function () {
                 col = "#ff0000";
             }
             if (person.state == 2) {
-                col = "#ffe3b1";
+                col = "#b1e3ff";
             }
             caCanvas.draw(patch.xPos, patch.yPos,bCol,true, col);
             if(person.watt!=null){
