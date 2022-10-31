@@ -150,8 +150,8 @@ var draw = function(){
     for (let i = 0; i < area.length; i++) {
         const place = area[i];
         const c = 255*place.gradient
-        d = 255-c
-        const color = "rgb("+d+","+d+","+255+")" 
+        d = 220-c
+        const color = "rgb("+d+","+d+","+220+")" 
         caCanvas.draw(place.xPos, place.yPos, color);
     }
     for (let i = 0; i < people.length; i++) {
