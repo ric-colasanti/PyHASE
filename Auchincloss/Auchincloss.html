@@ -143,8 +143,8 @@
                 data-parent="#accordion"
               >
                 <div class="card-body">
-                  <p>This is a much simplified version of Auchincloss'  model of income inequalities in diet in the context of residential segregation. In this simple version we are modeling the effect on shop type and location when an area is segregated.</p>
-                  <p>In this version at every iteration people ( agents represented by dots ) shop at there nearest shop (Circles). At the end of the iteration the shop with the least profit relocates.</p>
+                  <p>This is a simplified version of Auchincloss' model of income inequalities in diet in the context of residential segregation. In this simple version we are modelling the effect on shop type and location when an area is either segregated or unsegregated by affluence.</p>
+                  <p>In this version at every iteration people (agents represented by dots) shop at their nearest shop (red circle: high end shop; blue circle: convenience shop). At the end of the iteration the shop with the least profit relocates.</p>
                 </div>
               </div>
             </div>
@@ -157,23 +157,10 @@
               <div id="collapseOne" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    This is an excellent example of using an agent-based model
-                    (ABM) to ask “what if” questions about aspects of individual
-                    behaviour that would be very difficult to replicate within a
-                    real population. In this case the positioning of different
-                    types of food outlets within neighborhoods.
+                    This is an excellent example of using an agent-based model (ABM) to ask “what if” questions about aspects of individual behaviour that would be very difficult to replicate within a real population. In this case the positioning of different types of food outlets within neighbourhoods.
                   </p>
                   <p>
-                    This is a model of the inequalities in diet in the context
-                    of urban residential segregation. Auchincloss and Garcia use
-                    this model as an example of how to create an ABM to address
-                    complex non-communicable disease(NCD) problems. The model is
-                    used as an introductory guide to the philosophy and
-                    practices of ABMs and is used to illustrate why ABMs are a
-                    good fit for investigating NCD prevention. The paper
-                    describes very clearly how to take descriptions of
-                    individual behaviour and incorporate them into an ABM
-                    framework and run “what if “ experiments with the model.
+                    This is a model of the inequalities in diet in the context of urban residential segregation. Auchincloss and Garcia use this model as an example of how to create an ABM to address complex non-communicable disease (NCD) problems. The model is used as an introductory guide to the philosophy and practices of ABMs and is used to illustrate why ABMs are a good fit for investigating NCD prevention. The paper describes very clearly how to take descriptions of individual behaviour and incorporate them into an ABM framework and run “what if “ experiments with the model.
                   </p>
                 </div>
               </div>
@@ -231,20 +218,7 @@
               <div id="collapseThree" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    As is demonstrated by the Schelling model segregation and an
-                    individual's response to it is a function of the spatial
-                    location of populations. The nature of the spatial location
-                    of the individuals is governed by local factors and tends to
-                    be heterogeneous. By that we mean that the spatial pattern
-                    of the population tends not to a smooth gradation but tends
-                    to be a more patchy pattern. This type of spatial
-                    distribution is very hard to be incorporated in traditional
-                    mathematical or statistical models but is very easy to
-                    implement with an Agent Based Model (ABM). In this model we
-                    are mainly looking at the decisions that outlets make on
-                    their location, and food and price. The rule based nature of
-                    ABMs makes construction of a shop based model both simpler
-                    and transparent.
+                    As is demonstrated by the Schelling model segregation and an individual's response to it is a function of the spatial location of populations. The nature of the spatial location of the individuals is governed by local factors and tends to be heterogeneous. By that we mean that the spatial pattern of the population tends not to a smooth gradation but tends to be a patchier pattern. This type of spatial distribution is very hard to incorporate in traditional mathematical or statistical models but is very easy to implement with an ABM. In this model we are mainly looking at the decisions that outlets make on their location, and food and price. The rule-based nature of ABMs makes construction of a shop based model both simpler and transparent.
                   </p>
                 </div>
               </div>
@@ -262,15 +236,12 @@
               <div id="collapseFour" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    Here we present a simplified version of Auchinclosss model
-                    that concentrates on just the effect that segregation has on
-                    the success and type of food outlets within a neighbourhood.
+                    Here we present a simplified version of Auchincloss’ model that concentrates on just the effect that segregation has on the success and type of food outlets within a neighbourhood
                   </p>
                   <p>
-                    The model has two entities, people and shops. Each person is
-                    represented by a small dot. Each shop is represented by a larger circle. The color of the center of the shop circle identifies the shop. This color is mirrored in the person dot color and indicate if that person is a customer of that shop. The outer Outer color of the shop circle indicates the type of shop: <span style="color: darkblue">High end </span>shop, <span style="color: darkred">Convenience </span> shop.
+                    The model has two entities, people and shops. Each person is represented by a small dot. Each shop is represented by a larger circle. The colour of the shop circle indicates the type of shop: <span style="color: darkblue">High end </span>shop, <span style="color: darkred">Convenience </span> shop.The colour of each person (agent) dot matches the dot colour in the centre of the shop circle that they are a customer of.
                   </p>
-                  <p> At the start of the simulation each person is allocated a square ( a home ) on the grid. A class is of neighborhood is assigned to each home : affluent ( indicated by a dark background ) , non-affluent ( light background ). If the simulation is non-segregated then the neighborhood class is assigned randomly. If it is a segregated simulation the affluent neighborhood is assigned the top have of the grid.</p>
+                  <p> At the start of the simulation each person is allocated a square (a home) on the grid. A class is of neighbourhood is assigned to each home : affluent (indicated by a dark grey background) , non-affluent (light grey background). If the simulation is non-segregated then the neighbourhood class is assigned randomly. If it is a segregated simulation the affluent neighbourhood is assigned the top have of the grid.</p>
                   <p>
                     At each iteration each person chooses the nearest shop. The shop they choose is indicated by the color of the dot of the person. Each person spends a set amount at the shop. A person from an affluent neighborhood will spend more at a high-end shop than a person from a non-affluent neighborhood. They both spend the same amount at the convenience store.
                   </p>
@@ -291,9 +262,9 @@
               </div>
               <div id="collapseFive" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                    <p> The number of shops can be set with the slider.  there are equal numbers of high-end and convenience shops. The distribution of neighborhoods ( segregated or non-segregated is set with the check box. You can rerun the model by stopping it and the clicking reset before running again.</p>
+                    <p> The number of shops can be set with the slider. At the start, there are equal numbers of high-end and convenience shops. The distribution of neighbourhoods (segregated or non-segregated) is set with the check box. You can rerun the model by stopping it and the clicking reset before running again.</p>
                     <p>
-                        At each iteration each person chooses the nearest shop. A person from an affluent neighborhood will spend more at a high-end shop than a person from a non-affluent neighborhood. They both spend the same amount at the convenience store.</p>
+                      At each iteration each person chooses the nearest shop. The shop they choose is indicated by the colour of the dot of the person. Each person spends a set amount at the shop. A person from an affluent neighbourhood will spend more at a high-end shop than a person from a non-affluent neighbourhood. They both spend the same amount at the convenience store.</p>
                       <p>
                         At the end of an iteration the least profitable shop will relocate to a random spot in the grid and randomly assign its type to either high-end or convenience.
                       </p>
@@ -308,14 +279,14 @@
                     data-toggle="collapse"
                     href="#collapseFive"
                   >
-                    What to look out for.
+                  What does the model show?
                   </a>
                 </div>
                 <div id="collapseFive" class="collapse" data-parent="#accordion">
                   <div class="card-body">
-                      <p>When the simulation is segregated you can see that there are less stores in the non-affluent area and of those shops there are more convenience stores </p>
-                      <p> This just emerges out of the fact that affluent shoppers spend more in high-end shops. The convenience stores need a larger number of customer to make the same profit the thus the food deserts in the non-affluent area</p>
-                      <p> An interesting effect can be seen with the non-segregation and a higher shop number. Here the number of convenience store tumbles.</p>
+                      <p>When the simulation is run with a segregated neighbourhood you can see that there are less stores in the non-affluent area and of those shops there are more convenience stores.</p>
+                      <p> This just emerges out of the fact that affluent shoppers spend more in high-end shops. The convenience stores need a larger number of customers to make the same profit the thus creating food deserts in the non-affluent area</p>
+                      <p> An interesting effect can be seen when the model is run with a non-segregated neighbourhood and a higher shop number. Here the number of convenience store decreases and are replaced by more stable high-end stores.</p>
                   </div>
                 </div>
               </div>
@@ -334,7 +305,7 @@
               </div>
               <div id="collapseSeven" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                    In a follow-up paper in which Auchincloss's uses this model of residential segregation to look at the impact of income inequalities on diet in more detail, [2] the author concludes:
+                  In a follow-up paper in which Auchincloss uses this model of residential segregation to look at the impact of income inequalities on diet in more detail, [2] the author concludes:
                     "<i>The model underscores the challenges of fostering favorable
                       behavior change when people and resources are residentially segregated and behaviors are motivated or constrained by multiple factors. Simulation modeling can be a useful
                       tool for proposing and testing policies or interventions that will ultimately be implemented in a complex system where the consequences of multidimensional

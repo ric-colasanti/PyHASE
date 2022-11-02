@@ -210,7 +210,7 @@
                 data-parent="#accordion"
               >
                 <div class="card-body">
-                  <p>This is a much simplified implantation of Gorman etal model of drinking behavior. This models the social influence on drinking behaviour. In this version people (agents) are influenced to start or stop drinking by the agents they encounter. When the model is run agents move about the space and interact with other agent that occupy thr same square. These agents influences each other.  </p>
+                  <p>This is a simplified version of Gorman et al’s model of drinking behaviour that models the social influence on drinking behaviour. In this version people (agents) are influenced to start or stop drinking by the agents they encounter. When the model is run agents move around the space and interact with other agents that occupy the same square. These interactions with one another influence each agent’s drinking behaviour. </p>
                 </div>
               </div>
             </div>
@@ -223,16 +223,7 @@
               <div id="collapseOne" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    This is a particularly good example of using an abstract,
-                    spatially discrete ABM (Agent Based Model) to investigate
-                    the fundamental drivers of behavior. The model looks at the
-                    effect that other people’s drinking behavior has on an
-                    individual's drinking behavior and places this in a quite
-                    simple spatial context. It finds that the spatial aspects of
-                    social interactions are an important driver in determining
-                    population level drinking behavior. This model is also a
-                    much-cited precursor to more applied ABMs used for
-                    investigating drinking behavior such as SimDrink
+                    This is a particularly good example of using an abstract, spatially discrete agent-based model (ABM) to investigate the fundamental drivers of behaviour. The model looks at the effect that other people’s drinking behaviour has on an individual's drinking behaviour and places this in a simple spatial context. The model shows that the spatial aspects of social interactions are an important driver in determining population level drinking behaviour. This model is also a much-cited precursor to more applied ABMs used for investigating drinking behaviour such as SimDrink [2].
                   </p>
                 </div>
               </div>
@@ -250,22 +241,10 @@
               <div id="collapseTwo" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    This model asks: How can drinking behavior at the population
-                    level be influenced by environmental and social
-                    interactions? A key factor, in answering this question is
-                    that people’s drinking behavior is very dynamic. For
-                    example, it has been observed that over a year 75% of people
-                    classified as alcohol dependent will no longer be classified
-                    as such. Researchers into alcohol consumption have noted
-                    that social and environment interactions are key factors in
-                    determining drinking behavior.
+                    This model asks: how can drinking behaviour at the population level be influenced by environmental and social interactions? A key factor in answering this question is that people’s drinking behaviour is very dynamic. For example, it has been observed that over a year 75% of people classified as alcohol dependent at the start of the year will no longer be classified as such by the end of the year. Researchers into alcohol consumption have noted that social and environment interactions are key factors in determining drinking behaviour.
                   </p>
                   <p>
-                    This study uses an ABM to ask what effect the spatial
-                    environment has on an individual's social interactions and
-                    how these interactions affect the drinking behavior of an
-                    individual and thus influence the overall drinking behavior
-                    of the population.
+                    This study uses an ABM to ask what effect the spatial environment has on an individual's social interactions and how these interactions affect the drinking behaviour of an individual, and thus influence the overall drinking behaviour of the population.
                   </p>
                 </div>
               </div>
@@ -312,26 +291,10 @@
               <div id="collapseFour" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    The ABM is an abstract spatially discrete model. The model
-                    does not attempt to capture all the factors that influence
-                    drinking behaviors. It looks at just direct peer effect and
-                    environment space. It does so in a very abstract and
-                    theoretical way. The environment is represented as a simple
-                    one-dimensional grid of spaces. People are represented as
-                    simple agents that can be in one of three drinking states:
-                    never-drank, current-drinker, and former-drinker. (The model
-                    does not include lifelong teetotalers). Each agent occupies
-                    an individual grid space and can move between adjacent
-                    spaces. Each space can contain any number of agents. An
-                    agent’s state is influenced by its current state and the
-                    states of the other agents that occupy the same space.
+                    The ABM is an abstract spatially discrete model. The model does not attempt to capture all the factors that influence drinking behaviours. It looks at just direct peer effect and environment space. It does so in a very abstract and theoretical way. The environment is represented as a two-dimensional grid of spaces. People are represented as agents that can be in one of three drinking states: susceptible to drinking, current-drinker, and former-drinker (the model does not include lifelong teetotallers). Each agent occupies an individual grid space and can move between adjacent spaces. Each space can contain any number of agents. An agent’s state is influenced by its current state and the states of the other agents that occupy the same space.
                   </p>
                   <p>
-                    There are two versions of the model. In one, the agents move
-                    randomly between adjacent spaces. In the other, the agents
-                    also move randomly, but the agents who are current drinkers
-                    move preferentially towards a “pub” placed within the
-                    environment.
+                    TTwo versions of this model can be run. In one, the agents move randomly between adjacent spaces. In the other, pubs are added within the environment, and while the agents still move randomly those agents who are current drinkers move preferentially towards a pub.
                   </p>
                 </div>
               </div>
@@ -350,50 +313,22 @@
               <div id="collapseFive" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    The key components of the model are the rules that govern an
-                    agent’s change in drinking state. The never-drank state is
-                    described in the paper as susceptible and given the symbol
-                    S. The current-drinker state is described as a drinker and
-                    given the symbol D. The former-drinker state is described as
-                    recovered and given the symbol R.
+                    The key components of the model are the rules that govern an agent’s change in drinking state. The never-drank state is described in the paper as susceptible and given the symbol S. The current-drinker state is described as a drinker and given the symbol D. The former-drinker state is described as recovered and given the symbol R.
                   </p>
                   <p>
-                    The transition rules are: The S state can change to a D
-                    state. A D state can change to an R state and a R state can
-                    change to a D state.
+                    The transition rules are: The S state can change to a D state. A D state can change to an R state and a R state can change to a D state.
                   </p>
                   <p>
-                    This means that a person who has never drunk (S) can become
-                    a drinker (D), but a drinker can never become a person who
-                    has never drunk. A drinker (D) can stop drinking and become
-                    a former drinker (R), but that person can start drinking
-                    again to become a drinker (D).
+                    This means that a person who has never drunk (S) can become a drinker (D), but a drinker can never become a person who has never drunk. A drinker (D) can stop drinking and become a former drinker (R), but that person can start drinking again to become a drinker (D).
                   </p>
                   <p>
-                    The actual transition from one state to another is dependent
-                    on the state of the other agents in the same grid space and
-                    an intrinsic transition rate. For each space in the grid
-                    (the index i is used to identify the space) the total number
-                    of agents for each state is calculated (S(i), D(i), R(i))
+                    The actual transition from one state to another is dependent on the state of the other agents in the same grid space and an intrinsic transition rate
                   </p>
                   <p>
-                    The probability of transitioning from never drinking (S) to
-                    drinking (D) is proportional to the fraction of drinkers
-                    among the other agents in the same grid space. The
-                    probability of transitioning from drinking (D) to being a
-                    former drinker (R) is proportional to the fraction of
-                    nondrinkers among the other agents in the same grid space
-                    plus an intrinsic rate (γ) The probability of transitioning
-                    from being a former drinker (R) to being a drinker (D) is
-                    proportional to the fraction of drinkers among the other
-                    agents in the same grid space plus an intrinsic rate (ρ).
+                    The probability of transitioning from never drinking (S) to drinking (D) is proportional to the fraction of drinkers among the other agents in the same grid space. The probability of transitioning from drinking (D) to being a former drinker (R) is proportional to the fraction of non-drinkers among the other agents in the same grid space plus an intrinsic rate. The probability of transitioning from being a former drinker (R) to being a drinker (D) is proportional to the fraction of drinkers among the other agents in the same grid space plus an intrinsic rate.(ρ).
                   </p>
                   <p>
-                    The experimenter can change the rate at which the agents
-                    move between grid spaces and the intrinsic rates of stopping
-                    drinking and resuming drinking. The experimenter can also
-                    introduce a space that preferentially attracts drinkers, a
-                    “pub”.
+                    The experimenter can change the rate at which the agents move between grid spaces and the intrinsic rates of stopping drinking(probability to quit slider) and resuming drinking (probability to restart slider). The experimenter can also introduce spaces (pubs) that preferentially attract drinkers (pubs slider).
                   </p>
                 </div>
               </div>
@@ -413,16 +348,7 @@
               <div id="collapseSeven" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <p>
-                    The results from this model highlight the role that the
-                    environment has on alcohol use especially the roles that
-                    alcohol outlets play in shaping social interactions.
-                    Including a pub in the model limited the movement of current
-                    drinkers and locally spread drinking behavior. Those agents
-                    who stayed away from the pub space were less exposed to
-                    direct social influences to drink. The other side of this
-                    could be that the pub space segregates and concentrates
-                    current drinkers into more insular subgroups with possible
-                    knock-on behavior of normalizing drinking behavior.
+                    The results from this model highlight the role that the environment has on alcohol use especially the roles that alcohol outlets play in shaping social interactions. Including a pub in the model limited the movement of current drinkers and locally spread drinking behaviour. Those agents who stayed away from the pub space were less exposed to direct social influences on drinking. The other side of this could be that the pub space segregates and concentrates current drinkers into more insular subgroups with possible knock-on behaviour of normalizing drinking behaviour.
                   </p>
                 </div>
               </div>

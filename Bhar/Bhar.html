@@ -245,7 +245,7 @@
                   data-parent="#accordion"
                 >
                   <div class="card-body">
-                    <p>This is a model of how a person's "real" social net work effects both their weight and the overall health of the population. Here we have people (agents) located on a grid ian interacting with their immediate neighbors. The agent follow the eating behaviour of the majority of their neighbors.Altering the network and or the type of connections ( see Watts and Strogatz model )  changes the dynamic of the health odf the whole population</p>
+                    <p>This is a model of how a person's "real" social network affects both their weight and the overall health of the population. Here we have people (agents) located on a grid and interacting with their immediate neighbours. The agents follow the eating behaviour of the majority of their neighborus. Altering the network and/or the type of connections (see Watts and Strogatz model example) changes the dynamic of the health of the whole population.</p>
                   </div>
                 </div>
               </div>
@@ -266,18 +266,7 @@
                 >
                   <div class="card-body">
                     <p>
-                      This is a good model to explore and understand network
-                      theory[ see referance 2 in links]. One of the most
-                      important features of an ABM is the way in which the
-                      agents interact with each other. In this model social
-                      networks within a population are created by forming links
-                      between agents. The agent-to-agent links represent
-                      connections between a person and their friends. In this
-                      model this friendship network is used to simulate the
-                      effect that a person's friends have on their body weight.
-                      This abstract model shows that the structure of this
-                      friendship network is very important in determining
-                      population level patterns of behaviour.
+                      This is a good model to explore and understand network theory 2]. One of the most important features of an agent-based model (ABM) is the way in which the agents interact with each other. In this model social networks within a population are created by forming links between agents. The agent-to-agent links represent connections between a person and their friends. In this model this friendship network is used to simulate the effect that a person's friends have on their body weight. This abstract model shows that the structure of this friendship network is very important in determining population level patterns of behaviour.
                     </p>
                   </div>
                 </div>
@@ -294,30 +283,7 @@
                 </div>
                 <div id="collapseTwo" class="collapse" data-parent="#accordion">
                   <div class="card-body">
-                    <p>This model is concerned with obesity.</p>
-                    <p>
-                      Between 1971 and 2003, the population of the city of
-                      Framingham was part of a cardiac health study where 12,067
-                      people's health data were repeatedly collected. A
-                      long-term analysis of weight data and the social network
-                      the population by Christakis and Fowler [1] showed that a
-                      person’s chances of becoming obese increased by almost 70%
-                      if they had a friend who became obese. In this study by
-                      Christakis and Fowler, the social network describes the
-                      relationships between peopleincluding friends, family and
-                      co-workers. Each person can be thought of as node within
-                      the network and the relationships as links between the
-                      nodes. Networks of nodes and links are found throughout
-                      nature and society. A branch of mathematics called network
-                      theory[2] can be applied to these networks to identify
-                      common patterns and behaviours. Using network theory,
-                      artificial networks of social interactions can be
-                      constructed that have the same important characteristics
-                      of real social networks. These artificial networks can
-                      then be used to simulate how obesity spreads among social
-                      networks and to test the effectiveness of different weight
-                      management interventions on reducing obesity at the
-                      population level.
+                    <p>TThis model is concerned with obesity. Between 1971 and 2003, the population of the city of Framingham was part of a cardiac health study where 12,067 people's health data were repeatedly collected. A long-term analysis of weight data and the social network the population by Christakis and Fowler [1] showed that a person’s chances of becoming obese increased by almost 70% if they had a friend who became obese. In this study by Christakis and Fowler, the social network describes the relationships between people including friends, family and co-workers. Each person can be thought of as node within the network and the relationships as links between the nodes. Networks of nodes and links are found throughout nature and society. A branch of mathematics called network theory [2] can be applied to these networks to identify common patterns and behaviours. Using network theory, artificial networks of social interactions can be constructed that have the same important characteristics of real social networks. These artificial networks can then be used to simulate how obesity spreads among social networks and to test the effectiveness of different weight management interventions on reducing obesity at the population level.
                     </p>
                   </div>
                 </div>
@@ -339,20 +305,7 @@
                 >
                   <div class="card-body">
                     <p>
-                      The Bhar paper shows that the behaviour presented at the
-                      population level is dependent on the nature of the
-                      interactions at the individual level. An agent-based model
-                      allows you to model a range of personal interactions and
-                      observe how these affect the behaviour of the population
-                      as a whole. A small change in individual behaviour can
-                      result in a totally different outcome at the population
-                      level. This type of behaviour is known as a “phase
-                      change”. Mathematical or statistical models of whole
-                      populations are less good at capturing this type of
-                      behaviour. In the context of the management of obesity
-                      this means we can test different individual-level
-                      interventions and see how the effects propagate across the
-                      population.
+                      The Bhar paper shows that behaviour presented at the population level is dependent on the nature of the interactions at the individual level. An ABM allows you to model a range of personal interactions and observe how these affect the behaviour of the population as a whole. A small change in individual behaviour can result in a totally different outcome at the population level. This type of behaviour is known as a “phase change”. Mathematical or statistical models of whole populations are less good at capturing this type of behaviour. In the context of the management of obesity this means we can test different individual-level interventions and see how the effects propagate across the population.
                     </p>
                   </div>
                 </div>
@@ -374,36 +327,14 @@
                 >
                   <div class="card-body">
                     <p>
-                      The simulation recreated here models a population of
-                      individual agents (people) that are represented as
-                      different coloured dots on the grid. Each agent can be in
-                      one of three weight states: healthy weight (<span
+                      The simulation recreated here models a population of individual agents (people) that are represented as different coloured dots on the grid. Each agent can be in one of three weight states: healthy weight (<span
                         style="color: green"
                         >green</span
                       >)over weight (<span style="color: blue">blue</span>) and
-                      obese (<span style="color: red">red</span>). In this
-                      version of the Bhar model each agent occupies an
-                      individual space on a 40 by 40 grid. Each agent has a
-                      social network consisting of the agent’s eight immediate
-                      neighbours on the grid. As the model runs, at each
-                      iteration step an agent will change its weight state to
-                      match that of the majority of its social network
-                      neighbours (i.e. the surrounding agents on the grid).
+                      obese (<span style="color: red">red</span>).. In this version of the Bhar model each agent occupies an individual space on a 40 by 40 grid. Each agent has a social network consisting of the agent’s eight immediate neighbours on the grid. As the model runs, at each iteration step an agent will change its weight state to match that of the majority of its social network neighbours (i.e. the surrounding agents on the grid).
                     </p>
                     <p>
-                      Because the agents are linked together in a grid-like
-                      network, it means that each agent has two friends in
-                      common with every other agent in their social network,
-                      although note that these will be two different friends for
-                      each agent within the social network. This results in a
-                      network that has a high clustering coefficient with agents
-                      likely to take on the weight-state of their neighbours .
-                      The effect of this can be seen in the relatively stable
-                      clustering of weight type when the simulation is run. The
-                      number of common friends, and thus the clustering
-                      coefficient can be reduced by adding random links within
-                      the model so that each agent is also connected to other
-                      agents who are not next to them in the grid.
+                      Because the agents are linked together in a grid-like network, it means that each agent has two friends in common with every other agent in their social network, although note that these will be two different friends for each agent within the social network. This results in a network that has a high clustering coefficient with agents likely to take on the weight-state of their neighbours . The effect of this can be seen in the relatively stable clustering of weight type when the simulation is run. The number of common friends, and thus the clustering coefficient can be reduced by adding random links within the model so that each agent is also connected to other agents who are not next to them in the grid.
                     </p>
                   </div>
                 </div>
@@ -426,34 +357,17 @@
                 >
                   <div class="card-body">
                     <p>
-                      Click the Setup button, which will assign each agent to an
-                      individual space on the 40 by 40 grid. Each agent then
-                      makes a friendship link with its eight closest neighbours.
-                      Additional friendship links can be made to random members
-                      of the population. The number of such links is controlled
-                      by the random links slider. The top three sliders in the
-                      model (Healthy, Over, and Obese) determine the proportion
-                      of the population assigned to one of the three weight
-                      states at the model setup: healthy weight(<span
+                      Click the Setup button, which will assign each agent to an individual space on the 40 by 40 grid. Each agent then makes a friendship link with its eight closest neighbours. Additional friendship links can be made to random members of the population. The number of such links is controlled by the random links slider. The top three sliders in the model (Healthy, Overweight, and Obese) determine the proportion of the population assigned to one of the three weight states at the model setup: healthy weight(<span
                         style="color: green"
                         >green</span
                       >) over weight (<span style="color: blue">blue</span>) and
                       obese (<span style="color: red">red</span>).
                     </p>
                     <p>
-                      To run the model, click on the Run button. The model will
-                      run until there is no change in the population or until
-                      you click the stop button. The speed the simulation runs
-                      at can be altered with the Speed slider. You can change
-                      the initial conditions by changing the values of the
-                      sliders and then clicking the Setup followed by the Run
-                      button
+                      To run the model, click on the Run button. The model will run until there is no change runs at can be altered with the Speed slider. You can change the initial conditions by changing the values of the sliders and then clicking the Setup followed by the Run button
                     </p>
                     <p>
-                      If you run the model a few times you will note that the
-                      outcomes will not always be the same. This is because the
-                      initial distribution of agents and types has a random
-                      element in it.
+                      If you run the model a few times you will note that the outcomes will not always be the same. This is because the initial distribution of agents and types has a random element in it
                     </p>
                     <p>
                       The aim of the model is to demonstrate the effect that
